@@ -1,0 +1,453 @@
+CSS Integration
+CSS Rules
+CSS Selectors
+CSS Colors
+CSS Inheritance
+===================================
+
+CSS Units
+=========
+ - Units define size and position.
+ - They are used to define dimension and location of elements in page.
+ - You can configure size with: height and width.
+ - The CSS units are categorized into 2 groups
+	o Absolute Length Units
+	o Relative Length Units
+
+Absolute Length Units
+- They are  not relative to anything else and are generally considered as normal units.
+- These are not affected by other relative elements and their units.
+- They are not affected by parent or adjacent elements, they are individual and configured for various media devices.
+
+Unit 			Name 				Equivalent to
+==============================================================================
+cm 			Centimetres 			1cm = 96px/2.54 =37px
+mm 			Millimetres 			1mm = 1/10th of 1cm
+Q 			QuarterMillimetres		1Q  = 1/40th of 1 cm 
+in 			Inches 				1in = 2.54cm =96px
+pc 			Picas 				1pc = 1/6th of 1in
+pt			Point 				1pt = 1/72th of 1in
+px 			Pixels 				1px = 1/96th of 1in
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            font-size: 25px;
+        }
+        h1{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body class="container">
+    <h1>Welcome to CSS</h1>
+    Formatting HTML with Styles
+</body>
+</html>
+
+In the above code make the change and show them the usage of in|cm|mm
+.container{
+ 	font-size: 25px;
+	padding-left: 1in|1cm|1mm
+}
+
+show them the output.
+
+Note: When we are creating an animations on a button click, if we want to zoom, then go for "Absolute path".
+      If we want to move the objects little far in a screen then go for "inch|cm|mm".
+
+
+Relative length units:
+- These are related to other contents in the page.
+- The size of any element can be determined based on its parent, child or adjacent.
+- The advantages are when parent element size is changed it will relatively affects the child element also.
+- Relative units are based on another element, viewport, or font size.
+
+Unit 				Relative To
+=============================================================
+em 				It uses the font size of parent element and applies to current element.[element relative]
+				note: 1em   -> 100% of parent element
+				      0.5em -> 50%  of parent element
+				Relative to the parent element’s font size
+
+rem 				Relative to the root element’s font size (html)
+
+%                               Relative to parent element (for width/height)
+
+ln 				Line height of the element.
+vw 				1% of the viewport’s width.
+vh 				1% of the viewport’s height.
+vmin 				1% of the viewport’s smaller dimension.
+vmax 				1% of the viewport’s larger dimension.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       
+       html{
+         font-size: 16px;
+       }
+
+       .parent{
+            font-size: 20px;
+            border: 1px solid black;
+            margin :25px;
+            padding: 25px;
+       }
+       .child-em{
+            font-size: 1.5em;
+            color:blue;
+       }
+       .child-rem{
+            font-size: 1.5rem;
+            color:green;
+       }
+
+    </style>
+    
+</head>
+<body>
+    <div class="parent">
+        <p>Root font size is 16px</p>
+        <p class = "child-em">Child element with 1.5em(based on parent font size)</p>
+        <p class ="child-rem">Child element with 1.5rem (based on root font size)</p>
+    </div>  
+</body>
+</html>
+
+Output: 
+1. The <div class="parent"> has a font size of 20px.
+2. The .child-em font size is calculated  as  1.5 × 20px = 30px because em is relative to the parent element's font size.
+3. The .child-rem font size is calculated as  1.5 × 16px = 24px because rem is relative to the root font size defined on the <html> element.
+
+The .child-em text (blue) will be larger because it depends on the parent size (20px).
+The .child-rem text (green) will remain consistent at 24px because it relies on the root size (16px). 	
+
+
+Note: 
+em is relative to the immediate parent.
+rem is always relative to the root <html> size.
+
+
+Code using js to show what is the size information
+==================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Units Demo</title>
+    <style>
+        html{
+            font-size: 16px;
+        }
+        .container{
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            color:red;
+        }
+        .em-relative{
+            font-size: 1.5em;
+        }
+        .rem-relative{
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        Working with Absolute path
+        <h2 class="em-relative">Hello Users</h2>
+        <p class="rem-relative">
+            Welcome to the world of css
+        </p>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    let emRelative  = document.querySelector(".em-relative");
+    let remRelative = document.querySelector(".rem-relative");
+    let absolutePath = document.querySelector(".container");
+
+    let h2FontSize = window.getComputedStyle(emRelative).fontSize;
+    let h1FontSize = window.getComputedStyle(absolutePath).fontSize;
+    let pFontSize = window.getComputedStyle(remRelative).fontSize;
+
+    console.log(h1FontSize);
+    console.log(h2FontSize);
+    console.log(pFontSize);
+
+</script>
+
+
+Output
+25px
+37.5px
+16px
+
+CSS Box model attributes
+========================
+1. margin
+2. padding
+3. border
+4. border-radius
+5. width
+6. height
+7. box-shadow
+8. border-image
+
+Margin
+- It specifies the space around border.
+- You define by using following properties
+	o margin [short hand – sets in all directions]
+	o margin-top
+	o margin-bottom
+	o margin-left
+	o margin-right
+
+syntax: 
+  {
+	margin: 0px 0px 0px 0px;  <!-- TOP,RIGHT,BOTTOM,LEFT -->
+  }
+
+eg#1.
+
+/* All sides (top, right, bottom, left) */
+margin: 10px;
+
+/* Vertical (top & bottom) | Horizontal (left & right) */
+margin: 10px 20px;
+
+/* Top | Horizontal (left & right) | Bottom */
+margin: 10px 20px 30px;
+
+/* Top | Right | Bottom | Left */
+margin: 10px 20px 30px 40px;
+
+/* Individual sides */
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 30px;
+margin-left: 40px;
+
+
+Padding
+- It specifies the space around content
+- You can define
+	o Padding-left
+	o Padding-right
+	o Padding-top
+	o Padding-bottom
+	o Padding
+- All options are similar like margin
+
+syntax: 
+  {
+	padding: 0px 0px 0px 0px;  <!-- TOP,RIGHT,BOTTOM,LEFT -->
+  }
+
+eg#1.
+/* All sides (top, right, bottom, left) */
+padding: 10px;
+
+/* Vertical (top & bottom) | Horizontal (left & right) */
+padding: 10px 20px;
+
+/* Top | Horizontal (left & right) | Bottom */
+padding: 10px 20px 30px;
+
+/* Top | Right | Bottom | Left */
+padding: 10px 20px 30px 40px;
+
+/* Individual sides */
+padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 30px;
+padding-left: 40px;
+
+
+
+
+CSS Border
+==========
+ border       : short had for style, color and width. <width> <style> <color>
+
+ border-style : dotted,double,solid,dashed etc.
+ border-width : border size
+ border-color : border color
+
+ border-left  	  : short hand for style color and width
+ border-left-style: 
+ border-left-width:
+ border-left-color: 
+
+	similarly for all directions[indicates top,right,bottom]	.
+
+
+CSS Border radius
+=================
+   border-radius : short hand for all directions(top-left, top-right, bottom-right, bottom-left)
+   border-top-right-radius 
+   border-top-left-radius
+   border-bottom-right-radius
+   border-bottom-left-radius
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       img{
+            border-top-left-radius: 130px;
+            border-bottom-right-radius:100px;
+       }
+    </style>
+</head>
+<body>
+    <img  src="../public/images/menfashion.jpeg" width="300" height="400"><br>
+</body>
+</html>
+
+
+Note: To keep the image as circle, keep width height and border-radius : same so it gets adjusted to circle.
+
+CSS Border Image
+================
+ => we can set image as border by using attributes like
+	border 
+	border-image: source slice width outset repeat;
+
+syntax: 
+{
+	border: 10px solid transparent;
+	border-image : url() 1-100 stretch|space|repeat|round ;
+}
+
+border-image: source slice width outset repeat;
+
+source: The image URL or gradient used as the border.
+
+slice : Defines how the image is divided into regions.
+width : Specifies the width of the border.
+outset: Sets how much the border extends beyond the element’s box.
+repeat: Determines how the image parts are displayed (options: stretch, repeat, round, space).Border Image Slicing
+
+
+The border-image-slice property defines how the image is divided into 9 parts (4 corners, 4 edges, and the center).
+
+border-image-source: url('border.png'); /* Image for the border */
+border-image-slice: 30; /* Slicing the image */
+border-image-width: 10px; /* Width of the border */
+border-image-outset: 5px; /* Extends beyond the box */
+border-image-repeat: round; /* How the image is repeated */
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container{
+            margin: 50px;
+            padding: 10px;
+            text-align: justify;
+            border: 20px solid transparent;
+            border-image: url(../public/images/border-image.jpeg) 30 round;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatibus iure earum impedit corporis modi doloremque pariatur? Veritatis molestias tempora, optio sed voluptate architecto natus? Sint molestiae voluptate ratione inventore quisquam consequuntur hic mollitia enim, ducimus facilis aperiam natus. Placeat dolorum enim exercitationem officiis. Facere necessitatibus natus neque excepturi commodi similique error. Atque adipisci tempore est cum dolorum harum aspernatur ut placeat, nam, sunt accusamus minus id suscipit perspiciatis nesciunt modi inventore. Facere praesentium eveniet, quod beatae reiciendis ad repellendus non dolore molestiae facilis vitae debitis tenetur necessitatibus veniam maiores voluptas eius ducimus est natus consectetur. Voluptatum consectetur accusamus, ex saepe, voluptas possimus natus sint nihil nesciunt in autem accusantium quaerat. Corporis provident est pariatur ipsam molestias facilis ad deserunt voluptas voluptatum temporibus, consequuntur laboriosam quae porro, ea harum sint fugit esse explicabo voluptatibus quia ipsum optio quisquam numquam. Est perspiciatis facere, soluta labore excepturi, quam perferendis laboriosam quo ipsum exercitationem laborum suscipit fugit. Illum dolorum est expedita minus ipsam porro voluptate nemo voluptatum, voluptatem iusto molestiae impedit earum reiciendis omnis nisi sapiente cumque obcaecati! Vitae iste quasi, architecto fugiat neque, excepturi exercitationem repudiandae nemo esse magni, illum quibusdam in tenetur dolores. Error quidem cumque quam necessitatibus illo culpa nihil?
+        </p>
+    </div>
+</body>
+</html>
+
+BoxShadow
+=========
+ syntax 
+  {
+	box-shadow: horizontal[L|R] vertical[T|B] blur color;
+  }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container{
+            margin: 50px;
+            padding: 10px;
+            text-align: justify;
+            border: 5px solid black;
+            box-shadow: 2px 5px 10px rgb(110, 105, 105);
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatibus iure earum impedit corporis modi doloremque pariatur? Veritatis molestias tempora, optio sed voluptate architecto natus? Sint molestiae voluptate ratione inventore quisquam consequuntur hic mollitia enim, ducimus facilis aperiam natus. Placeat dolorum enim exercitationem officiis. Facere necessitatibus natus neque excepturi commodi similique error. Atque adipisci tempore est cum dolorum harum aspernatur ut placeat, nam, sunt accusamus minus id suscipit perspiciatis nesciunt modi inventore. Facere praesentium eveniet, quod beatae reiciendis ad repellendus non dolore molestiae facilis vitae debitis tenetur necessitatibus veniam maiores voluptas eius ducimus est natus consectetur. Voluptatum consectetur accusamus, ex saepe, voluptas possimus natus sint nihil nesciunt in autem accusantium quaerat. Corporis provident est pariatur ipsam molestias facilis ad deserunt voluptas voluptatum temporibus, consequuntur laboriosam quae porro, ea harum sint fugit esse explicabo voluptatibus quia ipsum optio quisquam numquam. Est perspiciatis facere, soluta labore excepturi, quam perferendis laboriosam quo ipsum exercitationem laborum suscipit fugit. Illum dolorum est expedita minus ipsam porro voluptate nemo voluptatum, voluptatem iusto molestiae impedit earum reiciendis omnis nisi sapiente cumque obcaecati! Vitae iste quasi, architecto fugiat neque, excepturi exercitationem repudiandae nemo esse magni, illum quibusdam in tenetur dolores. Error quidem cumque quam necessitatibus illo culpa nihil?
+        </p>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

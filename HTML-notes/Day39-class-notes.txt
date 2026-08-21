@@ -1,0 +1,417 @@
+To HTML pages, we can add CSS in 3 ways
+ a. Inline
+ b. Embedded
+ c. External style sheet
+
+Importance of Minification 
+
+Importance of CDN
+
+CSS Rules
+=========
+FAQ: If styles are defined for any element in all 3 ways, then which set of effects would apply?
+Ans. If different attributes are defined, then all will apply.
+     If same attributes are defined then it uses priority
+	a. inline b. embedded c. external
+
+eg#1.
+Home.html
+=========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color: yellow;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="../src/css/effects.css">
+</head>
+<body>
+    <h1 style="color:red">HELLO</h1>
+</body>
+</html>
+
+effects.css
+===========
+h1{
+    color: green;
+    background-color: yellow;
+}
+
+Output: HELLO(red)
+       background-color:yellow 
+	text-align:center
+	border: 1px solid black
+	padding: 5px
+
+
+2. If the style container is defined with same attribute in both head and body section, then which one would apply?
+Ans. Priority is defined for style in the body section.[It is in order, which one is latest that would be applied]
+     if attributes are same then it is priority, if different attributes are present then all will apply.
+<head>
+	<style> h1{ color: blue;} </style>
+</head>
+<body>
+	<style> h1{ color: red;}  </style>
+	<h1>Hello</h1>
+</body>
+     
+Output: Hello (red color)
+
+3. If the style container is defined with same attribute multiple times in body , then which set will apply?
+Ans. The latest container will apply.
+eg:: <body>
+	<style> h1{ color: red;}  </style>
+        <style> h1{ color: blue;} </style>
+	<h1>Hello</h1>
+     </body>
+
+Output: Hello(blue)
+
+
+FAQ:
+
+FAQ: 
+ 1. If styles are defined for any element in all 3 ways, then which set of effects would apply? 
+ 2. If the style container is defined with same attribute in both head and body section, then which one would apply?
+ 3. If the style container is defined with same attribute multiple times in body , then which set will apply?
+
+
+
+Selecting HTML elements
+=======================
+If styles are defined using inline technique where selecting element is not needed.
+If styles are defined embedded or in external file then we need a selector to select HTML element.
+Syntax: 
+  selector
+  {
+	"attribute-1" : value;   ====> CSSOM [CSS Object Model]
+	"attribute-2" : value;  
+  }
+
+Note: {
+	"K" : "V"                ====> Objects
+      }
+
+CSS selectors are classified into various categories
+ a. Primary selectors.
+ b. Rational selectors.
+ c. Dynamic Pseudo classes.
+ d. Structural Pseudo classes.
+ e. Element Pseudo classes.
+ f. Validation State Pseudo classes.
+ g. Attribute selectors.
+ h. Universal selectors
+ i. Root selector.
+ k. Behavioural selector.
+
+
+What are Primary Selectors?
+ 1. Type selector
+	It refers to element token name.
+		h1,h2,img,table,....
+
+	Adv::    It will apply effects to every occurrence of the tag in page. 
+	DisAdv:: You can’t disable for any specific.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style type="text/css">
+        h1{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+   <h1>WebTechnologies</h1>
+   <h1>HTML</h1>
+   <h1>CSS</h1>
+   <h1>JavaScript</h1>
+</body>
+</html>
+
+output
+  all elements of h1 type is in "red" colour.
+
+
+ 2. Id selector
+- Every element can be defined with ID.
+- You can use ID to access the element and apply effects.
+- You can choose to which element you want the effects.
+- Element is defined with ID
+	<div id=”effects”> 
+
+	</div>
+- You can access the ID in styles by using “#” reference
+	<style>
+		#effects
+		{
+
+		}
+	</style>
+- Every tag can use only one ID reference.
+- If you have configured multiple categories of styles with ID selector and want to use for specific tag, 
+  then it is not possible to define all effects to one element.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #head{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="head">WebTechnolgies</h1>
+    <h1>CSS</h1>
+    <p id="head">It is a Cascading langauge</p>
+    <h1>HTML</h1>
+    <h1 id="head">JS</h1>
+</body>
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #border-style{
+            border: 1px solid black;
+            padding: 5px;
+        }
+        #text-style{
+            text-align: center;
+            color: red;
+            font-family: Arial;
+        }
+        #bg-style{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="border-style text-style">WebTechnolgies</h1>
+</body>
+</html>
+
+Can't apply because limitation of "id" is only one can be applied
+
+3. Class selector
+- A class selector is defined by using “.”
+- Class is accessed and applied to element by using “class” attribute.
+- Every tag can implement multiple classes.
+- Multiple classes are specified with space.
+
+<style>
+	.cssClassName{
+
+	}
+</style>
+<div class=”cssClassName1 cssClassName2”> 
+
+</div>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .border-style{
+            border: 1px solid red;
+            padding: 5px;
+        }
+
+        .text-style{
+            text-align: center;
+            color: red;
+            font-family: Arial;
+        }
+
+        .bg-style{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="border-style text-style bg-style">WebTechnolgies</h1>
+</body>
+</html>
+
+
+CSS Rules
+FAQ: 
+If we define style for any element using all 3 primary selectors,which one will apply?
+Ans. If different attributes then all will apply
+     If same styles are defined then it uses priority
+	1. Id selector   2. class selector   3. type selector
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color:blue;
+        }
+        .head{
+            color:red;
+        }
+        #heading{
+            color:brown;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="head" id="heading">WebTechnolgies</h1>
+</body>
+</html>
+
+Output: WebTechnolgies(brown)
+
+
+If same attributes are defined using IDSelector in embeded and external file, which set will apply?
+Ans. Embeded.
+
+
+Note: we can group the selectors using "," delimitor|seperator 
+      we can group any type of selectors for same set of effects.
+      
+syntax: 
+     p1,#head{}
+     p1,h1,img{}
+     #container,.head{}
+
+Rational selectors
+==================
+=> We can select elements using parent and child hierarchy.
+=> We can also select elements using siblings.
+
+parent child		=> all child elements in specific parent
+
+parent>chid     	=> only direct child elements in specific parent
+
+ElementA+ElementB	=> Adjacent selector[sibling]
+
+ElementA~ElementB	=> Generic sibling
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container > p{
+            color:red;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class=".container">
+        <p>para-1</p>
+        <p>para-2</p>
+        <span>
+            <p>para-3</p>
+        </span>
+        <p>para-4</p>
+    </div>
+    <p>para outside container</p>
+</body>
+</html>
+
+Output: para-1 para-2 para-4 [red,fontsize]
+	para-3,para outside container[default appearence]
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 ~ p{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to web</h2>
+    <p>para-1</p>
+    <p>para-2</p>
+    <p>para-3</p>
+    <p>para-4</p>
+</body>
+</html>
+
+Output: para-1 para-2 para-3 para-4[red color]
+
+ 
+FAQ:
+a. If styles are defined for any element in all 3 ways, then which set of effects would apply?
+b. If style container is defined with same attributes in both head and body section, then which set of effect would apply?
+c. If the style container is defined with same attribute multiple times in body , then which set will apply?
+
+
+CSS Rules
+FAQ: 
+ a. If we define style for any element using all 3 primary selectors,which one will apply?
+ b. If same attributes are defined using IDSelector in embeded and external file, which set will apply?
+ c. Is it possible to group the selectors to apply the same effects on different elements?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

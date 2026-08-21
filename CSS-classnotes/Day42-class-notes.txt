@@ -1,0 +1,339 @@
+CSS Integration
+CSS Rules
+CSS Selectors
+CSS Colors
+CSS Inheritance
+===================================
+
+CSS Units
+=========
+ - Units define size and position.
+ - They are used to define dimension and location of elements in page.
+ - You can configure size with: height and width.
+ - The CSS units are categorized into 2 groups
+	o Absolute Length Units
+	o Relative Length Units
+
+Absolute Length Units
+- They are  not relative to anything else and are generally considered as normal units.
+- These are not affected by other relative elements and their units.
+- They are not affected by parent or adjacent elements, they are individual and configured for various media devices.
+
+Unit 			Name 				Equivalent to
+==============================================================================
+cm 			Centimetres 			1cm = 96px/2.54 =37px
+mm 			Millimetres 			1mm = 1/10th of 1cm
+Q 			QuarterMillimetres		1Q  = 1/40th of 1 cm 
+in 			Inches 				1in = 2.54cm =96px
+pc 			Picas 				1pc = 1/6th of 1in
+pt			Point 				1pt = 1/72th of 1in
+px 			Pixels 				1px = 1/96th of 1in
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            font-size: 25px;
+        }
+        h1{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body class="container">
+    <h1>Welcome to CSS</h1>
+    Formatting HTML with Styles
+</body>
+</html>
+
+In the above code make the change and show them the usage of in|cm|mm
+.container{
+ 	font-size: 25px;
+	padding-left: 1in|1cm|1mm
+}
+
+show them the output.
+
+Note: When we are creating an animations on a button click, if we want to zoom, then go for "Absolute path".
+      If we want to move the objects little far in a screen then go for "inch|cm|mm".
+
+
+Relative length units:
+- These are related to other contents in the page.
+- The size of any element can be determined based on its parent, child or adjacent.
+- The advantages are when parent element size is changed it will relatively affects the child element also.
+
+Unit 				Relative To
+=============================================================
+em 				It uses the font size of parent element and applies to current element.[element relative]
+				note: 1em   -> 100% of root element
+				      0.5em -> 50%  of root element
+
+rem 				Font size to the root element size.[root element relative]
+
+%                               Relative to view port
+
+ln 				Line height of the element.
+vw 				1% of the viewport’s width.
+vh 				1% of the viewport’s height.
+vmin 				1% of the viewport’s smaller dimension.
+vmax 				1% of the viewport’s larger dimension.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            font-size: 50px;
+        }
+
+        p {
+            font-size: 0.5em; <!-- adjusting according to its parent --> 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        Welcome to CSS
+        <p>Formatting HTML with Styles</p>
+    </div>
+</body>
+</html>
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-size: 25px;
+        }
+        .container {
+            font-size: 50px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        p {
+            font-size: 1.5rem; <!-- adjusting according to parent of parent[body] --> 
+        }
+    </style>
+</head>
+<body>
+    Web Development
+    <div class="container">
+        Welcome to CSS
+        <p>Formatting HTML with Styles</p>
+    </div>
+</body>
+</html>
+
+CSS Box model attributes
+========================
+1. margin
+2. padding
+3. border
+4. border-radius
+5. width
+6. height
+7. box-shadow
+8. border-image
+
+Margin
+- It specifies the space around border.
+- You define by using following properties
+	o margin [short hand – sets in all directions]
+	o margin-top
+	o margin-bottom
+	o margin-left
+	o margin-right
+
+syntax: 
+  {
+	margin: 0px 0px 0px 0px;  <!-- TOP,RIGHT,BOTTOM,LEFT -->
+  }
+
+
+Padding
+- It specifies the space around content
+- You can define
+	o Padding-left
+	o Padding-right
+	o Padding-top
+	o Padding-bottom
+	o Padding
+- All options are similar like margin
+
+syntax: 
+  {
+	padding: 0px 0px 0px 0px;  <!-- TOP,RIGHT,BOTTOM,LEFT -->
+  }
+
+
+
+CSS Border
+==========
+ border       : short had for style, color and width. <width> <style> <color>
+
+ border-style : dotted,double,solid,dashed etc.
+ border-width : border size
+ border-color : border color
+
+ border-left  	  : short hand for style color and width
+ border-left-style: 
+ border-left-width:
+ border-left-color: 
+
+	similarly for all directions[indicates top,right,bottom]	.
+
+
+CSS Border radius
+=================
+   border-radius : short hand for all directions(top-left, top-right, bottom-right, bottom-left)
+   border-top-right-radius 
+   border-top-left-radius
+   border-bottom-right-radius
+   border-bottom-left-radius
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       img{
+            border-top-left-radius: 130px;
+            border-bottom-right-radius:100px;
+       }
+    </style>
+</head>
+<body>
+    <img  src="../public/images/menfashion.jpeg" width="300" height="400"><br>
+</body>
+</html>
+
+
+Note: To keep the image as circle, keep width height and border-radius : same so it gets adjusted to circle.
+
+CSS Border Image
+================
+ => we can set image as border by using attributes like
+	border 
+	border-image
+
+syntax: 
+{
+	border: 10px solid transparent;
+	border-image : url() stretch|space 1-100;
+}
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container{
+            margin: 50px;
+            padding: 10px;
+            text-align: justify;
+            border: 20px solid transparent;
+            border-image: url(../public/images/border.webp) 30 round;
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatibus iure earum impedit corporis modi doloremque pariatur? Veritatis molestias tempora, optio sed voluptate architecto natus? Sint molestiae voluptate ratione inventore quisquam consequuntur hic mollitia enim, ducimus facilis aperiam natus. Placeat dolorum enim exercitationem officiis. Facere necessitatibus natus neque excepturi commodi similique error. Atque adipisci tempore est cum dolorum harum aspernatur ut placeat, nam, sunt accusamus minus id suscipit perspiciatis nesciunt modi inventore. Facere praesentium eveniet, quod beatae reiciendis ad repellendus non dolore molestiae facilis vitae debitis tenetur necessitatibus veniam maiores voluptas eius ducimus est natus consectetur. Voluptatum consectetur accusamus, ex saepe, voluptas possimus natus sint nihil nesciunt in autem accusantium quaerat. Corporis provident est pariatur ipsam molestias facilis ad deserunt voluptas voluptatum temporibus, consequuntur laboriosam quae porro, ea harum sint fugit esse explicabo voluptatibus quia ipsum optio quisquam numquam. Est perspiciatis facere, soluta labore excepturi, quam perferendis laboriosam quo ipsum exercitationem laborum suscipit fugit. Illum dolorum est expedita minus ipsam porro voluptate nemo voluptatum, voluptatem iusto molestiae impedit earum reiciendis omnis nisi sapiente cumque obcaecati! Vitae iste quasi, architecto fugiat neque, excepturi exercitationem repudiandae nemo esse magni, illum quibusdam in tenetur dolores. Error quidem cumque quam necessitatibus illo culpa nihil?
+        </p>
+    </div>
+</body>
+</html>
+
+BoxShadow
+=========
+ syntax 
+  {
+	box-shadow: horizontal[L|R] vertical[T|B] blur color;
+  }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       .container{
+            margin: 50px;
+            padding: 10px;
+            text-align: justify;
+            border: 5px solid black;
+            box-shadow: 2px 5px 10px rgb(110, 105, 105);
+       }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>
+           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio voluptatibus iure earum impedit corporis modi doloremque pariatur? Veritatis molestias tempora, optio sed voluptate architecto natus? Sint molestiae voluptate ratione inventore quisquam consequuntur hic mollitia enim, ducimus facilis aperiam natus. Placeat dolorum enim exercitationem officiis. Facere necessitatibus natus neque excepturi commodi similique error. Atque adipisci tempore est cum dolorum harum aspernatur ut placeat, nam, sunt accusamus minus id suscipit perspiciatis nesciunt modi inventore. Facere praesentium eveniet, quod beatae reiciendis ad repellendus non dolore molestiae facilis vitae debitis tenetur necessitatibus veniam maiores voluptas eius ducimus est natus consectetur. Voluptatum consectetur accusamus, ex saepe, voluptas possimus natus sint nihil nesciunt in autem accusantium quaerat. Corporis provident est pariatur ipsam molestias facilis ad deserunt voluptas voluptatum temporibus, consequuntur laboriosam quae porro, ea harum sint fugit esse explicabo voluptatibus quia ipsum optio quisquam numquam. Est perspiciatis facere, soluta labore excepturi, quam perferendis laboriosam quo ipsum exercitationem laborum suscipit fugit. Illum dolorum est expedita minus ipsam porro voluptate nemo voluptatum, voluptatem iusto molestiae impedit earum reiciendis omnis nisi sapiente cumque obcaecati! Vitae iste quasi, architecto fugiat neque, excepturi exercitationem repudiandae nemo esse magni, illum quibusdam in tenetur dolores. Error quidem cumque quam necessitatibus illo culpa nihil?
+        </p>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

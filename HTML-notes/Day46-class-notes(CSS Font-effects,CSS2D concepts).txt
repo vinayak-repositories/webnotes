@@ -1,0 +1,444 @@
+CSS Font effects
+  font-family
+  font-style
+  font-weight
+  font-variant  : normal | small-caps
+
+CSS Text
+  color
+  text-align	  : left|center|right|justify
+  text-shadow	  : (same like box shadow)
+  text-indent	  : First line of the paragraph with some space(length|initial|inherit)
+  text-transform  : uppercase,lowercase,capitalize
+  text-overflow   : It can display overflowing text with chars like ellipsis.
+  text-decoration : <'text-decoration-line'> || <'text-decoration-style'> || <'text-decoration-color'> || <'text-decoration-thickness'>
+
+While working with paragraph
+  line-height    : space b/w lines
+  word-space     : space b/w words
+  letter-space   : space b/w chars
+  word-break     : breaks lengthy words at right margin of paragraph.
+			normal,break-word,break-all,keep-all
+
+Explanation:
+word-break: normal; (default behavior):
+	Long words that cannot fit in the container will overflow without breaking.
+
+word-break: break-word;:
+	Breaks words at any point when they cannot fit within the container (modern browsers).
+
+word-break: break-all;:
+	Forces breaks at any character when the content overflows the container, even if it breaks the word unnaturally.
+
+word-break: keep-all;:
+	Prevents breaking words, often used for non-CJK (Chinese/Japanese/Korean) text. 
+        Forces the text to overflow if there’s no natural break.
+
+eg#1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Break Example</title>
+  <style>
+    .container {
+      width: 200px;
+      border: 2px solid black;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .normal {
+      word-break: normal;
+      background-color: lightblue;
+    }
+
+    .break-word {
+      word-break: break-word;
+      background-color: lightgreen;
+    }
+
+    .break-all {
+      word-break: break-all;
+      background-color: lightcoral;
+    }
+
+    .keep-all {
+      word-break: keep-all;
+      background-color: lightgoldenrodyellow;
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Word Break Example</h2>
+
+  <p><strong>Text used:</strong> A verylongwordwithoutspacesfortestingpurposes</p>
+
+  <div class="container normal">
+    <strong>word-break: normal</strong><br>
+    	
+  </div>
+
+  <div class="container break-word">
+    <strong>word-break: break-word</strong><br>
+    A verylongwordwithoutspacesfortestingpurposes
+  </div>
+
+  <div class="container break-all">
+    <strong>word-break: break-all</strong><br>
+    A verylongwordwithoutspacesfortestingpurposes
+  </div>
+
+  <div class="container keep-all">
+    <strong>word-break: keep-all</strong><br>
+    A verylongwordwithoutspacesfortestingpurposes
+  </div>
+
+</body>
+</html>
+
+==================================================================================
+
+white-space      : it controls wrapping of text in the container(nowrap).
+overflow	 : hidden|scroll|auto
+  
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        p {
+            text-indent: 10px;
+            text-transform: capitalize;
+        }
+        h1{
+		text-decoration: underline red wavy 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to CSS </h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At nemo consequatur veniam, id ab dolore voluptas vero
+        maiores quis!
+        Ab ex omnis ipsa odio iste.
+    </p>
+</body>
+
+</html>
+
+Displaying overflowing content with elipsis
+===========================================
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        p {
+          	border: 1px solid black;
+          	padding: 10px;
+          	width: 300px;
+          	
+		<!--  important stuff -->
+		white-space: nowrap;
+          	text-overflow: ellipsis;
+          	overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <p title="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam enim eligendi fugit facere at, in ipsam quos iusto expedita veniam ex iure cumque qui, et harum doloribus consequuntur laudantium cupiditate. Unde dolorem dolor accusamus odit consequatur magni incidunt enim officiis modi. Obcaecati ab soluta odit quasi aliquam quos provident optio eos voluptas qui. Corporis, enim!
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio, at eum. Quo, expedita. Accusamus nesciunt, quidem ipsum facilis cupiditate ipsa quam fugiat consequatur at vel placeat non eum! Voluptate odio eius aperiam cum ipsam asperiores, impedit dolores aliquam repellat veniam in nihil ea adipisci id perspiciatis et facere officia rerum quae ad quos. Quaerat, quibusdam!">
+       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam enim eligendi fugit facere at, in ipsam quos iusto expedita veniam ex iure cumque qui, et harum doloribus consequuntur laudantium cupiditate. Unde dolorem dolor accusamus odit consequatur magni incidunt enim officiis modi. Obcaecati ab soluta odit quasi aliquam quos provident optio eos voluptas qui. Corporis, enim!
+       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Distinctio, at eum. Quo, expedita. Accusamus nesciunt, quidem ipsum facilis cupiditate ipsa quam fugiat consequatur at vel placeat non eum! Voluptate odio eius aperiam cum ipsam asperiores, impedit dolores aliquam repellat veniam in nihil ea adipisci id perspiciatis et facere officia rerum quae ad quos. Quaerat, quibusdam!
+    </p>
+</body>
+
+</html>
+
+Syntax
+====== 
+{
+	border: 
+	padding: 
+	width  : 
+	white-space: nowrap;
+	overflow : hidden;
+	text-overflow: ellipsis;
+}
+
+making code dynamic
+===================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>!important Override</title>
+    <style type="text/css">
+        
+        p{
+            text-align: justify;
+            font-size: 10px;
+        }
+        .truncate{
+            width: 500px;
+            border: 1px solid black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+       }        
+    </style>
+    
+</head>
+<body>
+    <p class="truncate" id="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio corporis suscipit, iure fugit illum corrupti quisquam. Nesciunt nihil, quibusdam unde non illum voluptates eius natus corrupti eum itaque optio dolore, dicta incidunt nostrum alias magnam necessitatibus? Explicabo perferendis enim eligendi reiciendis consequuntur nesciunt voluptatem consectetur vel laborum, molestiae accusamus cupiditate quo, optio sunt ullam debitis neque odio. Corporis, dolores! Adipisci repellendus similique facere, ducimus incidunt exercitationem quod sunt beatae natus laborum sapiente. Reprehenderit similique eligendi aliquam eum debitis ullam at ratione porro ipsam optio deleniti exercitationem, numquam quisquam deserunt odit enim consequatur iste? Labore deleniti placeat eius cupiditate nostrum ipsam.
+    </p>
+    <button id="toggleButton">Read More</button>
+
+    <script >
+        document.getElementById("toggleButton")
+            .addEventListener("click",function () {
+            console.log("*** function called ***")
+            
+            let text = document.getElementById("text")
+            let button =document.getElementById("toggleButton")
+
+            console.log(text)
+            console.log(text.classList)
+
+	    //Toogle truncate class 
+            text.classList.toggle("truncate")
+            
+
+	    // Change button text accordingly
+            if (text.classList.contains("truncate")) {
+                button.innerHTML = "Read More";
+            } else {
+                button.innerHTML = "Read Less";
+            }
+        });
+    </script>
+
+</body>
+</html>
+	
+
+Note: Several CSS latest attributes are not compatible with browsers.so developers have to write css attributes with css browser plugins.
+	-webkit			safari,edge,chrome
+	-0			opera
+	-moz			firefox
+	-ms			internet explorer
+	
+Syntax
+	text-overflow : ellipsis [This website is best viewed on chrome browser with this version eg:: bank application,movie ticket booking]
+	
+
+CSS list styles
+==============
+    list-style 	       : shorthand
+    list-style-type    : alpa|number|roman|disc|circle
+    list-style-image   : custom images
+    list-style-position: inside,outside
+
+syntax: 
+   list-style : list-style-type list-style-image list-style-position;
+
+Note: If one of the values are missing, the default value for that property will be used.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+        ul {
+            list-style-image	: url(../public/images/bullets.gif);  
+            list-style-position : inside; 
+        }
+        li{
+            border: 1px solid black;
+            padding: 5px;
+            width: 150px;
+            margin-bottom: 5px;
+        }   
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+    </ul>
+</body>
+
+</html>
+
+CSS 2D effects
+==============
+ => 2D refers to 2-Dimension effects
+ => we can change the orientation and position of element along x and y axis.
+ => you can configure by using "transform" attribute.
+ => Transform method for 2D are
+	a. translate()
+	b. skew()
+	c. scale()
+	d. rotate()
+
+translate() 
+- It changes the position of element along x and y axis
+	translate(x,y)
+	translateX()
+	translateY()
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+        img{
+            transform: translateX(0px);
+            transition:3s;
+        }
+        img:hover{
+            transform: translateX(800px);
+            transition: 3s;
+        }    
+    </style>
+</head>
+
+<body>
+    <img src="../public/images/a4.jpg" width="300" height="200">
+</body>
+
+</html>
+
+2. scale()
+  It can change the size(width and height) of the element.
+	scale()  : both width and height
+	scaleX() : only width
+	scaleY() : only height 
+
+value > 1 : increases the height and width;
+vale  < 1 : decreases the height and width;
+value = 1 : no change in height and width;
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        img{
+            transform: scaleX(1);
+            transition:3s;
+        }
+
+        img:hover{
+            transform: scaleX(2);
+            transition: 3s;
+        }
+        .container{
+            border: 15px groove;
+            overflow:hidden;
+        }    
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="../public/images/a4.jpg" width="300" height="200">
+    </div>
+</body>
+
+</html>
+
+3. skew()
+	Tilting the element by specified angle.
+	
+	skew(degx,degy)
+	skewX()
+	skewY()
+
+Units: 
+Uses angles (deg, rad, grad, turn).
+Positive values skew right.
+Negative values skew left.
+
+4. rotate()
+      rotate() function in CSS is used to rotate an element around a fixed point (by default, its center). 
+      The angle of rotation is specified in degrees (deg).
+
+	rotate(angle);
+
+rotate(45deg): Rotates the element 45 degrees clockwise.
+rotate(-30deg): Rotates the element 30 degrees counterclockwise.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Skew Example</title>
+    <style>
+        .skew-box {
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            margin: 50px;
+            transition: 3s;
+        }
+        .skew-box:hover {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="skew-box">
+
+    </div>
+</body>
+</html>
+
+
+
+Learn CSS3D on your own[we use this is animations, but normally animation team would build this as a UI developer we just use this]
+	
+    
+
+
+
+
+  

@@ -1,0 +1,144 @@
+Responsive Design
+=================
+- A responsive design can change the layout of the page according to the view port(screen).
+- It provides fluid experience that fits the device screen(no scrolling left and right).
+- To create responsive designs there are various implementations to follow
+	
+	1. meta attributes
+	2. responsive|fluid images
+	3. responsive|fluid container
+	4. display grid & flex
+	5. media queries
+
+Meta attributes 
+	<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+	It will identify on which screen the user is watching and it will get the screen size and fit the content  
+        according to the screen width.
+
+Fluid images
+	<img scr='' width='100%'>
+	image width must be in '%',so it will adjust according to screen.
+
+Fluid containers
+	<table width='100%'>
+
+Display Grid and Flex
+	display:grid;
+	grid-row;
+	grid-column;
+	
+	display:flex;
+	flex-row
+	flex-wrap;
+	flex-direction;
+
+
+Media Queries
+ - Media have type	  : screen | print | speech 
+ - Media have orientation : landscape | portrait
+ - Media have min-width & max-width
+
+ - min-width 	: It defines the value starting from specified units to end.
+			eg: min-width: 600px (starting from 600px to end)
+
+ - max-width 	: It defines the value starting from 0px to specified units
+			eg: max-width: 400px ( starting from 0px to 400px)
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        span {
+
+            border: 2px solid black;
+            padding: 10px;
+            width: 100px;
+            display: inline-block;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        @media screen and (min-width:600px) {
+
+            nav {
+                display: flex;
+                justify-content: space-between;
+            }
+
+        }
+
+        @media screen and (max-width:599px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+            }
+
+            span {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <span>About</span>
+        <span>Home</span>
+        <span>Contact</span>
+        <span>Help</span>
+    </nav>
+</body>
+
+</html>
+
+Note: while working as a web developer we need to deliver the products with a bounded time.
+
+Every project will have 2 things
+	a. Objective : It is time bound and it should be achieved.
+	b. goal	     : It is not time bound and even if it is not achieved its ok.
+
+
+
+Bootstrap 
+========
+ => It is an opensource and cross platform component library used to build interactive UI faster.
+ => There are various component libraries other than bootstrap
+	a. Twitter bootstrap
+	b. Tailwind css
+	c. Telerix
+	d. Dev Express
+	e. Mui
+	f. jQuery UI etc...
+
+ Note: Open source means we can use what they have provided,if needed we can modify according to our requirement.
+       Free means, it is associated with "License".
+       Cross platform means it can run on any platform[ os services + browsers ].
+       Components means is a combination of 
+	a. Markup -> HTML
+	b. Styles -> CSS
+	c. Logic  -> Javascript | jQuery.
+
+	Component have presentation,style and functionality
+		ex: navbar, carousel, cards, accordion etc...
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

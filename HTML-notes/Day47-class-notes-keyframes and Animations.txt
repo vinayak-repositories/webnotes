@@ -1,0 +1,428 @@
+CSS Transition
+--------------
+The transition property in CSS allows smooth animations when changing CSS properties like background-color, transform, opacity, etc. 
+It makes UI interactions more visually appealing.
+
+
+	transition 		   : property duration timing-function delay
+
+	property	           : The CSS property to animate (e.g., all, background-color, transform).
+	duration		   : How long the transition lasts (e.g., 0.5s, 1s).
+	timing-function (optional) : Defines speed variation (ease, linear, ease-in, ease-out, ease-in-out).
+	delay (optional)           : Adds a delay before the transition starts (1s, 0.3s).
+
+specific things to change
+-------------------------
+	transition-duration            : total time taken for transition
+	transition-delay               : time taken to start the transition.
+	transition-property            : refers to the property that uses duration[time]
+	transition-animation-function  : it applies predefined animations.
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style type="text/css">
+
+    div{
+      	background-color: red;
+      	width:50px;
+      	height: 50px;
+      	transition-duration: 2s;   
+    }
+
+    div:hover{
+      	background-color: red;
+      	width:1000px;
+      	transition-duration: 3s;
+      	transition-delay: 3s;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+</body>
+
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style type="text/css">
+    div{
+      background-color: red;
+      width:50px;
+      height: 50px;
+      transition-duration: 2s;
+    }
+
+    div:hover{
+      background-color: yellow;
+      width:1000px;
+      transition-duration: 3s;
+      transition-property: width;
+      transition-delay: 3s;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+</body>
+
+</html>
+
+
+eg#3. transition-timing-function: values
+
+The transition-timing-function property can have the following values:
+ease 		      - specifies a transition effect with a slow start, then fast, then end slowly (this is default)
+linear 		      - specifies a transition effect with the same speed from start to end
+ease-in 	      - specifies a transition effect with a slow start
+ease-out 	      - specifies a transition effect with a slow end
+ease-in-out 	      - specifies a transition effect with a slow start and end
+cubic-bezier(n,n,n,n) - lets you define your own values in a cubic-bezier function
+
+1. ease (Default)
+	Starts slow, speeds up, then slows down again.
+	Good for a natural feel.
+
+2. ease-in
+	Starts slow and then speeds up.
+	Good for effects like loading animations.
+
+3. ease-out
+	Starts fast and then slows down at the end.
+	Good for exit animations (e.g., fading out smoothly).
+
+4. ease-in-out
+	Starts slow, speeds up, and slows down at the end.
+	Good for smooth, natural transitions.
+
+
+
+eg#1. Eg to demonstrate the movement of transition in steps
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steps Transition Example</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 50px;
+            background-color: coral;
+            text-align: center;
+            line-height: 50px;
+            transition: transform 2s steps(5); /* 5-step transition */
+        }
+        .box:hover {
+            transform: translateX(200px);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+	Hover Me
+    </div>
+</body>
+</html>
+
+To create our own animations as per the requirement, we need to go for "keyframes and animations".
+
+					CSS keyframes and animations
+					============================
+keyframe - It is used to create animations for any element in page.
+	 - A keyframe comprises of elements with any specified effect like size, position, orientation, color etc.
+	 - A good basic animations comprises of 30 frames per second(30fps)
+	
+CSS can configure "tweening" animations which comprises of initial and final state.
+
+Syntax: 
+  
+@keyframes animationName {
+  from {
+    /* Initial state */
+  }
+  to {
+    /* Final state */
+  }
+}
+
+@keyframes animationName {
+  0% {
+   	 /* Start */
+  }
+  50% {
+   	 /* Midway */
+  }
+  100% {
+    	/* End */
+  }
+}
+
+-key frame is applied to any element in page by using "animation" attributes.
+	animation-name
+	animation-duration
+	animation-direction
+	animation-iteration-count
+	animation-delay
+	animation-timing-function
+
+animation: name duration timing-function delay iteration-count direction fill-mode;
+
+1. name		  : Name of the animation (same as @keyframes name).
+2. duration	  : Time in s or ms for one cycle.
+3. timing-function: Speed curve (ease, linear, ease-in, ease-out, ease-in-out, cubic-bezier(...)).
+4. delay	  : Time before animation starts.
+5. iteration-count: Number of times it repeats (infinite for endless).
+6. direction	  : normal, reverse, alternate, alternate-reverse.
+7. fill-mode	  : none, forwards, backwards, both.
+
+
+Examples
+========
+animation: bounce 1s infinite;
+animation: marquee 5s linear infinite;
+animation: marquee-alternate 2s ease-in-out infinite alternate
+animation: marquee-slide 3s linear forwards
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+      }
+
+      .box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation: bounce 3s infinite;
+      }
+    </style>
+</head>
+<body>
+    <div class="box">
+        
+    </div>
+      
+</body>
+</html>
+
+Note: Using Keyframes at any interval we can control the animation.
+
+@keyframes customMove {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(50px); }
+  70% { transform: translateX(-50px); }
+  90% { transform: translateX(20px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }  /* Start fully transparent */
+  to { opacity: 1; }    /* End fully visible */
+}
+
+marquee elements behaviour
+==========================
+   behaviour = "scroll"    : Continuous scrolling.
+   behaviour = "slide"     : Moves once and stops when it reaches the end.
+   behaviour = "alternate" : Moves back and forth between two edges.
+
+behaviour of scroll effect
+==========================
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .marquee {
+            display: inline-block;
+            animation: marquee 3s linear infinite;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="marquee">
+        This is a marquee effect using keyframes!
+    </div>
+
+</body>
+
+</html>
+
+
+eg#2. behaviour of slide
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        @keyframes marquee-slide {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .marquee-slide {
+            display: inline-block;
+            animation: marquee-slide 3s linear forwards;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="marquee-slide">
+        This is a marquee effect using keyframes!
+    </div>
+
+</body>
+
+</html>
+
+Note: fill-mode attributes
+
+Value			Effect
+====================================
+forwards	Keeps final animation state and it won't apply again
+backwards	Applies first frame instantly (before animation starts)
+both		Combines forwards and backwards
+
+3. behaviour of alternate
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        @keyframes marquee-alaternate {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(200px);
+            }
+        }
+
+        .marquee-alternate {
+            display: inline-block;
+            animation: marquee-alternate 3s ease-in-out infinite alternate ;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="marquee-alternate">
+        This is a marquee effect using keyframes!
+    </div>
+
+</body>
+
+</html>
+
+Direction attributes values
+===========================
+Note: 
+normal			 Animation plays forwards from 0% to 100%.
+reverse			 Animation plays backwards, starting from 100% to 0%.
+alternate		 Animation plays forwards in the first cycle, then backwards in the next cycle (repeats).
+alternate-reverse	 Animation plays backwards in the first cycle, then forwards in the next cycle (repeats).
+	
+Note: To write a css code and link to element through javascript
+	document.styleSheets[index].insertRule("CSS Rule", position);
+
+
+
+Dynamically linking
+-------------------
+<script type="text/javascript">
+  console.log(document.styleSheets[0]);
+  console.log(document.styleSheets[0].cssRules);
+  
+  document.styleSheets[0].insertRule(`
+  	@keyframes bounce {
+            0%{
+                transform: translateX(0);
+            }
+            100%{
+                transform: translateX(200px);
+            }
+        }`,document.styleSheets[0].cssRules.length);
+</script>
+
+
+
+
+
+
+
+ 

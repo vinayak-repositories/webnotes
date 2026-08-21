@@ -1,0 +1,574 @@
+CSS Integration
+CSS rules
+CSS selectors
+CSS colors
+CSS inheritance
+CSS units
+Box Model
+CSS Positions
+CSS Z-index
+===================================================
+
+CSS Display
+===========
+1. None
+2. Block
+3. Inline
+4. Inline-Block
+5. Flex
+6. Grid
+
+None
+- It hides the element in a Page.
+- It removes the allocated space for element.
+
+syntax: 
+ img{
+	display:none;
+ }
+
+FAQ: What is the difference b/w "display:none" and "visiblity: hidden"?
+Ans. The properties visibility: hidden and display: none are both used in CSS to hide elements, but they behave differently 
+     in terms of rendering and layout:
+     1. display  : none     => "removes the allocated space".
+     2. visiblity: hidden   => "keeps the allocated space".[Best suited when some advertisment has to come on a page]
+			       " In js we will see how to remove an element, to decrease the loading time."
+
+eg#1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1 style="display:none;">Display attributes</h1>
+    <img src="../public/images/menfashion.jpeg" width="200" height="200">
+</body>
+</html>
+===========================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1 style="visibility: hidden;">Display attributes</h1>
+    <img src="../public/images/menfashion.jpeg" width="200" height="200">
+</body>
+</html>
+
+eg : To demonstrate the usage of display:none and visiblity: hidden in javascript
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div style="background: pink; display: none;" id="displayDiv">
+        Hidden with display
+    </div>
+
+    <div style="background: lightgreen; visibility: hidden;" id="displayHid">
+        visiblity with hidden
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    const displayDiv = document.getElementById("displayDiv");
+    const displayHid = document.getElementById("displayHid");
+
+    console.log("Is display:none available in DOM :: ",      displayDiv ? "Yes": "No");
+    console.log("Is visibility:hidden available in DOM :: ", displayHid? "Yes": "No");
+    console.log("DisplayNone    offsetHeight : ",displayDiv.offsetHeight)
+    console.log("DisplayHidden  offsetHeight  : ",displayHid.offsetHeight);
+
+</script>
+
+
+offsetHeight = content height + padding(top + bottom) + border(top + bottom)
+It doesn't include "margin".
+
+eg#1 To demonstrate offSetHeight
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offsetHeight Example</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 5px solid black;
+            margin: 10px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box" id="myBox">This is a box</div>
+    <p id="result"></p>
+
+    <script>
+        let box = document.getElementById("myBox");
+        let result = document.getElementById("result");
+
+        result.innerHTML = "offsetHeight: " + box.offsetHeight + "px";
+    </script>
+
+</body>
+</html>
+
+
+2. Block
+	It can display elements with line break
+
+display: block
+Behavior:
+1. A block-level element takes up the full width of its parent container (by default).
+2. Starts on a new line, stacking vertically.
+3. Supports width, height, padding, and margin.
+Common Block Elements: <div>, <p>, <h1>–<h6>, <section>, <article>, etc.
+
+
+Inline	
+	It can display elements without line break
+
+
+display: inline
+Behavior:
+1. An inline element takes up only as much width as its content.
+2. Does not start on a new line; elements appear next to each other horizontally.
+3. Width and height cannot be set directly (but padding and margins apply horizontally).
+Common Inline Elements: <span>, <a>, <strong>, <em>, <img> (by default), etc.
+
+Note: 	
+You can use block|inline to displaying hidden element.
+
+  span{
+	display: block     ===> display in new line
+  }
+
+  span{
+	display:inline     ===> display in same line
+  }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+
+       input:valid+span{
+            display: none;
+       }
+
+       input:invalid+span{
+           display: inline;
+           color:red;
+       }
+
+    </style>
+</head>
+<body>
+   <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="txtUser" required>
+            <span>Username is required</span>
+        </dd>
+   </dl>
+</body>
+</html>
+
+Inline-Block
+------------
+display: inline-block
+
+Behavior:
+1. Combines features of both inline and block:
+2. Elements appear inline (horizontally next to each other).
+3. Allows setting width and height like block.
+4. Useful for creating layouts like buttons or inline grids.
+ 
+=> Several HTML elements will not allow you to change the dimensions.
+=> The width and height depends on the content.
+=> It can change the dimension of elements with autosize[adjust accordingly].
+
+span{
+	heigth: 200px;			=> width&height are not applied.
+	width : 300px;
+}
+
+span{
+	heigth: 200px;			=> width&height are applied now.
+	width : 300px;
+	display:inline-block;
+}
+
+eg#3. To demonstrate the usage of inline, block and inline-block
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline-Block Example</title>
+  <style>
+    .card {
+      display: inline-block; /* Makes the element behave inline but allows block-level properties */
+      width: 200px;          /* Custom width */
+      height: 250px;         /* Custom height */
+      margin: 10px;          /* Adds space between cards */
+      padding: 15px;         /* Space inside the card */
+      background-color: #f9f9f9; /* Light gray background */
+      border: 1px solid #ccc; /* Border for the card */
+      border-radius: 10px;   /* Rounded corners */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      text-align: center;    /* Centers text content */
+    }
+
+    .card img {
+      width: 100%;           /* Makes image fit the card width */
+      border-radius: 8px;    /* Rounds image corners slightly */
+    }
+
+    .card h3 {
+      margin: 10px 0;        /* Space above and below the heading */
+      font-size: 18px;
+    }
+
+    .card p {
+      color: #666;           /* Gray color for the paragraph */
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Inline-Block Card Layout</h2>
+
+  <div class="card">
+    <img src="../public/images/a1.jpg" alt="Card Image">
+    <h3>Card 1</h3>
+    <p>This is the description for card 1.</p>
+  </div>
+
+  <div class="card">
+    <img src="../public/images/a2.jpg" alt="Card Image">
+    <h3>Card 2</h3>
+    <p>This is the description for card 2.</p>
+  </div>
+
+  <div class="card">
+    <img src="../public/images/a3.jpg" alt="Card Image">
+    <h3>Card 3</h3>
+    <p>This is the description for card 3.</p>
+  </div>
+</body>
+</html>
+
+
+Note:
+Compared to display: inline, the major difference of display:inline-block is that display: inline-block allows to set a width and height on the element.
+
+Also, with display: inline-block, the top and bottom margins/paddings are respected, but with display: inline they are not.
+
+Compared to display: block, the major difference is that display: inline-block does not add a line-break after the element, so the element can sit next to other elements.
+=========================================================================================================================================================================
+
+Flex
+- It is used for container that comprises of elements.
+- It is not applicable directly to elements.
+- Arrange elements side by side(general idea).
+- Flex have various attributes to control the orientation and allignment.
+
+For orientation
+	a. flex-row	
+	b. flex-column		
+	c. flex-wrap
+	d. flex-nowrap
+	e. flex-direction
+	f. flex-row-reverse
+	g. flex-col-reverse
+
+- You can configure allignments for elements using
+	a. justify-content
+	b. align-items
+
+
+FAQ: What is the difference b/w flex and inline?
+	- Flex is used only for container that comprises of elements.
+	- It can align items horizontally & vertically.
+
+Scenario
+========
+<style>
+	ol{
+		display: flex;
+	}
+</style>
+<ol>
+   <li>HTML</li>
+   <li>CSS</li>
+   <li>Bootstrap</li>
+</ol> 
+
+
+	- Inline is used for individual elements to keep along with other elements.
+	- It is not flexible for arrangements.
+
+<style>
+	li{
+		display: inline;
+	}
+</style>
+<ol>
+   <li>HTML</li>
+   <li>CSS</li>
+   <li>Bootstrap</li>
+</ol>
+
+syntax: 
+   container{
+	display: flex;
+   }	
+  
+   element{
+	display: inline;
+   }
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        ul {
+            list-style: none;
+        }
+
+        li {
+            background-color: black;
+            color: white;
+            margin: 5px;
+            padding: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .pages{
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            border-radius: 13px;
+            color: black;
+            background-color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">Table of Contents</h4>
+    <ul>
+        <li>HTML<span class="pages">1</span></li>
+        <li>CSS<span class="pages">4</span></li>
+        <li>Bootstrap<span class="pages">8</span></li>
+    </ul>
+</body>
+
+</html>
+
+=================
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+       
+       nav{
+        	border: 1px solid gray;
+        	width: 100px;
+        	height: 400px;
+        	padding:10px;
+		
+		/*Orientation*/
+        	display: flex;
+        	flex-direction: column;
+        	justify-content: space-evenly;
+       }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <button>Home</button>
+        <button>About</button>
+        <button>Blog</button>
+        <button>Pages</button>
+        <button>Contact</button>
+    </nav>
+</body>
+</html>
+
+
+Note: 
+    For Orientation we use 
+	a. display :flex
+	b. flex-direction : row|column|row-reverse|column-reverse
+
+     For Allignement we use
+	a. justify-content
+	b. align-items     
+
+- We can change the flex orientation for elements using "flex-direction"
+	container	
+	{
+		display:flex;
+		flex-direction: row|row-reverse|column|column-reverse
+	}
+
+
+- We can use the attributes like "align-items" while defining flex
+		align-items : baseline
+		align-items : center
+		align-items : end
+
+
+- It can change the alignment of  items in container to 
+	a. baseline[left when flex direction is column, top when flex direction is row]
+	b. center  
+	c. end[right when flex direction is column,bottom when flex direction is row]
+
+Note: when align-items is not defined,the elements in the container will adjust their size according to width and height.
+
+
+- justify-contents will provide various allignments like 
+		flex-start    : [left in row, top in column]
+		flex-end      : [right in row, bottom in column]
+		center        : [center in row and column]
+		space-around  :
+		space-evenly  :
+		space-between :  
+	
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+
+        .kids{
+
+            background-image : url(../public/images/kidfashion.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 200px;
+            height: 300px;
+
+            /* code for display option */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+	h1{
+       	 	font-size: 40px;
+        	color:white;
+        	text-shadow: 2px 2px 2px black;
+      	}
+
+      button{
+        	border:none;
+        	width:100px;
+        	padding:5px;
+        	background-color: white;
+      	    }
+
+    </style>
+</head>
+
+<body>
+    <div class="kids">
+        <h1>Kids</h1>
+        <button>Shop</button>
+    </div>
+</body>
+
+</html>
+====================================================================================================================
+
+Display : Grid
+
+- It is used for creating flexible layouts.[means change accordingly orientation wise and placement of content wise]
+
+====================================================================================================================
+
+FAQ: 
+a. What is the difference b/w "display:none" and "visiblity: hidden"?
+b. What is the difference b/w flex and inline?
+
+
+	
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,163 @@
+CSS Transition
+	transition 		       : shorthand
+	transition-duration            : total time taken for transition
+	transition-delay               : time taken to start the transition.
+	transition-property            : refers to the property that uses duration[time]
+	transition-animation-function  : it applies predefined animations.
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style type="text/css">
+    div{
+      	background-color: red;
+      	width:50px;
+      	height: 50px;
+      	transition-duration: 2s;   
+    }
+    div:hover{
+      	background-color: red;
+      	width:1000px;
+      	transition-duration: 3s;
+      	transition-delay: 3s;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+</body>
+
+</html>
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style type="text/css">
+    div{
+      background-color: red;
+      width:50px;
+      height: 50px;
+      transition-duration: 2s;
+    }
+
+    div:hover{
+      background-color: yellow;
+      width:1000px;
+      transition-duration: 3s;
+      transition-property: width;
+      transition-delay: 3s;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+</body>
+
+</html>
+
+
+eg#3. transition-timing-function: values
+
+The transition-timing-function property can have the following values:
+ease 		      - specifies a transition effect with a slow start, then fast, then end slowly (this is default)
+linear 		      - specifies a transition effect with the same speed from start to end
+ease-in 	      - specifies a transition effect with a slow start
+ease-out 	      - specifies a transition effect with a slow end
+ease-in-out 	      - specifies a transition effect with a slow start and end
+cubic-bezier(n,n,n,n) - lets you define your own values in a cubic-bezier function
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        div{
+            background-color: red;
+            width: 50px;
+            height: 50px;
+            transition-duration: 2s;
+            transition-timing-function: steps(5);
+        }
+        div:hover{
+            background-color: yellow;
+            width:1000px;
+            transition-property: width; 
+            transition-duration: 3s;
+            transition-timing-function: steps(20);
+        }
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+</html>
+
+To create our own animations as per the requirement, we need to go for "keyframes and animations".
+
+					CSS keyframes and animations
+					============================
+keyframe - It is used to create animations for any element in page.
+	 - A keyframe comprises of elements with any specified effect like size, position, orientation, color etc.
+	 - A good basic animations comprises of 30 frames per second(30fps)
+	
+CSS can configure "tweening" animations which comprises of initial and final state.
+
+syntax: 
+  @keyframes name
+  {
+	from{
+		initial_state;
+	}
+	to{
+		final_state;
+	}
+  }
+
+-key frame is applied to any element in page by using "animation" attributes.
+	animation-name
+	animation-duration
+	animation-direction
+	animation-iteration-count
+	animation-delay
+	animation-timing-function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

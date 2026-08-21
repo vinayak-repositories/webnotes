@@ -1,0 +1,636 @@
+Behavioural & Occurrence class
+=============================
+
+Selector 				Description
+====================================================================
+::first-line 			Effects for first line in paragraph.
+::first-letter 			Effects for first character.
+::before 			Effect or content to add before the current element.
+::after 			Effect or content to add after  the current element.
+::place-holder			Effects on the placeholder elements.
+::selection			For selecting particular portion in a page
+
+
+Note: The selectors in CSS can implement certain rules, which will not allow to configure all types of style attributes 
+      for an element.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        ol {
+            list-style: none;
+            display: flex;
+        }
+
+        li::after {
+            content: " >> ";
+        }
+
+        li:last-child::after {
+            content: "";
+        }
+
+        li:last-child {
+            color: gray;
+        }
+
+        input::placeholder {
+            color: red;
+        }
+
+        p::first-line {
+            color: blue;
+        }
+
+        p::first-letter {
+            font-size: 150px;
+            float: left;
+        }
+
+        p::selection {
+            background-color: yellow;
+            font-size: 50px;
+        }
+
+    </style>
+</head>
+
+<body class="container-fluid">
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Bootstrap</li>
+        <li>JS</li>
+        <li>SaaS</li>
+        <li>jQuery</li>
+        <li>Nodejs</li>
+        <li>React</li>
+    </ol>
+    <input type="password" placeholder="Enter password">
+    <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Nihil aperiam incidunt numquam autem. Odit accusantium,
+        impedit id vitae officia animi assumenda at illo aperiam,
+        corporis praesentium repudiandae soluta ratione recusandae dolores eaque ea
+        ab facilis illum? Sequi, iusto mollitia? Sint neque magni
+        mollitia nostrum temporibus aperiam! Laboriosam excepturi tenetur
+        molestiae facilis at animi et veniam, architecto corrupti neque
+        quia culpa dicta, beatae rerum odit maiores, non illum eum alias omnis aliquid cupiditate minima. Perspiciatis,
+        officiis vero nulla ipsam, illum aliquam suscipit temporibus molestias ipsa magnam mollitia inventore voluptatum
+        voluptas dicta possimus id sapiente labore laborum vitae itaque tempora blanditiis libero maiores. Suscipit
+        nostrum ipsa officiis explicabo iusto voluptatibus dolor commodi exercitationem non provident perspiciatis
+        omnis, rerum nam iure, magnam obcaecati earum saepe veniam voluptates unde! Eum earum deserunt illo ratione
+        cupiditate molestiae officia itaque soluta molestias, quo incidunt perferendis consequatur magnam, quos quia
+        voluptatum repellat ea maiores pariatur sequi vitae explicabo corporis! Sequi corrupti laboriosam, nihil modi
+        nemo ducimus cum, nesciunt ipsum quam perspiciatis natus esse sint sit! Corporis ea beatae sunt reiciendis
+        accusamus delectus vitae excepturi eum facilis voluptas quam doloribus est amet aut ullam dicta a nulla
+        obcaecati rerum libero numquam autem, aspernatur doloremque ad.
+        Ipsam, deserunt placeat.</p>
+</body>
+
+</html>
+
+
+Note: 
+
+:: selection is applied only on 
+
+1. Text elements
+
+<p> (paragraphs)
+<h1> to <h6> (headings)
+<span> (inline text)
+<div> (if it contains text)
+<li> (list items)
+
+2. Form elements
+
+<textarea> (selected text inside a text area)
+<input type="text"> (selected text inside input fields)
+
+3. Other elements with text content
+
+<a> (links)
+<blockquote> (quoted text)
+<label> (form labels) 
+
+Elements that ::selection does NOT affect:
+Certain elements that do not contain selectable text will not be affected, including:
+1. Images (<img>)
+2. Buttons (<button>)
+3. Non-selectable elements (<canvas>, <video>, etc.)
+
+Most modern browsers support ::selection, but only limited properties can be applied, such as:
+a. color
+b. background-color
+c. text-shadow
+
+Properties like border, padding, margin, and box-shadow won't work.
+
+  
+Universal Selector:
+- It is defined by using “*” that represents all.
+- It apply effects to all elements.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        *{
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <dl>
+        <dt>Name</dt>
+        <dd><input type="text"></dd>
+        <dt>Password</dt>
+        <dd><input disabled type="password"></dd>
+        <dt>Mobile</dt>
+        <dd><input required type="text"></dd>
+    </dl>
+</body>
+</html>
+
+Root selector
+=============
+:root 			It refers to root(highest level parent element) of document, which is ‘<html>’
+
+Ex:
+:root {
+  --main-color: #3498db;
+}
+
+body {
+  background-color: var(--main-color);
+}
+
+
+Note: 
+ root targets only the root element (typically <html>), whereas * targets every single element in the document.
+:root is often used for global settings like CSS variables, while * is often used for universal styles like resets or base styles for
+ all elements.
+
+e#1.
+
+styles.css
+==========
+:root {
+    --bg-color: white;
+    --text-color: black;
+}
+
+.dark-theme {
+    --bg-color: black;
+    --text-color: white;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+index.html
+==========
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Switcher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="themeToggle">Toggle Theme</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
+script.js
+=========
+document.getElementById("themeToggle").addEventListener("click", function() {
+    	document.documentElement.classList.toggle("dark-theme");
+});
+
+
+
+Language Selector:
+- It defines effects based on lang configured for element.
+- If you page is multi lingual then you can define effects to content based on specific language. “:lang()”
+
+eg#1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        p:lang(kan){
+            color:red;
+        }
+        p:lang(en){
+            color:blue;
+        }
+        p:lang(fr){
+            color:green;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <p lang="en">Hello User</p>
+    <p lang="fr">Bonjour utilisateur</p>
+    <p lang="kan">ಹಲೋ ಬಳಕೆದಾರ</p>
+</body>
+</html>
+
+CSS Colors
+==========
+a. Color name
+b. Color shade name
+c. hexadecimal[3 char | 6 char]
+d. rgb()
+e. rgba()
+f. hsl()
+g. hsla()
+h. linear-gradient()
+k. radial-gradient()
+
+rgb() - red,blue,green value ranges from 0 to 255
+	syntax: 
+		{
+			background-color: rgb(255,0,0);
+		}
+
+rgba() - red,green,blue and alpha[0 to 1]
+	 syntax: 
+		{
+			background-color:rgba(0,0,0,0.5);
+		}
+
+hsl()  - hue,saturation,lightness
+	  hue is an angle from 0 to 360 degree
+	  0 to 120   => red
+	  120 to 240 => green
+	  240 to 360 => blue
+	  saturation is grey shade with 0 to 100%
+	  lightness  is brightness with 0 to 100%
+===========================================================
+
+css inheritance
+===============
+ => CSS inheritance determines how styles are passed down from parent elements to child elements in an HTML document. 
+    Some properties are naturally inherited, while others are not.
+
+Inherited Properties
+====================
+Some properties automatically inherit from the parent element to its child elements. These are mostly text-related properties, such as:
+ 1. color
+ 2. font
+ 3. letter-spacing
+ 4. line-height
+ 5. visibility
+ 6. cursor
+
+Non-Inherited Properties
+========================
+Most box-model and layout-related properties are not inherited. These include:
+1. margin
+2. padding
+3. border
+4. width
+5. height
+6. background
+7. position
+8. display
+9. flex
+10. grid
+
+Controlling Inheritance Using inherit, initial, and unset
+  a. inherit : Forces an element to inherit a property from its parent, even if it's not naturally inherited.
+  b. initial : Resets a property to its default value (as defined by the browser).
+  c. unset   : Acts as inherit for inherited properties.
+             : Acts as initial for non-inherited properties.
+	
+syntax: 
+
+	{
+		attribute: inherit | initial | unset;
+	}
+
+Note: If we we want all properties of parent to inherit to child then we use
+	{
+		all: unset;	=> remove all the default styles
+	}
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Inheritance Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: blue;
+        }
+
+        div {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>Welcome to the world of CSS.</p>
+        <span>Learning CSS Inheritance</span>
+    </div>
+</body>
+</html>
+
+Output
+The text inside <p> and <span> will be blue because color is an inheritable property.  
+
+<style>
+    body {
+        background-color: lightgray;
+    }
+
+    div {
+        padding: 20px;
+    }
+</style>
+
+Output: Here, background-color is NOT inherited. The div must explicitly set its background color; otherwise, it won't inherit from body.
+
+
+Forcing Inheritance (inherit, initial, unset)
+You can override default inheritance using:
+
+a. inherit: Forces inheritance.
+b. initial: Resets to the default browser value.
+c. unset: Behaves as inherit for inheritable properties, initial otherwise.
+
+div {
+    color: inherit; /* Inherits from parent */
+    background-color: initial; /* Resets to default */
+}
+
+Code to see which all properties are inherited and which won't be inherited
+===========================================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Inheritance with JavaScript</title>
+    <style>
+        .parent {
+            color: blue;
+            font-size: 20px;
+            border: 2px solid black;
+            padding: 10px;
+            display: block;
+        }
+        .child {
+            display:unset;
+            font-size: unset;
+            border:unset;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="parent">
+        Parent Text
+        <div class="child">Child Text</div>
+    </div>
+
+    <button onclick="checkInheritance()">Check Inheritance</button>
+
+    <script>
+        function checkInheritance() {
+            let child = document.querySelector('.child');
+            let parent = document.querySelector('.parent');
+
+            console.log(window.getComputedStyle)
+
+            // Get computed styles
+            let childColor = window.getComputedStyle(child).color;
+            let childFontSize = window.getComputedStyle(child).fontSize;
+            let childBorder = window.getComputedStyle(child).border;
+            let childDisplay = window.getComputedStyle(child).display;
+            
+
+            let parentColor = window.getComputedStyle(parent).color;
+            let parentFontSize = window.getComputedStyle(parent).fontSize;
+            let parentBorder = window.getComputedStyle(parent).border;
+            let parentDisplay = window.getComputedStyle(parent).display;
+
+            // Log inheritance details
+            console.log("Parent Color:", parentColor);
+            console.log("Child Color (Inherited):",childColor);
+
+            console.log("Parent Font Size:", parentFontSize);
+            console.log("Child Font Size (Inherited):", childFontSize);
+
+            console.log("Parent Border:", parentBorder);
+            console.log("Child Border (Not Inherited by Default):", childBorder);
+
+            console.log("Parent Display:", parentDisplay);
+            console.log("Child Display (Not Inherited by Default):", childDisplay);
+        }
+    </script>
+
+</body>
+</html>
+
+
+Note: !important applies only at the selector level where it is declared—it does not force inheritance.
+
+Note: 
+
+In javascript to check the methods and properties name of any object we use the following code
+const properties = [];
+const methods = [];
+
+Object.getOwnPropertyNames(Array.prototype).forEach(prop => {
+    if (typeof Array.prototype[prop] === "function") {
+        methods.push(prop);  // It's a method
+    } else {
+        properties.push(prop);  // It's a property
+    }
+});
+
+console.log("Properties:", properties);
+console.log("Methods:", methods);
+
+
+Working with lang selector
+-------------------------
+a. index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Page</title>
+    <link rel="stylesheet" href="../styles/sample.css">
+</head>
+<body>
+
+    <h1 id="header">Hello, welcome!</h1>
+
+    <p id="text">This is an English paragraph.</p>
+
+    <label for="language-select">Choose a language: </label>
+    <select id="language-select">
+        <option value="en" selected>English</option>
+        <option value="fr">French</option>
+        <option value="ar">Arabic</option>
+        <option value="jp">Japanese</option>
+    </select>
+
+    <script src="../src/scripts/scripit.js"></script>
+</body>
+</html>
+
+b. styles.css
+
+/* Default styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+/* Styles for each language */
+p:lang(en) {
+    font-family: Arial, sans-serif;
+    color: blue;
+}
+
+p:lang(fr) {
+    font-family: Georgia, serif;
+    color: red;
+}
+
+p:lang(ar) {
+    font-family: 'Amiri', serif;
+    color: green;
+    direction: rtl;
+    text-align: right;
+}
+
+p:lang(jp) {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: purple;
+}
+
+h1:lang(en) {
+    color: blue;
+}
+
+h1:lang(fr) {
+    color: red;
+}
+
+h1:lang(ar) {
+    color: green;
+}
+
+h1:lang(jp) {
+    color: purple;
+}
+
+c. scripts.js
+
+// Select the elements
+const languageSelect = document.getElementById('language-select');
+const header = document.getElementById('header');
+const text = document.getElementById('text');
+
+// Function to change language
+function changeLanguage(language) {
+    // Set the language on the page
+    document.documentElement.lang = language;
+
+    // Change header and text content based on the selected language
+    if (language === 'en') {
+        header.textContent = 'Hello, welcome!';
+        text.textContent = 'This is an English paragraph.';
+    } else if (language === 'fr') {
+        header.textContent = 'Bonjour, bienvenue!';
+        text.textContent = 'Ceci est un paragraphe en français.';
+    } else if (language === 'ar') {
+        header.textContent = 'مرحبا، أهلا بك!';
+        text.textContent = 'هذا فقرة باللغة العربية.';
+    } else if (language === 'jp') {
+        header.textContent = 'こんにちは、ようこそ！';
+        text.textContent = 'これは日本語の段落です。';
+    }
+}
+
+// Event listener for language change
+languageSelect.addEventListener('change', (event) => {
+  
+    changeLanguage(event.target.value);
+});
+
+// Set the initial language
+//changeLanguage(languageSelect.value);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+Behavioural & Occurance class
+=============================
+
+Selector 				Description
+====================================================================
+::first-line 			Effects for first line in paragraph.
+::first-letter 			Effects for first character.
+::before 			Effect or content to add before the current element.
+::after 			Effect or content to add after  the current element.
+::place-holder			Effects on the placeholder elements.
+
+
+Note: The selectors in CSS can implement certain rules, which will not allow to configure all types of style attributes for an element.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        ol {
+            list-style: none;
+            display: flex;
+        }
+
+        li::after {
+            content: " >> ";
+        }
+
+        li:last-child::after {
+            content: "";
+        }
+
+        li:last-child {
+            color: gray;
+        }
+
+        input::placeholder {
+            color: red;
+        }
+
+        p::first-line {
+            color: blue;
+        }
+
+        p::first-letter {
+            font-size: 150px;
+            float: left;
+        }
+
+        p::selection {
+            background-color: yellow;
+            font-size: 50px;
+        }
+
+    </style>
+</head>
+
+<body class="container-fluid">
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Bootstrap</li>
+        <li>JS</li>
+        <li>SaaS</li>
+        <li>jQuery</li>
+        <li>Nodejs</li>
+        <li>React</li>
+    </ol>
+    <input type="password" placeholder="Enter password">
+    <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Nihil aperiam incidunt numquam autem. Odit accusantium,
+        impedit id vitae officia animi assumenda at illo aperiam,
+        corporis praesentium repudiandae soluta ratione recusandae dolores eaque ea
+        ab facilis illum? Sequi, iusto mollitia? Sint neque magni
+        mollitia nostrum temporibus aperiam! Laboriosam excepturi tenetur
+        molestiae facilis at animi et veniam, architecto corrupti neque
+        quia culpa dicta, beatae rerum odit maiores, non illum eum alias omnis aliquid cupiditate minima. Perspiciatis,
+        officiis vero nulla ipsam, illum aliquam suscipit temporibus molestias ipsa magnam mollitia inventore voluptatum
+        voluptas dicta possimus id sapiente labore laborum vitae itaque tempora blanditiis libero maiores. Suscipit
+        nostrum ipsa officiis explicabo iusto voluptatibus dolor commodi exercitationem non provident perspiciatis
+        omnis, rerum nam iure, magnam obcaecati earum saepe veniam voluptates unde! Eum earum deserunt illo ratione
+        cupiditate molestiae officia itaque soluta molestias, quo incidunt perferendis consequatur magnam, quos quia
+        voluptatum repellat ea maiores pariatur sequi vitae explicabo corporis! Sequi corrupti laboriosam, nihil modi
+        nemo ducimus cum, nesciunt ipsum quam perspiciatis natus esse sint sit! Corporis ea beatae sunt reiciendis
+        accusamus delectus vitae excepturi eum facilis voluptas quam doloribus est amet aut ullam dicta a nulla
+        obcaecati rerum libero numquam autem, aspernatur doloremque ad.
+        Ipsam, deserunt placeat.</p>
+</body>
+
+</html>
+
+Output: 
+  
+
+Universal Selector:
+- It is defined by using “*” that represents all.
+- It apply effects to all elements.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        *{
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <dl>
+        <dt>Name</dt>
+        <dd><input type="text"></dd>
+        <dt>Password</dt>
+        <dd><input disabled type="password"></dd>
+        <dt>Mobile</dt>
+        <dd><input required type="text"></dd>
+    </dl>
+</body>
+</html>
+
+Root selector
+=============
+:root 			It refers to root(highest level parent element) of document, which is ‘<html>’
+
+Ex:
+:root {
+  --main-color: #3498db;
+}
+
+body {
+  background-color: var(--main-color);
+}
+
+
+Note: 
+root targets only the root element (typically <html>), whereas * targets every single element in the document.
+:root is often used for global settings like CSS variables, while * is often used for universal styles like resets or base styles for all elements.
+
+
+
+Language Selector:
+- It defines effects based on lang configured for element.
+- If you page is multi lingual then you can define effects to content based on specific language. “:lang()”
+
+eg#1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+        p:lang(kan){
+            color:red;
+        }
+        p:lang(en){
+            color:blue;
+        }
+        p:lang(fr){
+            color:green;
+        }
+    </style>
+</head>
+
+<body class="container-fluid">
+    <p lang="en">Hello User</p>
+    <p lang="fr">Bonjour utilisateur</p>
+    <p lang="kan">ಹಲೋ ಬಳಕೆದಾರ</p>
+</body>
+</html>
+
+CSS Colors
+==========
+a. Color name
+b. Color shade name
+c. hexadecimal[3 char | 6 char]
+d. rgb()
+e. rgba()
+f. hsl()
+g. hsla()
+h. linear-gradient()
+k. radial-gradient()
+
+rgb() - red,blue,green value ranges from 0 to 255
+	syntax: 
+		{
+			background-color: rgb(255,0,0);
+		}
+
+rgba() - red,green,blue and alpha[0 to 1]
+	 syntax: 
+		{
+			background-color:rgba(0,0,0,0.5);
+		}
+
+hsl()  - hue,saturation,lightness
+	  hue is an angle from 0 to 360 degree
+	  0 to 120   => red
+	  120 to 240 => green
+	  240 to 360 => blue
+	  saturation is grey shade with 0 to 100%
+	  lightness  is brightness with 0 to 100%
+===========================================================
+
+css inheritance
+===============
+ => In css inheritance is the process of configuring parent effects to child elements.
+ => child element automatically implements some of the parent feature which we can control by using follwing css values
+		a. inherit
+		b. initial
+		c. unset
+
+syntax: 
+	{
+		all: unset;	=> remove all the default styles
+	}
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+
+       .container{
+            border: 3px solid black;
+            padding: 25px;
+            font-size: 35px;
+            font-family: Brush Script MT;
+            color:red;
+            margin:10px;
+       }
+
+       h1,p{
+        all: inherit;
+       }
+       
+    </style>
+</head>
+<body class="container">
+    <h1>Welcome to CSS</h1>
+    <p>Formating HTML with styles</p>
+</body>
+</html>
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <style type="text/css">
+       h1{
+            font-weight: unset;
+            display: unset;
+       }    
+    </style>
+</head>
+<body class="container">
+    <h1>Welcome to CSS</h1>
+    Formating HTML with styles
+</body>
+</html>
+
+Note: 
+
+How unset Works?
+Ans.
+Inherited Properties
+====================
+=> For properties that are normally inherited (like color, font-family, etc.), unset behaves like the inherit keyword. 
+=> It will make the property inherit its value from its parent.
+
+Non-Inherited Properties
+======================== 
+=> For properties that are not naturally inherited (like width, margin, border, etc.), unset behaves like the initial keyword. 
+=> It will reset the property to its initial value, which is the browser's default.
+
+eg#1.
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

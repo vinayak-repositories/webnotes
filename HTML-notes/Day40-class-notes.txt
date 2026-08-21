@@ -1,0 +1,486 @@
+1. Primary Selectors
+	Id,Name,class
+
+2. Rational Selector
+	child,directchild,+,~
+
+3. Attribute Selector
+- Several elements in HTML are presented by using attribute of tag.
+<input type=”button”>
+<input type=”radio”>
+- “type” is attribute.
+- We have to apply effects based on attribute and value.
+Syntax:
+tagName[“attribute”] { }
+tagName[“attribute=value”] { }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        input[type="button"]{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+   <form>
+        <dl>
+            <dt>Username</dt>
+            <dd>
+                <input type="text" name="txtUsername">
+            </dd>
+            <dt>Password</dt>
+            <dd>
+                <input type="password" name="txtPassword">
+            </dd>
+        </dl>
+        <input type="button" value="submit">
+        <input type="button" value="reset"> 
+   </form>
+</body>
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        p[id]{
+            color: red;
+            font-size:25px;
+        }
+    </style>
+</head>
+<body>
+   <form>
+        <p>para-1</p>
+        <p id="p1">para-2</p>
+        <p>para-3</p>
+        <p id="p2">para-4</p>
+   </form>
+</body>
+</html>
+
+
+eg#3.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       img[width]{
+            display: none;
+       }
+    </style>
+</head>
+<body>
+   <form>
+        <img><br>
+        <img><br><img width="200" height="200"><br><img><br>
+        <img><br>   
+   </form>
+</body>
+</html>
+
+Note: here we are applying effects only for 'p' element with the id[not interset with the value of p]
+      similarly when we want to give effects for image which are not associated with width attribute then go for this scenario.
+
+Attributes selector can have various conditions
+
+Condition 						Purpose
+=======================================================================================================
+[attribute=”val”] 			Equal specifies that it should be exact match.
+[attribute^=”val”] 			It refers the value starting with specified.
+[attribute$=”val”] 			It specifies that the value ending with given term.
+[attribute|=”val”] 			Name starts with specified term and separated with “-“.
+[attribute~=”val”] 			Name start with specified term and not binded with other words.
+[attribute*=”val”] 			It matches the term at any location.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       p[class~="Effects"]{
+         color:red;
+         font-size: 25px;
+       }
+    </style>
+</head>
+<body>
+        <p class="Effects">para-1</p> 
+        <p class="ParaEffects">para-2</p>  
+        <p class="EffectsPara">para-3</p>  
+        <p class="Para-Effects">para-4</p>  
+        <p class="Effects-Para">para-5</p>  
+        <p class="Effects Para">para-6</p>   
+        <p class="Para Effects text">para-7</p> 
+</body>
+</html>
+
+Case1: p[class="Effects"]  	  output: para-1 (red colour)
+Case2: p[class^="Effects"]        output: para-1,para-3,para-5,para-6 (red colour)
+Case3: p[class$="Effects"]	  output: para-1,para-2,para-4 (red colour)
+Case4: p[class|="Effects"]        output: para-1,para-5(red colour)
+
+
+4. Dynamic Pseudo-Classes
+- Dynamic indicates that the effect can change according to state and situation.
+- Pseudo means false representation.
+- Class refers to Program Template in computer programming,It contains predefined logic and data,which you can implement and customize according
+  to the requirements.
+
+Syntax:
+link - not <link> element, it refers to <a>
+class/Id/type: pseudoClass {
+	
+}
+
+Note: 
+Q> Without ready made classes we are working with "JavaScript".
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       
+    </style>
+    <script type="text/javascript">
+        function setEffect() {
+            document.querySelector("h1").style.color="red";
+        }
+        function resetEffect() {
+            document.querySelector("h1").style.color="black";     
+        }
+    </script>
+</head>
+<body>
+   <form>
+        <h1 onmouseover="setEffect()" onmouseout="resetEffect()">Welcome to Styles</h1>
+   </form>
+</body>
+</html>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       h1:hover{ <!-- inheritance operator(:) -->
+         color: red;
+       }
+    </style>
+</head>
+<body>
+   <form>
+        <h1>Welcome to Styles</h1>
+   </form>
+</body>
+</html>
+
+
+Selector 			Description
+:link 				Specifies effect for Hyperlink.[anchor in default state]
+:visited 			It defines effects for visited links.[anchor in visited state]
+:target				It defines effects for the target element[used normally in intradocument(not scrollable)]
+				[element is target of specified hyperlink]
+
+:hover 				It defines effects when mouse pointer is over element.[mouseover]
+:active 			It defines effects when link is in active state.[mousedown]
+
+Note: class can transform element appearence,transformation time can be controlled by using "CSS attribute called transition".
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       h1:hover{
+         color: red;
+         transition: 4s;
+         font-family: Brush Script MT;
+       }
+    </style>
+</head>
+<body>
+   <form>
+        <h1>Welcome to Styles</h1>
+   </form>
+</body>
+</html>
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        img{
+            width:50px;
+            height: 50px;
+            transition: 5s;
+        }
+       
+       img:active{
+            width: 350px;
+            height: 350px;
+            transition: 3s;
+       }
+       body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+       }
+    </style>
+</head>
+<body>
+   <img src="../public/images/a1.jpg">
+</body>
+</html>
+
+Element State Pseduo classes
+============================
+selector 			Description
+==========================================================================
+:enabled 			It defines effects when element is enabled.
+:disabled 			It defines effects when element is disabled.
+:read-only 			It defines effects when element is set to read-only.
+:checked 			It defines effects when element is checked
+:focus 				It defines effects when element get focus.
+
+
+The UI element validation state pseudo classes:
+Selector 			Description
+================================================================================================================
+:valid 				It defines effects for element if is value is valid against the validation defined. 
+					Validation can be verified by using:
+						- Minlength
+						- Maxlength
+						- Required
+						- Pattern
+						- Email
+						- URL etc.
+:invalid 			It defines effect for element when it is invalid.
+:required 			It defines effects to element when it verified with required
+:optional 			If it is not defined with required validation then it is treated as optional.
+
+
+Structural Pseudo Selector
+=========================
+ - You can target your effects based on the position of element in parent and child hierarchy.
+
+Selector 				Description
+======================================================================================================
+:first-child			  It defines effects only for first child element.
+:last-child 			  It defines effects only for last child element.
+:nth-child(LevelNumber)		  It defines effects only to specific child element that occurs at given level.
+					Level number starts with 1.
+				 	Index number starts with 0.
+				  You can also define the pre-set values like ‘even & odd’ to apply effects based on even 
+				  and odd occurrences.
+
+:nth-of-type(LevelNumber[n])	  It will repeat the effect for every nth occurrence.
+:nth-of-type(2n)		  It will repeat the effect for every 2nd occurrence.
+:nth-of-type(2n+startNumber)	  It will start with specific level.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+
+    <style type="text/css">
+        li:last-child{
+            color:red;
+        }
+        li:first-child{
+            color:green;
+        }
+    </style>
+
+</head>
+
+<body>
+   <ol>
+     <li>HTML</li>
+     <li>CSS</li>
+     <li>Bootstrap</li>
+     <li>Saas</li>
+     <li>JavaScript</li>
+     <li>jQuery</li>
+     <li>React</li>
+     <li>Node.js</li>
+   </ol>
+</body>
+
+</html>
+
+Output
+HTML (green)
+Node.js(red)
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+
+    <style type="text/css">
+
+	li:nth-child(3){
+		color:yellow;
+	}
+        li:nth-child(odd){
+            color:red; 
+        }
+        li:nth-child(even){
+            color:blue;
+        }
+
+    </style>
+
+</head>
+
+<body>
+   <ol>
+     <li>HTML</li>
+     <li>CSS</li>
+     <li>Bootstrap</li>
+     <li>Saas</li>
+     <li>JavaScript</li>
+     <li>jQuery</li>
+     <li>React</li>
+     <li>Node.js</li>
+   </ol>
+</body>
+
+</html>
+
+eg#3. Demonstrate one with table by adding rows so that it can told it is not only for ol elements, it can be applied for rows to in table.
+
+eg#4. nth-of-type(3|3n|3n+1)    :: select elements from top nth occurrence 
+      nth-last-of-type(3n+1)    :: select elements from bottom nth occurrence
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+
+    <style type="text/css">
+        li:nth-last-of-type(2){
+            color:red;
+        }
+    </style>
+
+</head>
+
+<body>
+   <ol>
+     <li>HTML</li>
+     <li>CSS</li>
+     <li>Bootstrap</li>
+     <li>Saas</li>
+     <li>JavaScript</li>
+     <li>jQuery</li>
+     <li>React</li>
+     <li>Node.js</li>
+   </ol>
+</body>
+
+</html>
+
+
+User Interaction States
+-----------------------
+:hover → When the user hovers over an element.
+:focus → When an element is focused (like an input field).
+:active → When an element is being clicked.
+
+Structural Pseudo-Classes
+-------------------------
+:first-child → Targets the first child of a parent.
+:last-child → Targets the last child.
+:nth-child(n) → Targets the nth child
+
+Form-Related Pseudo-Classes
+---------------------------
+:checked → Targets checked checkboxes or radio buttons.
+:disabled → Targets disabled form elements.
+:required → Targets required input fields.
+
+Other Pseudo-Classes
+--------------------
+:not(selector) → Excludes specific elements.
+:empty → Targets elements with no children.
+
+Key Points:
+1. Pseudo-classes do not modify the document structure.
+2. They help in styling elements dynamically.
+3. Commonly used for interactivity and layout styling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
