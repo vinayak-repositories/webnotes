@@ -1,0 +1,405 @@
+JavaScript functions
+  -> Function Declaration
+  -> Function Definition
+  -> Function Expression
+  -> Function Parameters
+
+
+FAQ: 
+What is the purpose of a function as parameter inside any function?
+Ans. 
+function Name(param) {
+
+}
+Name(function(){})
+
+-> It is used to design callbacks.
+
+FAQ: What is a callback function?
+Ans: It is used to handle various functionalities according to state and situation. 
+     A function can change according to state and situation.
+     You define a set of functions, condition chooses which function to execute according to situation.
+
+Note: When you define a function as parameter then it is not configured with "name".
+	Name(function(){})
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        function verifyPassword(password,success,failure){
+            if (password === "admin") {
+                success();
+            } else {
+                failure();
+            }  
+        }
+
+        verifyPassword("admin",function(){
+            document.write("Allow access...");
+        },function(){
+            document.write("Plz try again...");
+        })
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+ Allow acces...
+
+Note: 
+Allowing parameter into a function leads to "Injection Attacks".
+	XSS - Cross Site Scripting Attacks
+		Injection Attacks
+
+	CORS - Cross Origin Resource Sharing
+	       Cross Page Posting
+	       Double Posting
+
+Rest Parameters
+===============
+- JavaScript ES6 introduced Rest parameters.
+- One parameter can allow multiple arguments.
+- It is defined by using "...paramName".
+
+Syntax:
+	function Name(...paramName)
+	{
+
+	}
+
+	Name(arg1,arg2,arg3,arg4,....)
+
+- Rest parameter is an array type[] parameter.
+	...paramName  ====> paramName[] ===> paramName[0] , paramName[1] , paramName[2],....
+
+- You can access the values by using Index [property] reference of by using de-structuring.
+
+Destructuring working with arrays
+=================================
+eg#1.
+<script type="text/javascript">
+
+        const cricketers = ["sachin","saurav","kohli","dhoni"];
+
+        const[first,second,third,fourth] = cricketers;
+
+        console.log(first)
+        console.log(second)
+        console.log(third)
+        console.log(fourth)
+
+</script>
+
+Output
+sachin
+saurav
+kohli
+dhoni
+
+eg#2.
+You can skip elements using commas
+
+const colors = ["red", "green", "blue", "yellow"];
+const [firstColor, , thirdColor] = colors;
+
+console.log(firstColor);  // "red"
+console.log(thirdColor);  // "blue"
+
+eg#3.
+If there are fewer elements in the array than variables, you can assign default values
+
+const numbers = [10];
+const [a, b = 20] = numbers;
+
+console.log(a); // 10
+console.log(b); // 20
+
+
+eg#4.
+You can use the rest (...) operator to collect the remaining elements
+
+const scores = [100, 90, 80, 70];
+const [topScore, secondScore, ...remainingScores] = scores;
+
+console.log(topScore);        // 100
+console.log(secondScore);     // 90
+console.log(remainingScores); // [80, 70]
+
+
+Rules of Rest Operators
+=======================
+  1. Every function must have only one Rest parameter.
+		function(...param1, ...param2) ===> invalid
+
+  2. In a function we can keep normal parameter and Rest parameter also.
+		function(...param1, param2) =====> invalid
+		
+  3. RestParameter should be the last parameter [as it reads upto end]. 
+		funcation(param1, ...param2) ====> valid
+
+
+Working with Rest Operators
+===========================
+eg#3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+       function productInfo(title, ...details) {
+
+            const[Id,Name,Price,Stock] = details;
+
+            document.write
+            (
+                    `
+                        <h3>${title}</h3>
+                        Id: ${Id} <br>
+                        Name: ${Name} <br>
+                        Price: ${Price} <br>
+                        Stock: ${Stock}
+                    `
+            );
+       }
+
+       productInfo("Product Details",1, "TV",45000.50,true);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+Product Details
+Id: 1
+Name: TV
+Price: 45000.5
+Stock: true
+
+
+Spread Operation
+================
+- It is the process of configuring one actual parameter with multiple values, which can spread into multiple formal parameters.
+
+Syntax:
+function Name(param1, param2, param3)
+{
+	
+}
+var values = [val1,val2,val3];
+
+Name(...values);
+
+eg#4
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+       function productInfo(title, ...details) {
+
+            const[Id,Name,Price,Stock] = details;
+
+            document.write
+            (
+                    `
+                        <h3>${title}</h3>
+                        Id: ${Id} <br>
+                        Name: ${Name} <br>
+                        Price: ${Price} <br>
+                        Stock: ${Stock}
+                    `
+            );
+       }
+
+       productInfo("Product Details",1, "TV",45000.50,true);
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+Product Details
+
+Id: 1
+Name: TV
+Price: 45000.5
+Stock: true
+
+Note: usage of spread operator in web application
+
+eg#1. Appending a new element into array without using methods of Arrays.
+<script type="text/javascript">
+
+       var one = ["A","B"];
+       var val = "C";
+       console.log([...one,val]); 
+       console.log([one,val]);
+
+</script>
+
+Output
+(3) ['A', 'B', 'C']
+	0: "A"
+	1: "B"
+	2: "C"
+ length: 3[[Prototype]]: Array(0)
+
+ (2) [Array(2), 'C']
+	0: (2) ['A', 'B']
+	1: "C"
+	length: 2[[Prototype]]: Array(0)
+
+eg#2. concatination of array elements using spread operator
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+       var one = ["A","B"];
+       var two = ["C","D"];
+
+       console.log(one.concat(two));
+       console.log([...one,...two]);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+eg#3. Copying the array elements into new Array
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+       var one = ["A","B"];
+       var two = [...one];
+
+       console.log(one);
+       console.log(two);
+       
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+FAQ: What is difference between spread and rest?
+Ans : Rest is about formal parameters(function declaration)
+      Spread is about actual parameters | Arguments.(function call)
+
+
+Function with Return
+====================
+- Every JavaScript function is Void type by default.
+- Void refers to : discard the return.
+- Every JavaScript function
+	1. allocates memory
+	2. performs operation in memory
+	3. destroys memory
+	4. It will not return any value as there is no memory.
+
+function Name()	
+{
+
+} // end of function => memory is erased
+
+- A function can use "return" jump statement.
+
+function Name()
+{
+	return value;
+}
+
+output = value;
+
+eg#1. Without using additional memory trying to access the data of other functions
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+       function addTwoNumber(a,b){
+            return a+b;
+       }
+
+       function printResult(){
+            document.write(`Result is : ${addTwoNumber(10,30)}`);
+       }
+
+       printResult();
+       
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

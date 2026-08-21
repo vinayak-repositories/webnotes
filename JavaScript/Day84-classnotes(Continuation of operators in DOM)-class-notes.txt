@@ -1,0 +1,196 @@
+Operators
+  a. Arithmetic
+  b. Assignment
+  c. Comparison
+
+Task : Hotel Registration Form
+- Design using Bootstrap nav with tabs
+
+
+Logical Operators
+=================
+ a. &&[AND] , || [OR] , ! [NOT]
+ 
+eg#1.
+
+users.json
+==========
+[
+    {
+        "username" : "sachin",
+        "password" : "tendulkar@123"
+    },
+    {
+        "username" : "rahul",
+        "password" : "dravid@123"
+    }
+]
+
+
+logicaloperator.html
+====================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded",function(){
+            document.querySelector("button").addEventListener("click",function(){
+
+                let username = document.getElementById("txtUsername");
+                let password = document.getElementById("txtPassword");
+
+                const URL = "../data/users.json";
+
+
+                fetch(URL).then(function(response){
+                    return response.json();
+                }).then(function(users){
+                    users.map(function(user){
+                        if (user.username === username && user.password === password) {
+                             document.write("Login succesfull");
+                        } else {
+                            document.getElementById("msg").innerHTML = "Invalid Username/Password".fontcolor("red");
+                        }
+                    })
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <dl>
+        <h2>User Login</h2>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="" id="txtUsername">
+        </dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" name="" id="txtPassword">
+        </dd>
+    </dl>
+    <button>Login</button>
+    <p id="msg">
+
+    </p>
+</body>
+</html>
+
+2. Bitwise operator[Binary conversion we use while dealing the data at memory level]
+
+3. special operators
+	a. (condition)?true:false (ternary operator)
+	b. typeof -> It returns the datatype of value stored in a reference.
+	c. instanceof -> It returns true if the given object is derived from specified class.
+		syntax: 
+			object instanceof constructor
+
+instance-of-operator.html
+=========================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        class Animal {}
+        class Dog extends Animal {}
+
+        let myDog = new Dog();
+
+        console.log(myDog instanceof Dog);
+        console.log(myDog instanceof Animal);
+        console.log(myDog instanceof Object);
+        console.log(myDog instanceof Array);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+ true
+ true
+ true
+ false
+
+eg#2.
+let arr = [1, 2, 3];
+
+console.log(arr instanceof Array);  
+console.log(arr instanceof Object); 
+console.log(arr instanceof String); 
+
+Output
+  true
+  true
+  false
+
+
+	d. delete -> To a delete a particular property from an object.
+		     we can't delete the properties of built in objects because they are in [Read only Mode]
+
+	syntax 
+		delete Object.key
+
+	e. in 	-> It is a boolean operator that returns true if the given property  is available in specified object
+			Note: even if the property value is undefined stil it returns true
+		 
+	syntax
+		"property" in Object
+
+eg#1.
+const obj = { name: "Alice", age: 25 };
+
+console.log("name" in obj);  
+console.log("age" in obj);   
+console.log("gender" in obj); 
+
+Output
+true
+true
+false
+
+eg#2.
+const car = { brand: undefined };
+
+console.log("brand" in car);  
+console.log(car.brand); 
+
+Output
+true
+undefined
+
+Note: Instead of in, if we use if(car.brand) then it would have return false as undefined is falsy.
+
+		   
+	f. new  -> Dynamic memory allocation operator.
+			var arr = new Array()
+			var topics = new Map()
+
+	g. void -> It is used to discard the return of any function or an element
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,464 @@
+
+1. How to read all keys from Object?
+Ans. By using object.keys() and by using for... in iterator
+
+eg#1.
+<script type="text/javascript">
+    fetch("../data/product.json")
+    .then(function (response){
+        return response.json();
+    }).then(function (product){
+        Object.keys(product).map(function(key){
+            document.write(key +"<br>")
+        })  
+    })
+</script>
+	
+Output
+Title
+Price
+Features
+Ratings
+Photo
+
+eg#2.
+<script type="text/javascript">
+    fetch("../data/product.json")
+    .then(function (response){
+        return response.json();
+    }).then(function (product){
+        for (const key in product) {
+            document.write(key +"<br>")
+        }
+    })
+</script>
+
+Output: 
+Title
+Price
+Features
+Ratings
+Photo
+
+2. How to know the datatype of value in a Key?
+eg#1.
+<script type="text/javascript">
+    fetch("../data/product.json")
+    .then(function (response){
+        return response.json();
+    }).then(function (product){
+        Object.keys(product)
+            .map(function(key){
+                document.write(`${key}================= ${typeof product[key]} <br> `);
+        })
+    })
+</script>
+
+Output
+Title================= string
+Price================= string
+Features================= object
+Ratings================= object
+Photo================= string
+
+3. How to get the count of keys in an Object?
+Ans.  length :: using Object.keys(arrayName).length
+
+eg#1.
+    <script type="text/javascript">
+        fetch("../data/product.json")
+        .then(function (response){
+            return response.json();
+        }).then(function (product){
+            console.log(Object.keys(product).length);
+        })
+    </script>
+
+4. How to read both keys and values in an Object?
+Ans. using Object.keys(arrayname)
+
+eg#1.
+    <script type="text/javascript">
+        fetch("../data/product.json")
+        .then(function (response){
+            return response.json();
+        }).then(function (product){
+           Object.keys(product).map(function(key) {
+                document.write(`${key} ===> ${product[key]} <br>`);
+           })
+        })
+    </script>
+
+Output
+Title ===>    Apple iPhone 15 (Blue, 128 GB)
+Price ===>    57,999
+Features ===> 128 GB ROM,15.49 cm(1.6 inch) Super Letina XR Display,12MP + 12MP | 12MP Front Camera,A15 Bionic Chip, 6 core processor
+	      ,1 Year warranty for Phone and 6 months warranty for In Box Accessories
+Ratings ===>  [object Object]
+Photo ===> ../public/images/iphone.png
+
+5. How to remove a key dynamically?
+Ans. using javascript delete operator
+	syntax: delete objectName.key
+
+<script type="text/javascript">
+        fetch("../data/product.json")
+        .then(function (response){
+            //convert binary to Json format
+            return response.json();
+        }).then(function (product){
+            //reading the json data 
+            delete product.Ratings
+
+            Object.keys(product).map(function(key) {
+                document.write(`${key} ===> ${product[key]} <br>`);
+           })
+        })
+    </script>
+
+Output
+Title ===>    Apple iPhone 15 (Blue, 128 GB)
+Price ===>    57,999
+Features ===> 128 GB ROM,15.49 cm(1.6 inch) Super Letina XR Display,12MP + 12MP | 12MP Front Camera,A15 Bionic Chip, 6 core processor
+	      ,1 Year warranty for Phone and 6 months warranty for In Box Accessories
+Photo ===> ../public/images/iphone.png
+
+
+
+6. How to check the availablity of an key in Object?
+Ans. By using javascript "in" operator.
+
+	syntax: Key in Object ====> true if exists otherwise returns false
+
+eg#1.
+    <script type="text/javascript">
+        fetch("../data/product.json")
+        .then(function (response){
+            //convert binary to Json format
+            return response.json();
+        }).then(function (product){
+            //reading the json data 
+            if ("Stock" in product) {
+                document.write("Stock Details are :: "+product.Stock)
+            }else{
+                document.write("Product Stock details not available");
+            }
+        })
+    </script>
+
+Output
+  Product Stock details not available
+
+FAQ: 
+ 1. How to read all keys from Object?
+ 2. How to know the datatype of value in a Key?
+ 3. How to get the count of keys in an Object?
+ 4. How to read both keys and values in an Object?
+ 5. How to remove a key dynamically?
+ 6. How to check the availablity of an key in Object?
+
+------------------------------------------------------------------------
+Object with functions
+ a. An object can keep all related data and functions together
+ b. Functionality defines the actions of objects.
+ c. In javascript functionality is defined using "functions"
+ d. A function can be a void function or a function with return type
+   
+Syntax: 
+    var object = {
+			Key : value;
+			key : function(){}		==> function with void
+			key : function(){
+					return value;   ==> function with return type
+				}
+		 };
+
+
+Demonstrating the logic with data
+
+eg#1
+<script type="text/javascript">
+
+    var product = {
+        "Name" : "NikeCasuals",
+        "Qty" : 2,
+        "Price" : 3500.53,
+
+        "Total" : function(){
+            return this.Price * this.Qty;
+        }
+    }
+
+    product.Qty = parseInt(prompt("Enter the qty: "))
+    product.Price = parseFloat(prompt("Enter the Price: "))
+    document.write(`
+        		Name  : ${product.Name} <br>
+        		QTY   : ${product.Qty} <br>
+        		Price : ${product.Price} <br>
+        		Total : ${product.Total().toLocaleString("en-in",{style:"currency",currency:"INR"})}
+    		`)
+</script>
+
+Output
+Enter the qty: 3
+Enter the Price: 5467.45
+
+Name : NikeCasuals
+QTY : 3
+Price : 5467.45
+Total : ₹16,402.35
+
+eg#2. Demonstrating the usage of writing a function called "Print"
+
+<script type="text/javascript">
+
+    var product = {
+        "Name" : "NikeCasuals",
+        "Qty" : 2,
+        "Price" : 3500.53,
+
+        "Total" : function(){
+            return this.Price * this.Qty;
+        },
+
+        "Print" : function(){
+            document.write(`
+                		Name  : ${this.Name} <br>
+                		QTY   : ${this.Qty} <br>
+                		Price : ${this.Price} <br>
+                		Total : ${this.Total().toLocaleString("en-in",{style:"currency",currency:"INR"})}
+   		 `)
+        }
+    }
+
+ product.Qty = parseInt(prompt("Enter the qty: "))
+ product.Price = parseFloat(prompt("Enter the Price: "))
+ product.Print()
+    
+</script>
+
+Output
+Enter the qty: 3
+Enter the Price: 5467.45
+
+Name : NikeCasuals
+QTY : 3
+Price : 5467.45
+Total : ₹16,402.35
+
+
+Note: Object is often known as "Pseudo class"
+
+	
+Arrays of Objects
+=================
+-> Javascript represents data with collection of objects as "Array of Objects".
+-> It is a technique used to represent multiple records in datasource and manipulate them dynamically.
+
+Data in Source
+    Name     Price         Stock
+     TV       2000.33        true
+    Mobile    5000.54        false
+
+Json
+products = 
+   [
+	{"Name" : "TV" , "Price" : 2000.33 , "Stock" : true},
+	{"Name" : "Mobile", "Price": 5000.54, "Stock" : false}	
+   ]
+
+How to access Mobile Price?
+	products[1].Price
+
+
+eg#1. 
+products.json
+=============
+[
+    {
+        "Title" : "Apple iPhone 15 (Blue, 128 GB)",
+        "Price" : "57,999",
+        "Features": [
+            "128 GB ROM",
+            "15.49 cm(1.6 inch) Super Letina XR Display",
+            "12MP + 12MP | 12MP Front Camera",
+            "A15 Bionic Chip, 6 core processor",
+            "1 Year warranty for Phone and 6 months warranty for In Box Accessories"
+        ],
+        "Ratings": {
+                    "Rate" : 4.6, 
+                    "Count": "24,017 Ratings",
+                    "Review" : "8,701 Reviews"
+                    },
+        "Photo" : "../public/images/iphone.png"
+    },
+
+    {
+        "Title" : "Apple iPhone 16 (Blue, 128 GB)",
+        "Price" : "65,000",
+        "Features": [
+            "128 GB ROM",
+            "15.49 cm(1.6 inch) Super Letina XR Display",
+            "12MP + 12MP | 12MP Front Camera",
+            "A15 Bionic Chip, 6 core processor",
+            "1 Year warranty for Phone and 6 months warranty for In Box Accessories"
+        ],
+        "Ratings": {
+                    "Rate" : 4.5, 
+                    "Count": "55,017 Ratings",
+                    "Review" : "10,701 Reviews"
+                    },
+        "Photo" : "../public/images/iphone16.png"
+    }
+
+]
+
+json-array-code.html
+--------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+    <script type="text/javascript">
+        function bodyLoad() {
+            console.log("**Function getting called ***");
+
+            const URL = "../data/products.json"
+            fetch(URL).then(function(response){
+                return response.json()
+            }).then(function (products){
+                products.map(function (product){
+                    console.log(product)
+
+                    var img = document.createElement("img");
+                    img.src= product.Photo
+                    img.width = 100;
+                    img.height= 100;
+                    document.getElementById("container").appendChild(img);
+                })
+            })
+        }
+    </script>
+
+    <style type="text/css">
+
+    </style>
+</head>
+<body onload="bodyLoad()">
+    <div id="container">
+
+    </div>
+</body>
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Output</title>
+    <script type="text/javascript">
+        function bodyLoad() {
+
+            const URL = "../data/products.json"
+            fetch(URL).then(function(response){
+                return response.json()
+            }).then(function (products){
+                products.map(function (product){
+                    console.log(product);
+                    var tr = document.createElement("tr");
+
+                    var tdTitle = document.createElement("td");
+                    var tdPreview = document.createElement("td");
+                    var tdPrice = document.createElement("td");
+
+                    tdTitle.textContent = product.Title;
+                    tdPreview.innerHTML = `<img width="100" height="100" src=${product.Photo}>`
+                    tdPrice.textContent= product.Price;
+
+                    tr.appendChild(tdTitle)
+                    tr.appendChild(tdPreview)
+                    tr.appendChild(tdPrice)
+
+                    console.log(tr);
+                    document.querySelector("tbody").appendChild(tr)
+                })
+            })
+        }
+    </script>
+
+    <style type="text/css">
+
+    </style>
+</head>
+<body onload="bodyLoad()">
+    <table width="100%" cellspacing="3" cellpadding="3" frame="void" border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Preview</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

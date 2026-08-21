@@ -1,0 +1,424 @@
+UI Code
+-------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+
+       
+    </script>
+</head>
+<body>
+    
+    <!-- Button trigger modal -->
+     <div id="buttoncontainer">
+         <button type="button" class="btn btn-primary m-3" 
+         data-bs-toggle="modal" data-bs-target="#register">
+                ADD PRODUCT
+        </button>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="register">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h2 id="lblTitle">Add Product</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <dl>
+                <dt>Name</dt>
+                <dd>
+                    <input type="text" id="txtName" class="form-control">
+                </dd>
+
+                <dt>Price</dt>
+                <dd>
+                    <input type="number" id="txtPrice" class="form-control">
+                </dd>
+
+                <dt>Shipped To</dt>
+                <dd>
+                    <select class="form-select" id="lstCities">
+                        <option>Select City</option>
+                        <option>HYD</option>
+                        <option>BGR</option>
+                        <option>TN</option>
+                    </select>
+                </dd>
+
+                <dt>Stock</dt>
+                <dd class="form-switch">
+                        <input type="checkbox" id="optStock" class="form-check-input">
+                        <label class="form-check-label">Available</label>
+                </dd>
+            </dl>
+          </div>
+          
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-bs-dismiss="modal" id="btnRegister">Register</button>
+            <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="w-25 m-2" id="detailscontainer">
+        <h2 class="bg-dark text-white p-3">Product Details</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd id="lblName"></dd>
+
+            <dt>Price</dt>
+            <dd id="lblPrice"></dd>
+
+            <dt>City</dt>
+            <dd id="lblCity"></dd>
+
+            <dt>Stock</dt>
+            <dd id="lblStock"></dd>
+        </dl>
+
+        <button class="btn btn-warning bi bi-pen-fill" data-bs-toggle="modal" data-bs-target="#register"> EDIT </button>
+
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------
+
+fully fledged code
+==================
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+
+        function registerProduct() {
+
+            document.getElementById("detailscontainer").style.display="block";
+            document.getElementById("buttoncontainer").style.display="none";
+
+            document.getElementById("lblName").innerHTML =document.getElementById("txtName").value;
+            document.getElementById("lblPrice").innerHTML =document.getElementById("txtPrice").value;
+            document.getElementById("lblCity").innerHTML =document.getElementById("lstCities").value;
+        
+            stockCheckBox = document.getElementById("optStock");
+
+            stockstatus = "";
+
+            if (stockCheckBox.checked) {
+                stockstatus ="Available";
+            } else {
+                stockstatus="Out of Stock";
+            }
+
+            document.getElementById("lblStock").innerHTML = stockstatus;
+        
+        }
+
+        function changeDetails() {
+            document.getElementById("lblTitle").innerHTML = "Edit Product";
+            document.getElementById("btnRegister").innerHTML = "SAVE";
+            document.getElementById("btnRegister").className = "btn btn-success";    
+        }
+
+    </script>
+</head>
+<body>
+    
+    <!-- Button trigger modal -->
+     <div id="buttoncontainer">
+         <button type="button" class="btn btn-primary m-3" 
+         data-bs-toggle="modal" data-bs-target="#register">
+                ADD PRODUCT
+        </button>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="register">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h2 id="lblTitle">Add Product</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+            <dl>
+                <dt>Name</dt>
+                <dd>
+                    <input type="text" id="txtName" class="form-control">
+                </dd>
+
+                <dt>Price</dt>
+                <dd>
+                    <input type="number" id="txtPrice" class="form-control">
+                </dd>
+
+                <dt>Shipped To</dt>
+                <dd>
+                    <select class="form-select" id="lstCities">
+                        <option>Select City</option>
+                        <option>HYD</option>
+                        <option>BGR</option>
+                        <option>TN</option>
+                    </select>
+                </dd>
+
+                <dt>Stock</dt>
+                <dd class="form-switch">
+                        <input type="checkbox" id="optStock" class="form-check-input">
+                        <label class="form-check-label">Available</label>
+                </dd>
+            </dl>
+          </div>
+          
+          <div class="modal-footer">
+            <button class="btn btn-primary" onclick="registerProduct()"  data-bs-dismiss="modal" id="btnRegister">Register</button>
+            <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="w-25 m-2" id="detailscontainer" style="display:none;">
+        <h2 class="bg-dark text-white p-3">Product Details</h2>
+        <dl>
+            <dt>Name</dt>
+            <dd id="lblName"></dd>
+
+            <dt>Price</dt>
+            <dd id="lblPrice"></dd>
+
+            <dt>City</dt>
+            <dd id="lblCity"></dd>
+
+            <dt>Stock</dt>
+            <dd id="lblStock"></dd>
+        </dl>
+        <button class="btn btn-warning bi bi-pen-fill" 
+        data-bs-toggle="modal" data-bs-target="#register"
+        onclick="changeDetails()"> EDIT </button>
+
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+JavaScript Language
+===================
+ a. Variables
+ b. Datatypes
+ c. Operators
+ d. Statements
+ e. Functions
+ f. OOPS
+
+Variables
+   Variables are storage locations in memory, where you can store a value and use it as a part of any expression.
+
+Scenario1: 
+ document.write("Hello "+prompt("Enter the username :: ")+"<br>");
+ document.write("Hi "+prompt("Enter the username :: ")+" How r u doing today? ")
+
+As noticed above the user has to enter the name 2 times because the user is not storing the name entered by the user.
+The data would be stored on ram and on the ram the storage location we identify with "variable".
+
+Note: variables are strongly typed in various languages they are defined with specific datatype and will not allow other types.
+		int age ="john"; //invalid
+		int age = 22; //valid
+		int age =true; //invalid
+
+Javascript variables are not strongly typed,they are implicitly typed[Datatype is determined according to the value assigned].
+			age=22;	    //valid
+			age="John"; //valid
+			age = true; //valid 
+
+Javascript variables can be used directly without declaration,if javascript is not in strict mode.
+To turn on strict mode we need to tell  "use strict";
+
+
+Syntax : 
+ 	<script>
+		"use strict";
+		 age = 22;				=> invalid
+		document.write("Age = "+age);    
+	</script>
+
+	<script>
+		 age = 22;				=> valid
+		document.write("Age = "+age);    
+	</script>
+
+To declare a variable in javascript we use 3 keywords
+	a. var
+	b. let
+	c. const
+
+- Variables have 3 phase of configuration
+a) Declaration
+b) Assignment
+c) Initialization
+
+
+Syntax: 
+   var age;     //declaring a variable
+   
+   age = 22;    // assigning value to a variable 
+   age = 33;    // assigning value to a variable
+
+  var age =22;  //initializing a value to variable
+
+var(function scope, redeclared | reinitialized ) 
+- It defines a function scope variable.
+- You can declare in any block of a function and access from any another block in the same function.
+- It allows declaring, initialization and assignment.
+
+Note: You can redeclare | reassigned.
+
+eg#1.
+index.html
+==========
+<script src="index.js"></script>
+
+index.js
+========
+function demo() {
+    var x= 10;
+    if (x==10) {
+        var y =20;
+    }
+    document.write("X  = "+x +" Y = "+y);  
+}
+demo();
+
+Output: X = 10 Y = 20
+
+eg#2.
+index.html
+==========
+<script src="index.js"></script>
+
+index.js
+=======
+var userName;
+userName=prompt("Enter the username");
+
+document.write("Hello "+userName+"<br>");
+document.write("Hi "+userName+" How r u doing today? ")
+
+Output: Enter the username 
+		sachin
+
+Hello sachin
+Hi sachin How r u doing today?
+
+
+Note: if the variable is not assigned with any value then by default "undefined" will be stored in a variable.
+
+
+eg#3.
+Var allows shadowing. It is the process of re-declaring or re-initializing same name identifier within the function scope
+
+index.html
+==========
+<script src="index.js"></script>
+
+
+index.js
+=======
+function demo() {
+    var x= 10;//initializing
+    if (x == 10) {
+        var y = 20;//initializing
+        y= 30; //assigning
+        y= 40; //assigning
+        var y = 50; //shadowing
+    }
+    document.write("x = "+x +"<br>"+" y = "+y);
+}
+demo();
+
+Output: 
+x = 10
+y = 50
+
+eg#4.
+Var allows hoisting. It is the process of declaring or initializing a variable after using.
+
+index.html
+==========
+<script src="index.js"></script>
+
+index.js
+========
+function demo() {
+    "use strict";
+    x = 10;
+    document.write("X = "+x);
+    var x; //hoisting
+}
+demo();
+
+Output
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

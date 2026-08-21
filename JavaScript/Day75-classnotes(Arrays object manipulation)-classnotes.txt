@@ -1,0 +1,164 @@
+Reading Array elements 
+Adding elements to Array
+Removing Array elements
+	pop()     : It removes and returns the last element
+	shift()   : It removes and returns the first element
+        splice()  : It removes and returns the specified element
+
+Syntax: 
+ 	arrayName.pop()
+	arrayName.shift()
+	arrayName.splice(startIndex,deleteCount)
+
+Sorting Array elements
+	sort()		: It arranges array elements in ascending order
+	reverse()	: It arranges array elements in reverse order[bottom to top]
+
+Syntax: 
+	arrayName.sort()
+	arrayName.reverse()
+
+Searching for element in Array
+	indexOf()	: It returns 
+				a. first occurrence of indexnumber of element
+				b. if not found return -1
+
+	lastIndexOf()	: It returns the last occurrence of indexNumber of an element
+	
+	filter()	: It returns every occurance of element based on condition
+	
+	find()		: It returns first occurance of element based on condition
+
+eg#1. Array manipulation code
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manipulation</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <!-- Script code-->
+     <script type="text/javascript">
+        var cities = ["Bengaluru","Hyderabad"];
+
+        function loadCities() {
+            document.getElementById("lstCities").innerHTML = "";
+            document.getElementById("lblCount").innerHTML = `Total no of cities : ${cities.length}`
+
+            cities.map(
+
+                function(city){
+                    console.log(city);
+
+                    var option   = document.createElement("option")
+                    option.value = city
+                    option.text  = city
+                    console.log(option)
+                   
+                    document.getElementById("lstCities").appendChild(option)
+                }
+          );
+        }
+
+        function addCities() {
+            var cityName = document.getElementById("txtCity").value;
+            if (cities.indexOf(cityName)==-1) {
+                cities.push(cityName);
+                loadCities();
+                alert(`${cityName} added to list`)
+                document.getElementById("txtCity").value=""         
+            }else{
+                alert(`${cityName} already exists`)
+            }
+        }
+
+        function sortAsc() {
+            cities.sort()
+            loadCities()    
+        }
+
+        function sortDesc() {
+            cities.sort()
+            cities.reverse()
+            loadCities()
+        }
+
+        function removeCity() {
+            var cityName = document.getElementById("lstCities").value
+            var index = cityName.indexOf()
+            var flag = confirm(`Are you sure u want to delete ? ${cityName}`)
+            if (flag) {
+                cities.splice(index,1);
+                loadCities()  
+            } 
+        }
+        function removeAll() {
+
+            var flag = confirm(`Are you sure u want to delete all cities ?`)
+            if (flag) {
+                cities.length = 0
+                loadCities()  
+            } 
+        }
+     </script>
+
+</head>
+<body class="container-fluid" onload="loadCities()">
+    <h3 class="mt-3">Array Mainpulation</h3>
+
+    <div class="w-25 m-3">
+
+        <!-- Container to enter city details -->
+        <div>
+            <label for="" class="form-label">Add City</label>
+            <div class="input-group">
+                <input type="text" name="" id="txtCity" class="form-control">
+                <button class="btn btn-primary" onclick="addCities()">ADD</button>
+            </div>
+        </div>
+
+        <!-- Drop down to keep city entered by the user-->
+        <div class="mt-3">
+            <label for="" class="form-label">Select city</label>
+
+            <!-- container to display sorting options-->
+            <div class="mt-2 mb-3">
+                <button class="bi bi-sort-alpha-up btn btn-success" onclick="sortAsc()"></button>
+                <button class="bi bi-sort-alpha-down btn btn-info" onclick="sortDesc()"></button>
+            </div>
+
+            <!-- Container to keep drop Down-->
+            <div>
+                <select name="cities" size="3" id="lstCities" class="form-select">
+                        <!-- city should be entered dynamically-->
+                </select>
+                <label for="" class= "form-label fw-bold" id="lblCount">
+                        <!--container to display the count-->
+                </label>
+            </div>
+
+            <!-- Container to keep buttons-->
+            <div>
+                <button class="btn btn-danger bi bi-trash-fill" onclick="removeCity()"> Remove city</button>
+                <button class="btn btn-danger bi bi-trash-fill" onclick="removeAll()"> Clear All</button>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+	
+	
+	
+	
+	
+
+
+

@@ -1,0 +1,324 @@
+setInterval()
+ syntax: let intervalID = setInterval(function, delay, param1, param2, ...);
+	function	   : The function to execute.
+	delay		   : Time in milliseconds between each function call.
+	param1, param2, ...: (Optional) Parameters to pass to the function.
+
+- It would load the specified task into memory and release into process at regular intervals.
+- It repeats the task untill removed from memory.
+	
+
+
+clearInterval() 
+ syntax: clearInterval(intervalID);
+
+- It is used to remove the task from memory using clearInterval()
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+
+        function loadTime(){
+            var now  = new Date();
+            var time = now.toLocaleTimeString();
+            console.log(time);
+            document.querySelector("p").innerHTML = time;
+        }
+
+        var timer ;
+        function bodyLoad() {
+             timer = setInterval(loadTime,1000);
+             
+             document.getElementById("btnStop").addEventListener("click",function(){
+                 console.log("stopped button clicked");
+                 clearInterval(timer);
+             })
+
+             document.getElementById("btnStart").addEventListener("click",function(){
+                console.log("start button clicked");
+                timer = setInterval(loadTime,1000);
+             })
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+    <div align="center" style="margin-top: 10px">
+        <button id="btnStart">Start</button>
+        <button id="btnStop">Stop</button>
+    </div>
+    <p align="center" style="color:red"></p>
+</body>
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        progress{
+            width: 300px;
+            height: 30px;
+        }
+        @keyframes ZoomIn {
+            from{
+                width: 5px;
+                height: 5px;
+                transform: rotate(0deg);
+            }
+            to{
+                width: 300px;
+                height: 400px;
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var count=1;
+        function progressAnimationBar(){
+            count++;
+            document.getElementById("progress").value=count;
+            document.getElementById("status").innerHTML = `${count} % loaded`;
+
+            var img;
+            if (count==100) {
+                document.getElementById("progressContainer").style.display = "none";
+                document.getElementById("imageContainer").style.display = "block";
+                img = document.querySelector("img");
+                img.style.animation= "ZoomIn";
+                img.style.animationDuration = "4s";
+            }
+        }
+
+        function loadClick(){
+            //display progress bar
+            document.getElementById("progressContainer").style.display = "block";
+            document.getElementById("buttonContainer").style.display="none";
+            timer = setInterval(progressAnimationBar,100);
+        }
+
+
+    </script>
+</head>
+
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="text-center">
+
+        <div id="buttonContainer">
+            <button class="btn btn-primary" onclick="loadClick()">Load Image</button>
+        </div>
+
+        <div id="progressContainer" style="display: none;">
+            <progress min="1" max="100" id="progress" value="1"></progress>
+            <p id="status"></p>
+        </div>
+
+        <div id="imageContainer" style="display: none;">
+            <img src="../public/images/iphone16.png" alt="" width="300" height="300">
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+eg#3.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        progress{
+            width: 300px;
+            height: 30px;
+        }
+        @keyframes ZoomIn {
+            from{
+                width: 5px;
+                height: 5px;
+                transform: rotate(0deg);
+            }
+            to{
+                width: 300px;
+                height: 400px;
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var count=1;
+        function progressAnimationBar(){
+            count++;
+            document.getElementById("progress").value=count;
+            document.getElementById("status").innerHTML = `${count} % loaded`;
+
+            var img;
+            if (count==100) {
+                document.getElementById("progressContainer").style.display = "none";
+                document.getElementById("imageContainer").style.display = "block";
+                img = document.querySelector("img");
+                img.style.animation= "ZoomIn";
+                img.style.animationDuration = "4s";
+            }
+        }
+
+        var timer;
+        function loadClick(){
+            //display progress bar
+            document.getElementById("progressContainer").style.display = "block";
+            document.getElementById("buttonContainer").style.display="none";
+            timer = setInterval(progressAnimationBar,100);
+
+            document.getElementById("pauseBtn").addEventListener("click",function(){
+                clearInterval(timer);
+                document.getElementById("status").innerHTML = `${count}% paused`;
+            })
+
+            document.getElementById("playBtn").addEventListener("click",function(){
+                timer = setInterval(progressAnimationBar,100);
+            })
+        }
+
+
+    </script>
+</head>
+
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="text-center">
+
+        <div id="buttonContainer">
+            <button class="btn btn-primary" onclick="loadClick()">Load Image</button>
+        </div>
+
+        <div id="progressContainer" style="display: none;">
+            <progress min="1" max="100" id="progress" value="1"></progress>
+            <p>
+                <button class="bi bi-pause btn btn-danger" id="pauseBtn"></button>
+                <button class="bi bi-play btn btn-primary" id="playBtn"></button>
+            </p>
+            <p id="status"></p>
+        </div>
+
+        <div id="imageContainer" style="display: none;">
+            <img src="../public/images/iphone16.png" alt="" width="300" height="300">
+        </div>
+
+    </div>
+</body>
+</html>
+
+eg#4.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        progress{
+            width: 300px;
+            height: 30px;
+        }
+        @keyframes ZoomIn {
+            from{
+                width: 5px;
+                height: 5px;
+                transform: rotate(0deg);
+            }
+            to{
+                width: 300px;
+                height: 400px;
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var count=1;
+        function progressAnimationBar(){
+            count++;
+            document.getElementById("status").innerHTML = `${count} % loaded`;
+
+            var img;
+            if (count==100) {
+                document.getElementById("progressContainer").style.display = "none";
+                document.getElementById("imageContainer").style.display = "block";
+                img = document.querySelector("img");
+                img.style.animation= "ZoomIn";
+                img.style.animationDuration = "4s";
+            }
+        }
+
+        var timer;
+        function loadClick(){
+            //display progress bar
+            document.getElementById("progressContainer").style.display = "block";
+            document.getElementById("buttonContainer").style.display="none";
+            timer = setInterval(progressAnimationBar,100);
+
+            document.getElementById("pauseBtn").addEventListener("click",function(){
+                clearInterval(timer);
+                document.getElementById("status").innerHTML = `${count}% paused`;
+            })
+
+            document.getElementById("playBtn").addEventListener("click",function(){
+                timer = setInterval(progressAnimationBar,100);
+            })
+        }
+
+
+    </script>
+</head>
+
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+    <div class="text-center">
+
+        <div id="buttonContainer">
+            <button class="btn btn-primary" onclick="loadClick()">Load Image</button>
+        </div>
+
+        <div id="progressContainer" style="display: none;">
+            <div class="spinner-border text-success"> <!-- Extra spinner code added --> 
+
+            </div>
+            <p>
+                <button class="bi bi-pause btn btn-danger" id="pauseBtn"></button>
+                <button class="bi bi-play btn btn-primary" id="playBtn"></button>
+            </p>
+            <p id="status"></p>
+        </div>
+
+        <div id="imageContainer" style="display: none;">
+            <img src="../public/images/iphone16.png" alt="" width="300" height="300">
+        </div>
+
+    </div>
+</body>
+</html>

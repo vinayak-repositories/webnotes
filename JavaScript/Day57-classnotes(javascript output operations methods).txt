@@ -1,0 +1,185 @@
+JavaScript output techniques
+============================
+- It is the process of presenting data dynamically in browser.
+- JavaScript provides various techniques
+	alert()
+	confirm()
+	document.write()
+	console methods[log(),info(),warn(),debug(),error()]
+	innerHTML
+	outerHTML
+	innerText
+
+1. alert()
+- It is used to display output in a message box.
+- Message box pops-up in browser window.
+- It comprises of only "OK", you can't cancel.
+- Input will be accepted as a String and result will be demonstrated as String.
+- Using "esc" key you can cancel.
+
+Syntax:
+	alert("message"); // single line
+	alert("message\n line2"); // multiple lines
+
+eg#1.
+  <button onclick="DeleteClick()">Delete</button>
+
+  index.js
+  -------
+function DeleteClick()
+{
+	alert("Delete\nRecord will be deleted");
+}
+
+Note: It will not allow any formats for "String", It is RC Data type[Plain Text] element.
+
+2. confirm()
+- It is similar to alert but allows to cancel.
+- It is boolean method that returns
+	true = OK
+	false = Cancel
+
+Syntax:
+	flag = confirm("Message\nLine2"); // true or false
+
+	if (flag==true) {
+                actions on OK
+        } else {
+               actions on Cancel
+        }
+
+Note: = is assignment operator
+      == is equality operator
+
+
+3. document.write()
+- It is an output method, which can display output on a new screen.
+	[It is on same page but a new screen]
+
+- It can present String,Expression or Markup.
+
+Syntax:
+document.write("message"); \\ no "\n" for line break
+document.write(<markup>); \\ <br>
+
+
+Note: To Present the String within another String, we can switch b/w "" and ''.
+	syntax: "Outer  'inner String'  String "
+		'Inner  "Outer String " String'
+
+eg#1.
+function deleteRecord() {
+        flag = confirm("Are You Sure U Want to Delete")
+         
+	if (flag) {
+                document.write("<h3 style='color:red;'>Record Deleted Succesfully</h3><a href='index.html'>CLICK HERE</a>");
+        } else {
+                alert("You pressed Cancel");
+        }
+ }
+
+<button onclick="deleteRecord()">Delete</button>
+
+4. innerText(slower)  vs textContent(faster)
+- Returns only visible text (ignores elements with display: none).
+- It can display output in any container of HTML page, which can show text.
+- It will not allow formats for text.
+- It is only for plain text content.
+- Markup not allowed for output.
+
+eg#1.
+function deleteRecord() {
+            
+	flag = confirm("Are You Sure U Want to Delete")
+        if (flag) {
+             document.querySelector("h2").innerText ='Record Deleted Succesfully';
+        } else {
+             document.querySelector("p").innerText ='You Pressed Cancel button';
+        }
+ }
+
+<button onclick="deleteRecord()">Delete</button>
+<h2></h2>
+<p></p>
+
+5. innerHTML
+	
+ -It is similar to innerText but allows formats with markup or functions.
+ -It will not replace the existing elements with new element.
+
+eg#1.
+function deleteRecord() {
+            flag = confirm("Are You Sure U Want to Delete")
+            if (flag) {
+                document.querySelector("h2").innerHTML ='<h3 style="color:green;">Record Deleted Succesfully</h3>';
+            } else {
+                document.querySelector("p").innerHTML ='<h2 style="color:red;">You Pressed Cancel button</h2>';
+            }
+ }
+<button onclick="deleteRecord()">Delete</button>
+<h2></h2>
+<p></p>
+
+
+6. outerHTML
+  - It can replace the target markup with the specified.
+
+Syntax:
+document.querySelector("targetElement").outerHTML = "<newElement>";
+
+eg#1.
+function deleteRecord() {
+            flag = confirm("Are You Sure U Want to Delete")
+            if (flag) {
+                document.querySelector("h2").outerHTML ='<h3 style="color:green;">Record Deleted Succesfully</h3>';
+            } else {
+                document.querySelector("p").outerHTML ='<h2 style="color:red;">You Pressed Cancel button</h2>';
+            }
+ }
+<button onclick="deleteRecord()">Delete</button>
+    <h2></h2>
+    <p></p>
+
+Note: Show the DOM Hierarchy to show the difference b/w innerHTML and outerHTML.
+
+
+7. console
+- It is a developer tool.
+- Developer can test all his logic in console.
+- Developer can log information in console with various contextual messages
+	warning[warn()]
+        log[log()]
+	error[error()]
+	debug[debug()]
+	info[info()]
+
+Note: 
+Make sure that console methods are not in production.
+Value is not provided : NullException
+			Please provide a value, Name is required
+
+function deleteRecord() {
+            
+	console.warn("User Clicked Button");
+           
+ 	flag = confirm("Are You Sure U Want to Delete")
+         
+	if (flag) {
+                console.log("User Pressed OK Button");
+                document.querySelector("h2").outerHTML ='<h3 style="color:green;">Record Deleted Succesfully</h3>';
+        } else {
+                console.error("User Pressed Cancel Button");
+                document.querySelector("p").outerHTML ='<h2 style="color:red;">You Pressed Cancel button</h2>';
+        }
+}
+
+index.html
+==========
+<button onclick="deleteRecord()">Delete</button>
+<h2></h2>
+<p></p>
+
+
+
+
+

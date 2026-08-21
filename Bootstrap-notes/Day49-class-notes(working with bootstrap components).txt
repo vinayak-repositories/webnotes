@@ -1,0 +1,344 @@
+Bootstrap
+  It is a component library, through which UI can be build effectively.
+  Component contain : markup(HTML),style(CSS) and logics(JavaScript library : jquery)
+
+Bootstrap-5V library
+====================
+1. Install bootstrap library in your project
+	>npm install bootstrap --save
+	>npm install bootstrap-icons --save
+	>npm install jquery --save 
+
+2. Link the following files to your webpage where you want to use complete bootstrap
+	<head>
+		<link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    		<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">		
+	</head>
+	<body>
+		<!-- For Better peformance keep scripts in body section -- > 
+		<script src="../node_modules/jquery/dist/jquery.js"></script>
+    		<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+	</body>
+
+Note: For scripts order is compulsory, first keep jquery.js and later keep bootstrap.bundle.js
+      we can use complete bootstrap library except "poper" we will learn poper at the end.
+
+3. 				Bootstrap classes
+				=================
+	1. Container classes
+	2. Box model classes
+		a. margin
+		b. padding
+		c. border
+		d. width and height
+		e. radius
+	3. Display classes[grid,flex]
+	4. Form classes[form-control,form-select]
+	5. Button classes[btn,btn-primary,btn-secondary]
+	6. Position classes[static,fixed,sticky,relative,absolute]
+			   [start,top,bottom,end]
+
+Note: classes of position 
+<div class="position-static">...</div>
+<div class="position-relative">...</div>
+<div class="position-absolute">...</div>
+<div class="position-fixed">...</div>
+<div class="position-sticky">...</div>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+</head>
+  
+<body class="container-fluid">
+
+    <button class="mt-3 ms-3 btn btn-primary position-relative">
+	<span class="bi bi-bell-fill"> Notifications</span>
+	<span class="bg-dark text-white badge rounded-circle position-absolute top-0 end-0"> 2</span>
+    </button>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+	7. Background colour
+		.bg-{contextual}
+	8. Text color
+		.text-{contextual}
+
+			
+			   Bootstrap components
+			   ====================
+1. Alerts
+	- It is an embeded message box in page.
+	- You can dynamically control using client side script.
+	
+  Classes
+	.alert
+	.alert-{contextual}
+	.alert-dismissible
+	.alert-link
+
+jQuery attributes
+	Bootstrap components use jQuery attributes to configure and handle functionality.
+	Bootstrap5 version defines the attributes using "data-bs-{}"
+	Bootstrap Upto4 version defines the attributes using "data-{}".
+
+	Bootstrap jquery attributes are of various types
+		a. data-bs-target
+		b. data-bs-toggle
+		c. data-bs-dismiss
+		d. data-bs-slide
+		e. data-bs-ride etc..
+
+To close any component in bootstrap you can attach the attribute called "data-bs-dismiss" to any clickable element like[button,links]
+		<button class='btn btn-close' data-bs-dismiss='component-name'>
+
+		eg:: <button class='btn btn-close' data-bs-dismiss='alert'>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+</head>
+<body class="container-fluid">
+    <h1>Alerts</h1>
+
+    <div class="alert alert-danger alert-dismissible">
+        <button class="btn btn-close" data-bs-dismiss="alert"></button>
+        <h2 class="alert-title">Delete Record</h2>
+        <p class="alert-text">Record deleted succesfully</p>
+        <a href="javascript.window.href('')" class="alert-link">Help?</a>
+    </div>
+
+    <div class="alert alert-success alert-dismissible">
+        <h2 class="alert-title">Inserted</h2>
+        <p class="alert-text"> Record inserted succesfully into database </p>
+        <button data-bs-dismiss="alert" class="btn btn-success">OK</button>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+2. Badges
+	- It is used to highlight any caption in page.
+	- It is defined using the class "badge".
+	
+	<span class="badge bg-dark text-white rounded-circle">2</span>
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+</head>
+<body class="container-fluid">
+    <h2 class="text-center">Table of Contents</h2>
+    <ul class="list-unstyled">
+
+        <li class="bg-dark text-white p-2 m-2 d-flex justify-content-between">HTML 
+		<span class="badge bg-light text-dark text-center rounded-circle">2</span>
+	</li>
+
+        <li class="bg-dark text-white p-2 m-2 d-flex justify-content-between">CSS 
+		<span class="badge bg-light text-dark text-center rounded-circle">3</span>
+	</li>
+
+        <li class="bg-dark text-white p-2 m-2 d-flex justify-content-between">JS 
+		<span class="badge bg-light text-dark text-center rounded-circle">4</span>
+	</li>
+
+        <li class="bg-dark text-white p-2 m-2 d-flex justify-content-between">jQuery 
+		<span class="badge bg-light text-dark text-center rounded-circle">8</span>
+	</li>
+
+    </ul>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+3. Cards	
+	A card comprises of 3 sections
+	a. cardheader
+	b. cardbody
+	c. cardfooter
+We can present our content in cards, which are displayed in page with flexible rows or column layout.
+  
+Classes
+	.card
+	.card-header
+	.card-body
+	.card-footer
+	.card-title
+	.card-subtitle
+	.card-img-top
+	.card-img-bottom
+	.card-img-overlay
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+</head>
+
+<body class="container-fluid">
+    <h1>Courses</h1>
+    <main class="d-flex">
+
+
+        <div class="card m-2 p-2" style="width: 250px;">
+
+            <img class="card-img-top" src="../public/images/web.jpg" height="120">
+
+            <div class="card-header">
+                <h2 class="card-title">Web Design</h2>
+                <p class="card-subtitle">
+                    <span class="bi bi-calendar"> Starts on Oct-23</span>
+                </p>
+            </div>
+
+            <div class="card-body">
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>Bootstrap</li>
+                </ul>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-primary">Join Today</button>
+            </div>
+
+        </div>
+
+        <div class="card m-2 p-2" style="width:250px;">
+            <img class="card-img-top" src="../public/images/java.jpeg" height="120">
+            <div class="card-header">
+                <h2 class="card-title">Java</h2>
+                <p class="card-subtitle">
+                    <span class="bi bi-calendar"> Starts on Oct-23</span>
+                </p>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>J2SE</li>
+                    <li>JEE</li>
+                    <li>Framework</li>
+                </ul>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary">Join Today</button>
+            </div>
+        </div>
+
+    </main>
+
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
+
+4. Pagination
+	It is used to display the no of pages requried for browsing content.
+	It is just a design for pagination with predefined classes.
+	
+Classes
+	.pagination
+	.page-item
+	.page-link
+	.page-text
+	.active
+	.disabled
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+
+</head>
+
+<body class="container-fluid">
+
+    <h2 class="mt-3 pt-3">Pagination</h2>
+
+    <ul class="pagination">
+        <li class="page-item">
+		<a class="page-link">
+			<span class="page-text">&laquo;</span>
+		</a>
+	</li>
+        <li class="page-item"><a class="page-link"><span class="page-text">1</span></a></li>
+        <li class="page-item"><a class="page-link"><span class="page-text">2</span></a></li>
+        <li class="page-item active"><a class="page-link"><span class="page-text">3</span></a></li>
+        <li class="page-item"><a class="page-link"><span class="page-text">4</span></a></li>
+        <li class="page-item disabled"><a class="page-link"><span class="page-text">5</span></a></li>
+        <li class="page-item"><a class="page-link"><span class="page-text">&raquo;</span></a></li>
+    </ul>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>
+
+
+Learning order 
+ a. alerts
+ b. badges
+ c. cards
+ d. pagination
+
+
+
+
+
+
+
+
+
+
+ 
+

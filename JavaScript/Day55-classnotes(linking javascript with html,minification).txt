@@ -1,0 +1,156 @@
+Evolution of JavaScript
+=======================
+ ECMAScript was the first Scripting language used for Web Browsers.
+ Mosaic is the browser that started implementing client side script.
+ First it was named as "Moca" after that renamed as "Live Script".
+ Script belongs - Netscape
+ Netscape given the rights of maintain script to a company called "Sun Micro Systems".
+
+ Sun Micro System named the script as "Java-Script".
+ In 2000 Netscape stopped it services, JavaScript was given to ECMA
+   By 2014 JavaScript
+   2015 ECMA Version ES5 = ECMAScript 2015,...2022..Next
+   Current Latest version of JavaScript is "ECMAScript 2022" [ES2022]
+	[ES5, ES6,ES7, ES8...ES9, 2020, 2021, 2022]
+
+JavaScript is maintained by "MDN"[Mozilla Developer Network:: Brendan Eich].
+
+JavaScript is a Scripting language which is used in existing system to handle specific operations.
+
+
+Integrating JavaScript to HTML Page
+===================================
+In 3 different ways
+	a) Inline
+	b) Embedded
+	c) External File
+
+Inline
+------
+ In this technique JavaScript functions are directly written in HTML elements start tag.
+	<button onclick="window.print()"> Print </button>
+
+Advantages
+=========
+=> It is faster in responding.
+=> It is not good for reusability.
+
+
+Embedded
+---------------
+- JavaScript functions are kept in a <script> container and can be accessed from any element.
+- You can reuse the functions.
+- The script container can be in <head> or <body>.
+- You have to define functions in <script> container
+<script>
+	function PrintPage(){
+		window.print();
+	}
+</script>
+<button onclick="PrintPage()"> Print </button>
+
+Issue with embedded technique is
+a) It is slow
+b) You can't re-use across pages
+
+
+FAQ: 
+1.   What is the mime type for script?
+Ans.   type='text/javascript'
+       type='text/babel'
+       type='text/module'
+ 
+2.   What is difference between script in head and body?
+Ans: Script in head section is intended to load into browser memory and later accessed by page when ever required.
+     Script in body section is intended to load into page directly, it is not in memory of browser.
+
+3.   How JavaScript converts Static DOM into Dynamic DOM?
+Ans : By Integrating JavaScript functions into page.
+
+4.   What is strict mode for JavaScript?
+Ans: JavaScript is not implicitly strictly typed. It will not follow programming rules and standards. 
+     You have to manually turn on "Strict Mode".
+     If strict mode is ON then developer have to write as per standards.
+     You can turn on strict mode by using "use strict"; in your code snippet.
+EX:
+<script type='text/javascript'>
+	"use strict";
+	x = 10; // invalid - x is not defined // valid if strict off
+	document.write("x=" + x);
+</script>
+
+
+5.    How to target JavaScript for Legacy browsers? [Old Version Browsers]
+Ans : Developer can target new JavaScript code to the legacy browser by enclosing the code in HTML comments.
+
+Syntax
+<script type="text/javascirpt">
+	<!--
+		"use strict";
+			......
+			......
+	-->
+</script>
+
+
+JavaScript in External File
+-----------------------------------
+- JavaScript functions are written in a separate script file with extension ".js"
+
+index.js
+--------
+<!--
+	"use strict";
+	function PrintPage(){
+		window.print();
+	}
+-->
+
+- You can link the script file to any HTML page by using <script> element.
+	<script type="text/JavaScript" src="index.js"> </script>
+
+Features
+--------
+Clean separation of code and design.
+Hard to test if it is embedded , [easy]
+Hard to extend if it is embedded , [easy]
+
+Issue
+-----
+Using a external file for HTML page will increase the number of requests.
+If number of requests are increased for page, then page load time will increase.
+
+
+
+FAQ: 
+ 1.   What is the MIME type for script?
+ 2.   What is difference between script in head and body?
+ 3.   How JavaScript converts Static DOM into Dynamic DOM?
+ 4.   What is strict mode for JavaScript?
+ 5.   How to target JavaScript for Legacy browsers? [Old Version Browsers]
+ 6.   How to link external javascript file to html?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

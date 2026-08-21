@@ -1,0 +1,159 @@
+Functions in JavaScript
+  Callback
+  Promises
+  Closures
+  Return
+  Parameters
+  Rest
+  Spread
+
+JavaScript OOP
+==============
+-> It is not a OOP language.
+-> It support few features of OOP.
+-> In real world development various Programming architectures are used
+	a. POPS
+	b. OBPS
+	c. OOPS
+ 
+POPS
+ - Process Oriented Programming System.
+ - It supports low level features.
+ - It can directly interact with hardware services.
+ - It uses less memory.
+ - Supports Low level features.
+		eg: C, Cobal,Fortran, Pascal etc...[Washing machine,refrigerators,ovan]
+
+Limitations
+-----------
+ a. No dynamic memory
+ b. Hard to extend
+ c. ReUsability issues
+
+OBPS
+ - Object based Programming System
+ - It supports dynamic memory
+ - Can allow reusability
+ - Can extend
+ - It uses less memory but legacy type[To use one or two components load entire library].
+ 
+eg: VB,Javascript
+
+Limitations
+-----------
+  a. No dynamic polymorphism
+  b. Extensiblity issues
+  c. Code level Security Issues
+
+OOPS
+ - Object Oriented Programming System
+ - Supports Dynamic Polymorphism
+ - Extensibility
+ - Code security
+ - Reusability
+
+Limitations
+-----------
+ - It is heavy
+ - It uses More memory
+ - It can't directly interact with hardware
+ - It is slow
+
+Evolution of OOP
+================
+- "Alan kay" introduced the concept of "Object" in early 1960's
+- 1967   SIMULA     - first OOP - Johan Olay , Nygaard - Code Resusability
+- 1970's Small Talk - Trygve - Code Separation [MVC]
+	 Java MVC   - Spring
+	 PHP MVC    - Code Igniter, Cake PHP
+	 Python MVC - Django
+	.NET MVC   - ASP.NET MVC
+
+Popular OOP's language in the world
+===================================
+- 1975   C++
+- 1990   Java
+- 2003   C#
+
+
+Javascript Module
+=================
+- A module comprises of data and logic.
+- Application is built using set of modules.
+- Module enables code reusability and extensibility.
+- Modules are used to build a library for application, So that you can import and reuse the library.
+- Module system will not work of every device(With HTML no problem).
+- You have to install a module system or use any browser, which is using a module system.
+- There are various javascript module systems
+	a. Common JS
+	b. Required JS
+	c. UMD [ Universal Module Distrubution]
+	d. AMS [ Asynchronous Module Distrubution]	
+	e. ES Module
+
+Creating a JS Module
+ - Every Javascript file is technically a module.
+ - To create a module we need to add a "JS" file into project.
+                        index.js
+ - The file name is used as "module name(index module)".
+ - Every JS module comprises of
+		a) Variables
+		b) functions
+		c) classes
+
+Syntax: 
+	index.js
+	========
+var name="sachin";
+function Hello(){
+	return `Hello ${name}`;
+}
+
+ - Every member of module is in module scope and not accessible outside.
+ - If you wan any module member accessbile outside the scope then you have to mark it as "export"
+
+		export function Hello(){}
+		export name;
+
+ - you can import and use in any page
+		<script type="module">
+			import {functionName} from "path of js file";
+		</script>
+
+ - We can make any one member marked with "default", so that it would do "Earger Loading" in the memory
+			index.js
+			========
+	var title = "Fashion Store | Home";
+
+	export function printTitle(){
+    		return title;
+	}
+
+	export default function printSubTitle(){
+    		return "<b>Kids, Men, Women Fashion 50% OFF</b>";
+	}
+ 
+ - To use this earger loaded member in index.html we use the following syntax
+		<script type="module">
+			import printSubTitle, {printTitle} from "../library/modules/index.js"
+		</script>
+
+Note: 
+a. {} indicates where to start and where to stop.
+b. eager loaded member should not be at the last
+		<script type="module">
+			import  {printTitle}, printSubTitle from "../library/modules/index.js"
+		</script>
+c. default member would be loaded and unloaded automatically.
+d. default member doesn't need explicit start and stop[meaning no {} is needed]
+
+
+
+
+
+
+
+
+
+
+

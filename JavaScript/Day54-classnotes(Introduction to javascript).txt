@@ -1,0 +1,102 @@
+JavaScript
+==========
+JavaScript is light weight Interpreted and Just-in-Time Compiled programming language.
+
+Light weight refers to memory occupied and how heavy the application is.
+
+Interpreted refers to line by line translation.
+
+Compiled refers to translating entire program, all lines of program are translated simultaneously at the same time.
+	a) JIT compiled
+	b) AOT compiled
+
+JIT [Just-in-Time]  is the process where JavaScript is loaded into browser and compiled in browser
+			[This happens when the user sends the request].
+
+AOT [Ahead-of-Time] is the process where JavaScript is compiled and processed at application level.
+			[Even before the request comes this process would happen]
+
+We can use various engines and compilers
+a) Ivy
+b) Babel
+c) Node
+d) V8
+
+JavaScript supports various programming techniques and approaches
+	a) Structural Programming
+	b) Functional Programming
+	c) Imperative Programming
+	d) Object Oriented Programming etc..
+
+Note: JavaScript is not an OOP language, It supports only few features of OOP.
+
+JavaScript is a programming language, which is used at different layers of our projects
+a) Client Side  	: with HTML
+b) Server Side  	: with Node JS
+c) Database     	: MongoDB
+d) Animation Tools 	: Flash, 3DS Max, etc..
+
+
+JavaScript Client Side
+======================
+  a. The main purpose of JavaScript at Client side is to avoid burden on the server.
+
+  b. It can improve the performance of the application by managing the various interactions client side.
+
+  c. Interactions at the Client Side includes
+
+	a. DOM Manipulations
+		- Adding Elements into page
+		- Remove Elements from Page
+		- Update Data into Elements
+		- Configuring styles to elements dynamically.
+		- Configuring events to elements dynamically.
+
+	b. It is used for validations[Verify the user input]
+
+	c. Client Side 
+		- Managing Client Memory.[username and password stored in cache memory]
+		- Managing Client Devices.[Booked the ticket and now print the ticket so we don't need internet].
+		- Managing the locations of the user[websites ask for location].
+		- Sharing of data with other applications on client device.
+
+
+FAQ: What are the issues with JavaScript?
+Ans: 
+a. JavaScript is not a strongly typed language[It is all about datatypes and type-coercion].
+	var age = 23;
+	    age = "John"; // valid
+	    age = true; // valid
+
+b. JavaScript is not implicitly strictly typed[It is all about rules].
+	x = 10; // valid
+
+c. JavaScript is not Structured in handling data.
+		[
+			{
+				"Name": "TV","Price":45000.0}
+			},
+			{
+				"Product": "Mobile", "Cost" : 35000.0}
+			}
+		]
+
+d. JavaScript is not a oops language.
+	Extensibility Issues.
+	Code Level Security Issues.
+	Reusability Issues.
+	JavaScript is not having features for dynamic polymorphism.
+
+e. JavaScript is not secured and it can be blocked by browser.
+	eg:: Trojan    [install this virus in one computer we can control that device:: Bad approach].
+	     TeamViewer[install this software so we can control the device for installing softwares: Good approach].
+
+Note: The solution to javascript is use "TypeScript".
+      TypeScript can't be understable to browser so it should be converted to JavaScript.
+      	
+	
+
+
+
+
+

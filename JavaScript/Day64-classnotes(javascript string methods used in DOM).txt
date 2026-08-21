@@ -1,0 +1,555 @@
+String type
+	a. Data Binding :: `${}`
+
+String formatting methods
+	a. Style Binding :: element.style.propertyName = value
+	b. Class Binding :: element.className = "css supplied class name";
+
+Data  Binding refers to process the accessing the data from the source(user input to variable) and binding it to UI.
+Style Binding refers to process of binding style attributes to elements dynamically.
+Class Binding refers to process of binding classes to elements dynamically.
+
+event names
+===========
+ a. onchange()
+	<input type='text | password |email '> fires up when user modifies the value and looses the focus.
+        <input type='checkbox|radio'> fires up when user checks|unchecks immediately
+	<select> fires up when user selects a different option
+	<input type='file'> when users selects a file
+	<input type='range'> when user releases the slider handle
+
+ b. onfocus() : when the user enters into the input field.
+ c. onblur()  : when the user leaves the input field.
+
+eg#1.
+UI Code
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <form action="" class="w-25 border border-3 rounded p-4 bg-light text-dark" id="frmLogin">
+
+        <div class="form-switch">
+            <input type="checkbox" name="" 
+                    id="themeCheckBox"
+                    class="form-check-input">
+            Dark Theme
+        </div>
+        <h2><span class="bi bi-personal-fill"></span> User Login</h2>
+        <dl>
+            <dt>User Name</dt>
+            <dd><input type="text" class="form-control"></dd>
+            <dt>Password</dt>
+            <dd><input type="password" class="form-control"></dd>
+        </dl>
+        <button class="btn btn-dark w-100" id="btnLogin">Login</button>
+    </form>
+</body>
+
+</html>
+
+
+Fully fledged code
+==================
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script type="text/javascript">
+
+        function themeChange() {
+
+            var frmLogin = document.getElementById("frmLogin");
+            var checkBox = document.getElementById("themeCheckBox");
+            var btnLogin = document.getElementById("btnLogin");
+
+            if (checkBox.checked) {
+                frmLogin.className="w-25 p-4 border border-3 rounded bg-dark text-white";
+                btnLogin.className="w-100 btn btn-light";
+            } else {
+                frmLogin.className="w-25 border border-3 rounded p-4 bg-light text-dark";
+                btnLogin.className="w-100 btn btn-dark";
+            }
+        }
+    </script>
+</head>
+
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <form action="" class="w-25 border border-3 rounded p-4 bg-light text-dark" id="frmLogin">
+
+        <div class="form-switch">
+            <input type="checkbox" name="" 
+                    id="themeCheckBox" onchange="themeChange()"
+                    class="form-check-input">
+            Dark Theme
+        </div>
+        <h2><span class="bi bi-personal-fill"></span> User Login</h2>
+        <dl>
+            <dt>User Name</dt>
+            <dd><input type="text" class="form-control"></dd>
+            <dt>Password</dt>
+            <dd><input type="password" class="form-control"></dd>
+        </dl>
+        <button class="btn btn-dark w-100" id="btnLogin">Login</button>
+    </form>
+</body>
+
+</html>
+
+
+String manipulation properties and methods
+==========================================
+1. length :  It returns total count of  characters in a String
+			length: number
+
+Syntax: var str = "sachin";
+	 str.length;            => 6
+
+
+eg#3.
+	index.js
+	========
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function verifyName() {
+            var userName = document.getElementById("txtUsername").value;
+            var errorDetails = document.getElementById("nameError");
+
+            if (userName.length == 0) {
+                errorDetails.innerHTML = "Name required".fontcolor("red");
+            } else {
+                if (userName.length < 4) {
+                    errorDetails.innerHTML = "Name too short".fontcolor("red");
+                } else {
+                    errorDetails.innerHTML = "";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="" id="txtUsername" onKeyUp="verifyName()">
+        </dd>
+        <dd id="nameError">
+
+        </dd>
+    </dl>
+</body>
+
+</html>
+
+
+eg#4.
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script type="text/javascript">
+
+        function verifyChars() {
+            var chars = document.querySelector("textarea").value;
+            var maxLimit = 20;
+            var remaining =  maxLimit - parseInt(chars.length)
+
+            document.getElementById("msg").innerHTML = `${remaining} no of chars left`;
+        }
+
+    </script>
+
+
+</head>
+<body>
+    
+    <fieldset style="width:250px">
+        <legend>Your comments</legend>
+        <samp>Note : max 20 characters</samp>
+        <br><br>
+        <textarea name="" id="userComments" maxlength="20"
+            cols="40" rows="4" onkeyup="verifyChars()">
+
+        </textarea>
+        <p id="msg"></p>
+    </fieldset>
+
+
+</body>
+</html>
+
+-----------------------------------
+
+2. charAt(index) : it returns the character at specified index.
+
+3. charCodeAt(index) : it returns the code of the charcter at the specified index.
+				Note: A to Z [65 to 90] 
+				      a to z [97 to 122]
+
+ 	syntax: var str="sachin";
+		 str.charAt(1);   ====> a
+		 str.charCodeAt(1) ===> 97
+
+
+eg#5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script type="text/javascript">
+
+    function verifyUpperCase() {
+
+        console.log("control entered into the method");
+
+        var username  = document.getElementById("txtUsername").value;
+        var nameError = document.getElementById("nameError");
+        console.log(username);
+        console.log(nameError);
+
+        if(username.charCodeAt(0)>65 && username.charCodeAt(0)<90){
+            console.log("valid case")
+            nameError.innerHTML= "";
+        }else{
+            nameError.innerHTML = "Must start with Upper Case".fontcolor("red");
+            console.log("invalid case")
+        }
+        
+    }
+    </script>
+
+</head>
+<body>
+    <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text"  id="txtUsername" onblur="verifyUpperCase()">
+        </dd>
+        <dd id="nameError">
+
+        </dd>
+    </dl>
+</body>
+</html>
+
+----------------
+
+4. startsWith()   :: It returns true if string starts with specified chars.
+
+5. endsWith()	  :: It returns true if string ends with specified chars.
+
+eg#6
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    
+    <script type="text/javascript">
+
+        function verifyCard() {
+            var cardDetails = document.getElementById("txtCard").value;
+            var imgCard = document.getElementById("imgCard");
+            if (cardDetails.startsWith("4455")) {
+                imgCard.src="../public/images/visa.png"
+            } else {
+                imgCard.src="../public/images/mastercard.png";
+            }    
+        }
+
+        function verifyEmail() {
+          var emailInfo =  document.getElementById("txtEmail").value 
+          var emailError = document.getElementById("emailError");
+
+          if (emailInfo.endsWith("gmail.com")) {
+            emailError.innerHTML=" ";
+          } else {
+            emailError.innerHTML="Only Gmail is allowed".fontcolor("red")
+          }
+        }
+
+    </script>
+
+
+</head>
+
+<body class="container-fluid">
+    <dl class="mt-4">
+
+        <dt>Your car number</dt>
+        <dd class="input-group">
+            <input type="text" id="txtCard" onblur="verifyCard()"> 
+            <img width="40" height="40" id="imgCard">
+        </dd>
+
+        <dt>Your Gmail Account</dt>
+        <dd>
+            <input type="email" id="txtEmail" onblur="verifyEmail()">
+        </dd>
+        <dd id="emailError">
+
+        </dd>
+
+    </dl>
+
+</body>
+</html>
+
+------------------
+
+6. indexOf()   : it returns the index number of specified character in string.
+		     indexOf(string): number
+
+		 index number starts from 0.
+		 if character not found return -1
+		 if character found return first occurance.
+
+   syntax : var str = "sachintendulkar"
+		str.indexOf("a");  //1
+		str.indexOf("e");  //7
+		str.indexOf("z");  //-1
+
+
+eg#7.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    
+    <script type="text/javascript">
+        function verifyCard() {
+            var cardDetails = document.getElementById("txtCard").value;
+            var imgCard = document.getElementById("imgCard");
+            if (cardDetails.startsWith("4455")) {
+                imgCard.src="../public/images/visa.png"
+            } else {
+                imgCard.src="../public/images/mastercard.png";
+            }    
+        }
+
+        function verifyEmail() {
+          var emailInfo =  document.getElementById("txtEmail").value 
+          var emailError = document.getElementById("emailError");
+        
+          if (emailInfo.indexOf("@") ==-1) {
+             emailError.innerHTML = "Invalid Email".fontcolor("red");
+          } else {
+              if (emailInfo.endsWith("gmail.com")) {
+                emailError.innerHTML=" ";
+              } else {
+                emailError.innerHTML="Only Gmail is allowed".fontcolor("red");
+              }   
+          }
+        }
+    </script>
+
+
+</head>
+
+<body class="container-fluid">
+    <dl class="mt-4">
+        <dt>Your car number</dt>
+        <dd class="input-group">
+            <input type="text" id="txtCard" onblur="verifyCard()"> 
+            <img width="40" height="40" id="imgCard">
+        </dd>
+
+        <dt>Your Gmail Account</dt>
+        <dd>
+            <input type="email" id="txtEmail" onblur="verifyEmail()">
+        </dd>
+        <dd id="emailError">
+
+        </dd>
+    </dl>
+</body>
+</html>
+
+
+Note: 
+  + operator workflow
+
+a. When both the operands are number it perform "Addition"
+
+console.log(5 + 10); 
+console.log(3.5 + 2.5);
+console.log(-1 + 4); 
+
+b. If one operand is of string type then other operand will be converted to string and it performs "Concatination".
+
+eg#1.
+console.log("3" + 2); 
+console.log(2 + "3"); 
+console.log("5" + true); 
+console.log("Value: " + null); 
+console.log("Value: " + undefined);
+
+
+eg#2.
+console.log(10 + "5"); 
+console.log("5" + 10); 
+console.log("Result: " + 5 + 10); 
+console.log(5 + 10 + " is the result");
+
+
+c. If '+' is used with a single operand, it attempts to convert the operand to a number.
+
+eg#1.
+console.log(+"5"); 
+console.log(+"3.14"); 
+console.log(+true); 
+console.log(+false); 
+console.log(+null); 
+console.log(+undefined); 
+console.log(+"abc"); 
+
+ - operator work flow
+======================
+- does subtraction when used with two numbers.
+eg#1.
+console.log(10 - 5); 
+console.log(3.5 - 2.2); 
+console.log(100 - "20"); 
+console.log("50" - "30"); 
+
+- does negation when used with a single operand.
+eg#1.
+console.log(-10); 
+console.log(-(-5)); 
+console.log(-"3.14");
+console.log(-true); 
+console.log(-false); 
+console.log(-null); 
+console.log(-undefined); 
+
+
+
+- always converts strings to numbers (unlike +).
+- gives NaN if conversion fails.
+eg#1.
+console.log("10" - 2); 
+console.log("5" - "3"); 
+console.log("10px" - 5); 
+console.log("3.5" - "2.5"); 
+console.log(null - 1); 
+console.log(undefined - 1); 
+
+
+
+Case study to show how to add the elements dynamically
+======================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic List with Custom Names</title>
+</head>
+<body>
+
+    <input type="text" id="nameInput" placeholder="Enter a name">
+    <button id="addName">Add Name</button>
+    <button id="reset">Reset</button> 
+
+    <ul id="nameList"></ul> <!-- The list to display names -->
+
+    <script type="text/javascript">
+        let ul = document.getElementById("nameList"); // Get the existing <ul>
+        let input = document.getElementById("nameInput"); // Get the input field
+
+        document.getElementById("addName").addEventListener("click", function () {
+            let name = input.value.trim(); // Get input value and remove spaces
+
+            if (name === "") { // Check if input is empty
+                alert("Please enter a name!");
+                return;
+            }
+
+            let li = document.createElement("li");
+            li.textContent = name;
+            ul.appendChild(li); // Add to the list
+
+            input.value = ""; // Clear input after adding
+        });
+
+        document.getElementById("reset").addEventListener("click", function () {
+            ul.innerHTML = ""; // Clear the list
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,155 @@
+switch selector
+==============
+ - Switch is used to interrupt the flow of electrons in circuit[For electronic device]
+ - Switches are classified into
+	a. Toggle switch
+	b. Push button switch
+	c. Selector switch
+	d. Joystick switch etc.
+
+Selector switch is used in programming, it allows us to choose exactly the block that matches the condition
+
+syntax:  
+   switch(value|expression)
+   {
+	case value|expression:
+		statement to be executed upon match
+		break;
+
+	case value|expression:
+		statement to be exeucted upon match
+		break;
+
+	default: 
+		break;
+   }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function useSwitch() {
+            var num = prompt("Enter the number")
+            switch (num) {
+                case 1:
+                    document.write("one")
+                    break;
+                case 2:
+                    document.write("two")
+                    break;
+                case 3:
+                    document.write("three")
+                    break;
+                case 4:
+                    document.write("four")
+            
+                default:
+                    document.write("Enter the value b/w 1 to 4");
+            }
+        }
+        useSwitch()
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+FAQ:
+1. Can we define switch without default ?
+Ans.  Yes we can define.
+
+2. Can we define default above or b/w cases?
+Ans. Yes we can define default anywhere in the switch.
+
+3. Can we use case without "jump statement" in switch[break]?
+Ans. Yes we can define(it refers to fall through)
+		eg: purchase 3 you get 3 + 1 
+		    purchase 2 you get 2
+
+4. Can we use return as a jump statement in switch?
+Ans. yes we can.
+
+5. What is the difference b/w break and return ?
+Ans. break will terminate the current block but will stay in function,compiler is ON.
+     return will terminate the compiling[Stop everything].
+     Note: return statement can be used only in function and switch
+	   break can be used only in switch or loops
+
+
+6. Can we define case value as "string" or "boolean"?
+Ans. yes
+
+
+7. Can we define multiple cases for a single input?
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function useSwitch() {
+            var input = prompt("Enter the value ","yes|no")
+            switch (input) {
+                case "Y":
+                case "y":
+                    document.write("Your Presed Y to stop")
+                    break;
+                case "N":
+                case "n":
+                    document.write("You Pressed N to stop")
+                    break;
+            }
+        }
+        useSwitch()
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+8. How to define a case with range of values?
+	eg: like 1 to 10 , 20 to 100
+Ans. Yes by using boolean expression is case and boolean type in switch.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function useSwitch() {
+           var n = parseInt(prompt("Enter the number"))
+
+           switch (true) {
+
+            case (n>=1 && n<=10):
+                document.write(`Your number ${n} in the range of 1 to 10`)
+                break
+            case (n>=10 && n<=30):
+                document.write(`Your number ${n} in the rang eof 10 to 20`)
+                break
+            default:
+                document.write(`Plz enter number b/w 1 to 30`)
+           }
+        }
+        useSwitch()
+    </script>
+</head>
+<body>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

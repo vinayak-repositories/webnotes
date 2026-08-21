@@ -1,0 +1,477 @@
+let (block scope {} | can't be redeclared | can be initialized )
+
+- It is used to define a block scope variable.
+- It uses closure techniques.
+- closures allows members of outer block accessible to inner block.
+- It allows declaring, initialization and assignment.
+- It will not allow shadowing and hoisting.
+
+eg#1.
+index.js
+========
+function demo() 
+{
+    let x= 10;
+    if (x ==10) 
+    {
+        let y= 20;
+    }
+   document.write("X = "+x +"<br> Y = "+y);
+}
+demo();
+
+index.html
+==========
+<script src="index.js">
+    
+</script>
+
+Output: index.js:10 Uncaught ReferenceError: y is not defined
+
+
+eg#2.
+index.js
+========
+function demo() 
+{
+    let x= 10;
+    if (x ==10) 
+    {
+        let y= 20;
+        y = 30; //assignment
+        y = 40; //assignment
+        document.write("X = "+x +"<br> Y = "+y);
+    }
+}
+demo();
+
+index.html
+==========
+<script src="index.js">
+    
+</script>
+
+Output
+X = 10
+Y = 40
+
+eg#3.
+
+index.js
+========
+function demo() 
+{
+    "use strict";
+    x = 10;
+    document.write("X = "+x);
+    let x; //hoisting
+}
+demo();
+
+index.html
+==========
+<script src="index.js">
+    
+</script>
+
+Output: Error
+
+const
+- It is also block scope variable.
+- It allows only initialization.
+- It will not allow declaring and assigning.
+- It will not allow shadowing and hoisting.
+
+eg#1.
+index.html
+==========
+function demo() 
+{
+    const x;
+    x = 10; //assigning
+    document.write("X = "+x);
+} 
+demo();
+
+index.js
+=========
+<script src="index.js">
+    
+</script>
+
+Output
+  Uncaught SyntaxError: Missing initializer in const declaration
+
+eg#2.
+ function demo() 
+{
+    const x = 100;
+    x = 10; //assigning
+    document.write("X = "+x);
+} 
+demo();
+
+index.html
+=========
+<script src="index.js">
+    
+</script>
+
+Output
+ Uncaught TypeError: Assignment to constant variable.
+
+eg#3.
+function demo() 
+{
+    "use strict";
+    x = 10;
+    
+    document.write("X = "+x);
+
+   const x; //shadowing
+} 
+demo();
+
+Output
+ Uncaught TypeError: Assignment to constant variable.
+
+eg#4.
+index.js
+========
+function demo() 
+{
+	const x = 100; //initialization
+	document.write("X = "+x);  
+} 
+demo();
+
+index.html
+=========
+<script src="index.js">
+    
+</script>
+
+Output
+ x = 100
+
+
+eg#5. 
+index.js
+========
+function demo() 
+{
+    
+    const x=100;
+    const x = 200; //shadowing
+    document.write("X = "+x);
+} 
+demo();
+
+index.html
+=========
+<script src="index.js">
+    
+</script>
+
+Output : Uncaught SyntaxError: Identifier 'x' has already been declared (at index.js:5:11)
+
+
+FAQ: Can const variable changes the value?
+Ans. Yes at the time of initializing the variable.
+
+FAQ: Does const and readonly same?
+Ans. No readonly can't change,but const can change.
+
+Global scope of a variable
+==========================
+ => Global scope allows variables to access from any function
+ => Global scope is technically "Module scope"
+ => Module scope refers to "<script>" area.
+ 
+Syntax: 
+  <script type="text/javascript">
+	//module scope
+	function f1()
+	{
+		//function scope
+	}
+	///module scope
+ </script>
+
+ => you can declare a global variable using "let,var,const" by configuring it at "Module scope".
+
+eg#1. 
+ 
+index.js
+========
+var x = 10;
+var y = 20;
+var z = 30;
+function f1() 
+{
+    document.write("In function-1 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+}
+function f2() 
+{
+    document.write("In function-2 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+} 
+f1();
+f2();
+
+
+index.html
+=========
+<script src="index.js">
+    
+</script>
+
+Output
+In function-1
+x = 10
+y = 20
+z = 30
+In function-2
+x = 10
+y = 20
+z = 30
+
+eg#2. 
+index.js
+========
+var y = 20;
+var z = 30;
+function f1() 
+{
+    var x = 10; //local variable
+    document.write("In function-1 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+}
+function f2() 
+{
+    document.write("In function-2 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+} 
+f1();
+f2();
+
+
+index.html
+=========
+<script src="index.js">
+    
+</script>
+
+Output
+In function-1
+x = 10
+y = 20
+z = 30
+
+Uncaught ReferenceError: x is not defined
+    at f2 (index.js:10:46)
+    at index.js:13:1
+
+
+FAQ : can we define variable in function and can we make it global in access
+	Ans. yes possible by configuring the variable as "window" variable 
+             It is possible only with javascript in browser [HTML + Javascript]
+
+	Syntax: 
+		window.variable = value;
+		document.write(variable);
+
+
+index.js
+========
+var y = 20;
+var z = 30;
+function f1() 
+{
+    window.x = 10; //using window object
+    document.write("In function-1 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+}
+function f2() 
+{
+    document.write("In function-2 <br> x = "+x+"<br> y = "+y +"<br> z = "+z +"<br>");
+} 
+f1();
+f2();
+
+index.html
+==========
+<script src="index.js">
+    
+</script>
+
+Output
+In function-1
+x = 10
+y = 20
+z = 30
+In function-2
+x = 10
+y = 20
+z = 30
+
+FAQ: What is local and global scope?
+   Ans. local refers to block and funtion
+	global refers to module.
+
+Variable naming rules
+=====================
+1.  Name must start with an alphabet or can start with _ .
+
+2. _ is used for configures lot of constructs.
+   _ refers that variable requires further implementation.
+	var productName;  // its functionality is final
+	var _productName; // Representation :: it is not yet implemented
+
+3. Don't use special chars in variable.[Suggested by ECMA standards]
+
+4. Name can be alpha numeric.
+	var product2020;
+
+5. Name is case sensitive.
+
+6. Name can be max 255 chars long.
+
+7. Avoid using single char and long variable name.
+
+8. Avoid using keywords
+	var const; // invalid
+	var if;   // invalid
+
+9. Always use cameCase for name and it should speak what it is?.
+
+	var u = "sachin"; //not a good approach
+	var userName = "sachin"; //good approach
+
+JavaScript Data Types
+=====================
+=> JavaScript is not a strongly typed language.
+=> Data Type defines "Data Structure". [DS]
+=> Data Structure defines data rules. [type, range and behaviour].
+=> All JavaScript variables are implicitly typed.
+=> The data type of variables is decided according to value initialized or assigned .
+=> There is no restriction for type.
+	var x = 10; // x is number
+	x = "A"; // x is string
+	x = true; // x is boolean
+
+JavaScript allows various types of data, which is classified into 2 groups
+1. Primitive Types
+2. Non-Primitive Types
+
+Primitive Types
+=> They are Immutable types.
+=> Their structure can't be changed[they don't have any properties to be modified, even if javascript allows primitives are not object so u can't change them].
+=> They have fixed range for values.
+=> They use a stack. [LIFO]
+	1. Number
+	2. String
+	3. Boolean
+	4. null
+	5. Undefined
+	6. Symbol [ES6]
+	7. BigInt
+
+
+eg#1. 
+  let str = "Hello";
+  str[0] = "y";
+  console.log(str);
+
+output : Hello
+
+eg#2.
+  let str = "Hello";
+  str[0] = "y";
+  console.log(str);
+
+  str= "yellow";
+  console.log(str);
+
+output : Hello yellow
+
+eg#3. 
+  let num = 10;
+  num.newProperty = "Hello";
+  console.log(num.newProperty); // undefined
+
+eg#4. 
+ let obj = { name: "sachin" };
+  obj.name = "kohli"; // Modifies the existing object
+  console.log(obj.name); // "kohli"
+
+eg#5.
+  let obj = {"name" : "sachin"};
+    console.log(obj.name);
+
+ obj.age = 52;
+    console.log(obj); //{ name: "sachin", age: 52 }
+
+ delete obj.age;
+    console.log(obj); //{name:"sachin"}
+
+eg#6. 
+   let student = {id:10 , name : "sachin"};
+      console.log(student); //{id:10,name : "sachin"}
+
+    student.id = {value: 10, type:"roll_number"};
+       console.log(student); // {{value: 10, type:"roll_number"} , name: "sachin"};
+
+Summary
+Primitive types (String, Number, Boolean, etc.) are immutable.
+	Their values cannot be changed in place.
+	Operations on them create new values instead of modifying the existing one.
+	They do not store properties like objects do.
+
+Objects are mutable.
+	Their properties can be modified without creating a new object.
+
+
+Javascript Object vs JSON 
+=========================
+eg#1.
+let user = {name:"sachin", age : 25};
+  console.log(user); //{name:"sachin", age : 25}
+
+let jsonUser = JSON.stringify(user);
+  console.log(jsonUser); //{"name":"sachin", "age" : 25}
+
+Note: JSON.stringify():  converts the javascript object  to JSON[data format], it automatically adds double quotes to keys.
+
+
+eg#2
+let user = '{"name":"sachin", "age" : 25}';
+  console.log(user);
+
+let javascriptObject = JSON.parse(user);
+  console.log(javascriptObject);
+
+Note: JSON.parse() : converts String representation of json to javascript Object[double quotes not added]
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+

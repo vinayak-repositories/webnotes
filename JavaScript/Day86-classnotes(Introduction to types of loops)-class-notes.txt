@@ -1,0 +1,182 @@
+eg#1. Working with DOM to create a nesting of ul li elements
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        var menuItems = [
+            {
+                categories : "Electronics" , Products : ["TV","MOBILES","WATCH"]
+            },
+            {
+                categories: "Fashion", Products : ["Kids's" , "Women's","Mens's"]
+            }
+        ];
+
+        document.addEventListener("DOMContentLoaded",function(){
+    
+            for(var i =0 ; i<menuItems.length ; i++){
+
+                var olLi = document.createElement("li");
+                olLi.innerHTML = menuItems[i].categories;
+
+                var ul   = document.createElement("ul");
+                
+                for(var j=0;j<menuItems[i].Products.length;j++){
+                    var ulLi = document.createElement("li");
+                    ulLi.innerHTML = menuItems[i].Products[j];
+
+
+                    ul.appendChild(ulLi);
+
+                    olLi.appendChild(ul);
+                   
+
+                    document.querySelector("ol").appendChild(olLi);
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <ol></ol>
+</body>
+</html>
+
+
+eg#2.
+
+<script type="text/javascript">
+
+   var n = parseInt(prompt("Enter the number"));
+
+    for(var i = 1 ; i<=n; i++){
+        for(var j=1; j<=i;j++){
+            document.write("*" +"&nbsp; &nbsp;");
+        }
+        document.write("<br>");
+    }
+
+</script>
+
+
+While loop
+=========
+ - It is used for collections when developer is not sure about the no of iterations
+ - Iteration counter may change dynamically.
+ - It will use initialization and counter , it would start loop only when the condition evaluates to true.
+
+syntax
+ initialization
+ while(condition)
+ {
+	statements;
+	counter;
+ } 
+
+Case study : 1
+ When the user enter the password as secret then say "Access Granted"
+
+<script type="text/javascript">
+    let password = ""
+    while(password!="secret"){
+        password = prompt("Enter the password");
+    }
+    console.log("Access granted");
+</script>
+
+
+Case study : 2
+   As long as we need to read the data from a file or from a database then we use while loop
+
+<script type="text/javascript">
+    while((data = readFromFile()) != null){
+        //use data for processing
+    }
+</script>
+
+<script type="text/javascript">
+    while((data = readFromDatabase())!= null){
+        //use data for processing
+    }
+</script>
+
+Case study : 3
+  When we enter password the no of times we enter password is restricted to "three" counts 
+
+<script type="text/javascript">
+   let noOfAttempts = 3;
+
+   let userInput = 1;
+   
+   while(userInput<=noOfAttempts){
+        var password = prompt("Enter the password");
+        if (password === "sachin@123") {
+            console.log("Access granted");
+            break;
+        } else {
+            alert(`Plz enter proper password , No of attempts left is :: ${noOfAttempts-userInput}`);
+            userInput++;
+        }
+   }
+   console.log("Plz contact administrator...");
+</script>
+
+Note: You need jump statement with in looping control  to exit the loop based on specific condition [ break , return ]
+
+do-while
+--------
+ This loop execute atleast once without even checking the condition is false
+
+syntax
+  do{
+	statements;
+	counter;
+  }while(condition)
+
+eg#1.
+
+<script type="text/javascript">
+	let number;
+
+	do {
+    		number = prompt("Enter a number greater than 10:");
+	} while (number <= 10);
+
+	console.log("You entered:", number);
+</script>
+
+Note: 
+When to Use do...while?
+ans. When you want to guarantee at least one execution, even if the condition is initially false.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

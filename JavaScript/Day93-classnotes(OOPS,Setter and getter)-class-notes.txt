@@ -1,0 +1,221 @@
+Class in OOP
+===========
+ - It is a program template that provides logic and data which we can implement and customize according to the requirement.
+ - class have the behaviour of Entity when it comprises of business related interactions.
+ - class have the behaviour of modal when it comprises of data related interactions.
+ - class is used as a blueprint to customize and create a multiple copies according to the requirements.
+
+
+Configure a class in JavaScript
+===============================
+a. Declaration 		  :: allocates memory and handles functionality in the same memory
+	class Name{
+		
+	}
+
+b. Expression		  :: allocates memory and handles the functionality in the different memory according to situation
+	var Name = class{
+
+	}
+
+
+class members
+-------------
+- JavaScript classes support only following members
+	a. Properties
+	b. Methods
+	c. Accessors
+	d. Constructor
+
+FAQ: 
+1. can we define a variable has a class member?
+Ans. No, But we can have variable in class as a member of any method
+	class Demo{
+		var x = 10; //not allowed
+	}
+	class Demo{
+		print(){
+		   var x= 10; //allowed
+		}
+	}
+
+note: In JavaScript classes, variables are not directly declared inside the class like in Java. 
+      Instead, properties (which hold values) are assigned inside the constructor method. 
+      This is because JavaScript treats a class as a special type of function, and inside functions, 
+      variables are declared using let, const, or var, which are scoped (local) and not attached to the instance.
+
+2. Why variable can't be a class member?
+Ans. It is immutable and class can have only mutable members
+
+Property in class
+=================
+- It is used in class to stored the data.
+- It is mutable which can change according to state and situation.
+
+Syntax
+ class Name{
+	propertyName =  value;
+ }
+
+- A property can  handle type of data(not initialized undefined will be stored for both primitive and nonprimitive)
+	a. primitive
+	b. nonprimitive
+
+- To access the properties of a class , we need to create an instance of class.
+- "." is refered as member invoking operator.
+
+Syntax
+	class Product{
+		Name;
+		price;
+	}
+
+	let tv = new Product();
+	tv.Name = "samsung";
+	tv.price = 45000;
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script type="text/javascript">
+        class Product{
+            Name= ""
+            Price = 0; 
+            Stock = false;
+            Cities = [];
+            Rating = {Rate: 0, Count:0};
+        }
+        
+
+        var tv = new Product();
+        tv.Name= prompt("Enter the Product name : ")
+        tv.Price = prompt("Enter the Price: ");
+        tv.Stock = ((prompt("Enter the status of stock :","true|false")) ==="true" ? true : false);
+        
+        for(var i = 0; i<2; i++){
+            tv.Cities[i] = prompt(`Enter the city for ${i}: `)
+        }
+
+        tv.Rating.Rate  = parseInt(prompt("Enter the Ratings: "));
+        tv.Rating.Count = parseInt(prompt("Enter the Count: "));
+
+        console.log(tv);
+        document.write(JSON.stringify(tv));
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+Note: JSON.stringify(object) – What Does It Do?
+      JSON.stringify(object) is a JavaScript method used to convert a JavaScript object into a JSON-formatted string.
+
+
+Accessors
+---------
+- They are used to configure fine grained control over properties
+- Accessor can manage read and write opertion on a property
+- Every property comprises of 2 accessors
+	a. get()  : Getter
+	b. set()  : Setter
+- Getter is used to read and return the value defined in property
+- Setter is used to store a new value into property
+
+
+Syntax: 
+	Property;
+
+	get aliasName(){
+		return this.property;
+	}
+	
+	set aliasName(newValue){
+		this.property = newValue;
+	}
+ 
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+    
+        var userName = prompt("Enter your Name: ");
+        var userRole = prompt("Enter your Role","admin|customer");
+        var productName = prompt("Enter New Name for Product");
+        
+        class Product{
+
+            _productName;
+
+            //getter
+            get ProductName(){
+                return  ;
+            }
+
+            //setter
+            set ProductName(newName){
+
+                if (userRole === "admin") {
+                    this._productName = newName;
+                } else {
+                  document.write(`Hello ! ${userName} you are not authorized to set productName`);  
+                }
+            }
+        }
+        let tv =new Product();
+        tv.ProductName = productName;
+        if (tv.ProductName) {
+            document.write(`Product Name is : ${tv.ProductName}`);
+        } 
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+
+case1:
+Enter your Name : sachin
+Enter your Role : admin
+Enter Name for Product : NikeCasuals
+
+Product Name is : NikeCasuals
+
+case2: 
+Enter your Name : kohli
+Enter your Role : customer
+Enter Name for Product : Puma
+Hello ! Kohli you are not authorized to set productName
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

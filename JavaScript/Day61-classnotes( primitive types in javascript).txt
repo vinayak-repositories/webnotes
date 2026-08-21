@@ -1,0 +1,234 @@
+Primitive types of javascript
+=============================
+    Javascript is not strongly typed[No restriction on datatype]
+
+1. Number
+2. String
+3. Boolean
+4. null
+5. Undefined
+6. Symbol [ES6]
+7. bigint [ES6]
+
+Number
+=====
+ It represents a numeric value.
+- A numeric value can be
+	Signed Integer  :: -5
+	Unsigned Integer::  5
+
+	Floating Point  ::    34.30[2 integers with 2 digit fractions]
+	Double          ::   420.40[more than 2 digits integer with 2 digit fractions]
+	Decimal         ::  4560.448765 [more than 4 digits integer with 29 digits fractions]
+	Exponent        :: 2e3 [2 x 10(3) = 2000]
+        bigint 		:: 23283928354748n [ suffix it with n so during calculations if we don't want round up]
+
+	Hexa 		:: 0f0033 [0 to f]
+	Octa 		:: Oo748  [0 to 8] ----> related to memory management[caching at that time we use]
+	Binary 		:: 0b1010 [0,1]
+
+
+
+How Does JavaScript Handle Numbers?
+	JavaScript uses a single Number type, which follows the IEEE 754 64-bit floating-point standard.
+	The same Number type is used for both integers and floating-point values.
+	Internally, JavaScript stores:
+			Integers exactly (if they fit in 53 bits).
+			Decimals as floating points.
+
+	Since Number is a floating-point type, it can lead to precision issues.
+
+
+eg#1. 
+   console.log(o.1 + 0.2); //0.300000000002 
+
+solution : console.log((0.1 + 0.2).toFixed(2)); // 0.30
+
+What If You Need Large Integers?
+	If numbers exceed 53-bit precision, JavaScript introduces BigInt.
+
+eg#1.
+ let bigNumber = 9223372036854775807n; // "n" denotes BigInt
+	console.log(bigNumber);
+
+
+eg#2.
+ let a = 9007199254740991;  
+ let b = 9007199254740992;  
+ let c = 9007199254740993; 
+
+console.log(a === a + 1);  //false
+console.log(c === c + 1);  // true (precession lost)
+
+solution 
+  let bigNum = 9007199254740993n; 
+  console.log(bigNum === bigNum + 1n);
+
+	
+Note: Every value the user inputs from the UI, by defualt is of String type, hence we need parsing method to convert a 
+      String type into Number[parseInt(),parseFloat(),Number()].
+
+3 ways of input
+===============
+ a. prompt()      :: String
+ b. queryString   :: String
+ c. form elements :: String
+
+
+Method to convert String input to Number type
+---------------------------------------------
+
+1. parsetInt("data") :  extracts the numeric value from the string.
+		        if it reaches a character then it would stop there.
+
+2. parseFloat("data") : extracts the numeric value from the string.
+		        if it reaches a character then it would stop there.
+
+3. Number()           : The type of input should be perfect number otherwise it returns NaN
+
+ 
+In JavaScript, any mathematical operation involving NaN results in NaN.
+
+
+eg#1.
+  parseInt("30")    + parseInt("20")  => 50
+  parseInt("30A")   + parseInt("B30") => NaN
+  parseInt("30A40") + parseInt("10")  => 40  
+  parseInt("A")     + parseInt("25")  => NaN[Not a Number]
+
+
+Methods to check whether the input entered in Number or not
+-----------------------------------------------------------
+To verfiy whether the input is of number type or not we use a method called "isNaN(data) [global function]  | Number.isNaN(data)".
+
+a. isNaN(data)        -> It converts the data and chek wheter it is NaN if it is NaN then it returns true otherwise false.
+
+eg#1. 
+  console.log(isNaN("123")); //false : because 123 gets converted to Number and it is not NaN
+  console.log(isNaN("A30")); //true  : because A30 would be converted to NaN.
+  console.log(isNaN(true));  //false : true gets covnerted to number 1 and it is not NaN
+  console.log(isNaN(false)); //false : false gets converted to number 0 and it is not NaN
+  
+  
+b. Number.isNaN(data) -> It wont convert the data rather it would check for NaN and it is very strict.
+ eg#1.
+    console.log(Number.isNaN("123")); //false : because "123" is string and it is not NaN.
+    console.log(Number.isNaN(NaN));   //true  : because NaN is checked with NaN.
+
+eg#1. 
+var age = prompt("Enter Age");
+if(isNaN(age)){
+	document.write("Age must be number");
+} else {
+	document.write("Your Age : " + age);
+}
+Output
+  Enter the age : 30
+  Your Age : 30
+
+eg#2.
+var age = prompt("Enter Age");
+if(isNaN(age)){
+	document.write("Age must be number");
+} else {
+	document.write("Your Age : " + age);
+}
+Output
+  Enter the age : 30A
+  Your Age :Age must be number
+
+eg#3.
+var age = prompt("Enter Age");
+if(isNaN(age)){
+	document.write("Age must be number");
+} else {
+	document.write("Your Age : " + age);
+}
+Output
+  Enter the age : A30
+  Your Age : Age must be number
+
+Note: It is possible to convert number to string using a method called "toString() and toLocaleString()"
+
+toString()       : It converts number into String format so that we can handle String operations.
+toLocaleString() : It converts number into regional String format which can be applied with various number and date formats.
+
+syntax: 
+   price.toLocaleString(
+		"local-encode", 
+		{
+			style    : "currency|date",
+			currency : "format"
+		}
+	);
+			
+index.js
+=======
+function f1() {
+    var price = 45000;
+    document.write("The price = "+price.toLocaleString("en-in",
+                        {
+        			style   :"currency",
+        			currency: "INR"
+			}
+		     )
+		   );
+}
+f1();
+
+Output: The price = ₹45,000.00 
+
+
+Note: de-DE : EUR [GERMANY]
+      ja-JP : JPY [JAPAN]
+
+
+Note: Javascript provides "Math" Object to handle various Mathematical operation on numbers.
+	
+The operators available to perform mathematical operations are
+	+	 Add
+	- 	 Sub
+	*	 Mul
+	/ 	 Division
+	% 	 Modulus
+	** 	 Power 2**3 = 8
+	++       increment
+	--       decrement
+
+A developer can convert a mathematical or scientific equation into JavaScript expression by using Math object
+	Math.PI
+	Math.sqrt()
+	Math.min()
+	Math.max()
+	Math.avg()
+	Math.cos()
+	Math.sin()
+	Math.pow etc.
+
+
+    var emi = P * r * Math.pow(1 + r, n) / Math.pow(1+r,n) - 1
+
+Note: 
+You can use "typeof" operator to check the data type of any reference value.
+	var x = 10;
+	document.write(typeof x);
+
+
+
+
+
+
+ 	
+
+
+
+
+
+
+
+
+
+
+
+
+

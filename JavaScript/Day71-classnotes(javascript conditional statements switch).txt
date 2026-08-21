@@ -1,0 +1,197 @@
+Switch example
+==============
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Demo</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <script type="text/javascript">
+
+        var pattern=/ /;
+
+        function changeCountry() {
+
+           var countryName  = document.getElementById("lstCountries").value
+           var mobileNumber = document.getElementById("txtMobile")
+           var imgFlag      = document.getElementById("imgFlag")
+
+           switch (countryName) {
+
+            case "IND":
+                imgFlag.src="../public/images/india-flag.jpg"
+                mobileNumber.placeholder="+91 and 10 digits"
+                pattern=/\+91\d{10}/
+                break;
+
+            case "USA": 
+                imgFlag.src="../public/images/usa-flag.jpg"
+                mobileNumber.placeholder="+(1)(425) 555-0100"
+                pattern=/\+\(1\)\(\d{3}\)\s\d{3}-\d{4}/
+                break;
+
+            case "UK":
+                imgFlag.src="../public/images/uk-flag.jpg"
+                mobileNumber.placeholder="+(44)(20)1234 5678"
+                pattern=/\+\(44\)\(20\)\d{4}\s\d{4}/
+                break;
+
+
+            default:
+                imgFlag.src=" "
+                imgFlag.alt="N|A"
+                pattern=""
+                mobileNumber.placeholder="Please select your country"
+                break;
+           }
+        }
+
+        function verifyClick() {
+            var mobileNumber = document.getElementById("txtMobile").value
+
+            if (mobileNumber.match(pattern)) {
+                document.write("<h1>Mobile number verified succesfully</h1>")
+            }else{
+                document.getElementById("error").innerHTML=
+                    `Invalid mobile number : ${document.getElementById("txtMobile").placeholder} `
+            }
+
+        }
+    </script>
+</head>
+<body class="container-fluid">
+
+    <div class="w-25 mt-3">
+
+        <h2> Verify Mobile</h2>
+        <dl>
+            <dt>
+                Select Your Country 
+            </dt>
+            <dd>
+                <img width="50" height="50" id="imgFlag">
+            </dd>
+            <dd>
+                <select name="" id="lstCountries" class="form-select" 
+                        onchange="changeCountry()">
+                    <option>Select Country</option>
+                    <option value="IND">INDIA</option>
+                    <option value="UK">UnitedKingdom</option>
+                    <option value="USA">UnitedStates of America</option>       
+                </select>
+            </dd>
+
+            <dt>
+                Your Mobile
+            </dt>
+            <dd>
+                <input type="text" name="" id="txtMobile" class="form-control" autocomplete="off">
+            </dd>
+
+            <button class="btn btn-primary w-100" onclick="verifyClick()">Verify</button>
+        </dl>    
+    </div>
+    <p class="text-center text-danger h2" id="error"></p>
+</body>
+</html>
+
+
+
+Summary
+  Number
+  String
+  Boolean
+	a. comparison operators :  ==, ===, <,<=,>,>=,!=,!==
+	b. logical operators	: && , ||
+	c. selection statements
+			if,else,switch,case,default
+
+
+undefined type
+==============
+ - It is a type assigned to variables if value is not defined during compile time.
+ - It is a type used to verfiy value in a reference value during compile time.
+ - we can use "undefined" keyword to verify whether value is defined or not.
+ 
+eg#1
+<script type="text/javascript">
+
+      var product="samsung"
+      var rating;
+      if (rating==undefined) {
+        document.write(`Name = ${product}`)
+      } else {
+        document.write(`Name =${product}  Rating = ${rating}`)
+      }
+</script>
+	Note: It is not a good code
+
+
+eg#2(while taking attendence we need to check for the people who are present,not the people who are absent)
+<script type="text/javascript">
+
+      var product="samsung"
+      var rating=3.5;
+      if (rating) {
+          document.write(`Name =${product} <br>  Rating = ${rating}`)
+        } else {
+          document.write(`Name = ${product}`)
+        }
+</script>
+
+FAQ: What is undefined and notdefined?
+Ans. undefined is about value
+     not-defined is about reference
+
+     if value is not present it defines undefined
+     if reference is not present then it returns not-defined
+
+
+null type
+---------
+  ** undefined at compile time
+  ** null at run time
+
+null is a type  which is used to verify the values at the runtime.
+if reference is not provided with the value at the runtime then javascript returns null.
+null is used to verify value in a reference.
+
+syntax: 
+	var price= prompt("Enter the price");
+		
+	-> price = string [when pressed ok : "" | "data entered by the user"]
+	-> price = null   [when pressed cancel]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

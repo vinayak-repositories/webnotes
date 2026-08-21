@@ -1,0 +1,265 @@
+String handling
+---------------
+ 1. length()
+ 2. charAt()
+ 3. charCodeAt()
+ 4. startsWith()
+ 5. endsWith()
+ 6. indexOf()
+
+Syntax
+   property = value
+   method(value)
+
+7. lastIndexOf() : It returns the last occurance of index number specified character in a String.
+
+  Syntax
+  	 var str = "Welcome";
+	     str.indexOf(e);     //1
+             str.lastIndexOf(e); //6 
+
+8. slice()  : It is used to extract the characters b/w specified index
+
+	syntax: slice(start,end) : string  => It returns characters b/w  starting to ending. [end-1]
+						rule : forward direction extraction
+						     : end index must be greater that starting index
+		
+		slice(start): string 	   => It return from starting to ending
+
+Parameters
+==========
+startIndex (required) – The position where extraction begins (inclusive).
+	If negative, it is counted from the end of the string.
+
+endIndex (optional) – The position where extraction stops (exclusive).
+	If omitted, it extracts till the end.
+	If negative, it is counted from the end.
+
+Key Features
+------------
+Supports negative indices (unlike substring()).
+Does not swap indices if startIndex > endIndex (unlike substring()).
+Returns an empty string if startIndex is greater than endIndex.
+
+eg: str.slice(0,7); // returns from 0 to 6 characters[forward direction]
+    str.slice(7,0); // returns empty string
+
+
+
+9. substr() :  It is used to extract specified number of chars from given index
+	
+	syntax: substr(startIndex, totalCountOfChars) => It reads based on noOfcharacters to read.
+		substr(startIndex) 		      => It reads till end[end-1].
+		
+	
+eg: str.substr(0,7); //from 0th index it reads 6 characters
+    str.substr(7,3); //from 7th index it reads 2 characters
+    str.substr(7,0); //from 7th index it won't read any characters.
+
+
+
+10. substring() : It can read the characters b/w the given index range which can be bidirectional.
+
+	syntax: substring(startIndex,endIndex) : string  ==> endIndex can be bi-directional
+		substring(startIndex): string 		 ==> It return from starting to ending
+
+eg: str.substring(7);     //from 7 till end of the String
+    str.substring(7,15);  //from 7 till 14th index of the String
+    str.substring(7,0);   //from 7 till 0th index of the String
+
+
+Parameters
+----------
+startIndex (required) – The index where extraction begins (inclusive).
+endIndex   (optional) – The index where extraction stops (exclusive). 
+			If omitted, the substring extends to the end of the string.
+
+Key Points
+----------
+If startIndex is greater than endIndex, they are swapped.
+If startIndex or endIndex is negative or NaN, they are treated as 0.
+If endIndex is omitted, it extracts up to the end of the string.
+It does not modify the original string.
+
+
+eg#1. Program to extract id and domain in email 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function strCheck() {
+            var str=prompt("Enter the email id","sachin@gmail.com|saurav@outlook.com")
+
+            var id = str.substring(0,str.indexOf("@"));
+            var domain=str.substring(str.indexOf("@")+1);
+
+            console.log(id);
+            console.log(domain);
+
+            var output = `
+                id = ${id} <br>  domain= ${domain}
+            `;
+            document.write(output);
+        }
+        strCheck();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+eg#2. Program to extract key and value in QueryString
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function strCheck() {
+            var str="?name=sachin";
+
+            var key = str.substring(1,str.indexOf("="));
+            var value=str.substring(str.indexOf("=")+1);
+
+            console.log(key);
+            console.log(value);
+
+            var output = `
+                key = ${key} <br>  value= ${value}
+            `;
+            document.write(output);
+        }
+        strCheck();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+key = name
+value= sachin
+
+------------------
+11. split() - It can split the string at specified index and returns array of string.
+
+		syntax: split(seperator,limit) : string[]
+
+Parameters:
+separator (optional) – Specifies the pattern (string or regular expression) to divide the string.
+			If omitted, the entire string is returned as a single element array.
+			If an empty string ("") is used, the string is split into individual characters.
+
+limit (optional)    – Specifies the maximum number of splits. The remaining string is ignored.
+
+
+eg#1.
+<script type="text/javascript">
+       function codeCheck() {
+            var str="HOME|CONTACT|ABOUTUS"
+            var items = str.split("|");
+            console.log(items)
+
+            var users = "sachin-sachin@mi.com, dravid-dravid@rr.com"
+            var [sachin,dravid] = users.split(",");
+            console.log(sachin)
+            console.log(dravid)
+        }
+        codeCheck();
+</script>
+
+
+Output
+(3) ['HOME', 'CONTACT', 'ABOUTUS']
+	0: "HOME"
+	1: "CONTACT"
+	2: "ABOUTUS"
+	length: 3[[Prototype]]: Array(0)
+split-code.html:15 sachin-sachin@mi.com
+split-code.html:16  dravid-dravid@rr.com
+
+-----------------------
+
+12. trim()  : It is used to remove the leading spaces in string
+		[space before and after]
+
+  Note: It does not modify the original string; instead, it returns a new string with whitespace removed.
+
+index.js
+========
+<script type="text/javascript">
+        function codeCheck() {
+            var password = prompt("Enter the password")
+            
+            
+            if (password.trim()=="admin") {
+                document.write("valid")
+            } else {
+                document.write("invalid")
+            }
+        }
+        codeCheck()
+</script>
+
+--------------------------
+13. match() : It is used to verify the format of input value using regular expression.
+	      It returns boolean value "true" if value is matching with regular expression.
+
+Note: Regular expression in javascript is enclosed using /regExpression/.
+
+<script type="text/javascript">
+
+        function codeCheck() {
+            var password = document.getElementById("txtPassword").value   
+            console.log(password)
+            var pwdError = document.getElementById("pwdError");
+
+            var regEx = /(?=.*[A-Z]\w{4,15})/
+
+            if (password.match(regEx)) {
+                pwdError.innerHTML = "Strong password".fontcolor("green");
+            } else {
+                if (password.length <4) {
+                    pwdError.innerHTML = "Weak password".fontcolor("red");
+                } else {
+                    pwdError.innerHTML = "Poor password".fontcolor("goldenrod");
+                }
+            }
+        }
+        codeCheck();
+
+</script>
+
+
+
+ 
+
+	
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

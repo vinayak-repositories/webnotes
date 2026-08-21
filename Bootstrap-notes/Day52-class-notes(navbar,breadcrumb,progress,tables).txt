@@ -1,0 +1,391 @@
+Nav bar
+------
+->  It is a responsive navigation for website
+
+classes
+     .navbar
+     .navbar-nav
+     .nav-item
+     .nav-link
+     .navbar-collapse
+     .navbar-brand
+     .navbar-toggler
+     .navbar-toggler-icon
+     .navbar-dark	
+     .navbar-light
+     .navbar-expand-lg|sm [mandatory for responsive design]
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    
+    
+   
+</head>
+<body class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Shopper.</a>
+
+            <button class="navbar-toggler" type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+                <div class="collapse navbar-collapse flex-lg-row flex-column" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Home </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Pages </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> Blog </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"> ContactUs </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-lg-row flex-column ms-lg-auto">
+                            <li>
+                                <span class="bi bi-person ms-3"></span>
+                                <span class="bi bi-heart ms-3"></span>
+                                <span class="bi bi-cart3 ms-3"></span>
+                            </li>
+                        </ul>
+                </div>
+        </div>
+    </nav>
+    
+
+
+    <!-- Script for functionality-->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+Progress Bar
+============
+It can show status of the tasks performed by actions in page
+Actions including downloading,uploading,copying,installing, etc
+
+classes
+ .progress
+ .progress-bar
+ .progress-bar-animated
+ .progress-bar-striped
+
+The progress is defined in progress bar with style attribute width.
+
+  <div class="progress">	
+    <div class="progress-bar" style="width:50%">
+    		50% COMPLETED
+    </div>
+  </div>
+
+A progress can display multiple progress bars
+	<div class="progress">
+		<div class="progress-bar" style="width:50%">
+    			50% COMPLETED
+    		</div>
+		<div class="progress-bar" style="width:40%">
+    			40% Processing
+    		</div>
+        </div>
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+   
+</head>
+<body class="container-fluid">
+
+    <h2>HTML Progress</h2>
+    <progress max="100" min="1" value="50"></progress> 50% Completed
+    
+    <h2>Bootstrap Progress</h2>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: 20%;">
+            20% Completed
+        </div>
+        <div class="progress-bar bg-danger" style="width: 60%;">
+            60% Completed
+        </div>
+        <div class="progress-bar bg-warning" style="width: 20%;">
+            20% Remaining
+        </div>
+    </div>
+    <!-- Script for functionality-->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+Bread Crumb
+-----------
+ It is used to display the phases of any actions performed on the page
+ It shows the current active state and previous state in the process
+
+classes
+  .breadcrumb
+  .breadcrumb-item
+
+
+syntax
+ <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+		<a href="#">Home</a></li>
+    <li class="breadcrumb-item active">
+	Library
+    </li>
+ </ol>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+   
+</head>
+<body class="container-fluid">
+
+    <h2> Bread Crumb </h2>
+    <ol class="breadcrumb" style=
+				"--bs-breadcrumb-divider : url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' 
+				height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);">
+        <li class="breadcrumb-item">
+            <a href="#">HOME</a>
+        </li>
+
+        <li class="breadcrumb-item ">
+            <a href="#">Contact US</a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            User
+        </li>
+
+        <li class="breadcrumb-item">
+            <a href="#">Pages</a>
+        </li>
+
+    </ol>
+    <!-- Script for functionality-->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+Working with tables
+===================
+
+.table
+.caption-top
+.table-hover
+.table-striped
+.table-striped-columns
+.table-active (apply on row)
+.table-bordered, .border-{contextual}
+.table-borderless
+ 
+.table-dark | .table-light
+.table-group-divider (apply on tbody)
+.table-{contextual}(apply on table,tr,td)
+
+.table-responsive (put the table in one container and adjust the width of that container and keeep this class to see table behaving like responsive)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style type="text/css">
+
+        table img{
+            width: 30px;
+        }
+
+        table{
+            font-family: Arial;
+        }
+
+        .L{
+            background-color: red;
+            color: white;
+            padding: 2px;
+            border-radius: 5px;    
+        }
+
+        .a{
+            background-color: gray;
+            padding: 2px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .w{
+            background-color: green;
+            padding: 2px;
+            border-radius: 5px;
+            color: white;
+        }
+
+   </style>
+</head> 
+<body class="container-fluid">
+    
+    <div style="width:400px;" class="table-responsive">
+
+        <table class="table caption-top table-hover table-striped table-warning table-bordered  ">
+            <caption>Asia Cup Points Table 2023- Group A</caption>
+        <thead valign="center">
+            <th>Pos</th>
+            <th colspan="2" width="150">Teams</th>
+            <th>Matches</th>
+            <th>Won</th>
+            <th>Lost</th>
+            <th>Tied</th>
+            <th>NR</th>
+            <th>Points</th>
+            <th>NRR</th>
+            <th colspan="2">Series Form</th>
+       </thead>
+       <tbody>
+            <tr align="center">
+                <td>1</td>
+                <td><img src="../public/images/pak.png"></td>
+                <td align="left">Pakistan</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>+4.760</td>
+                <td><span class="w">W</span></td>
+                <td><span class="a">A</span></td>
+            </tr>
+            <tr align="center">
+                <td>2</td>
+                <td><img src="../public/images/ind.png"></td>
+                <td align="left">IND</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>3</td>
+                <td>+1.028</td>
+                <td><span class="a">A</span></td>
+                <td><span class="w">W</span></td>
+            </tr>
+            <tr align="center">
+                <td>3</td>
+                <td><img src="../public/images/nep.png"></td>
+                <td align="left">Nepal</td>
+                <td>2</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>-3.572</td>
+                <td><span class="L">L</span></td>
+                <td><span class="L">L</span></td>
+            </tr>
+            
+        </tbody>
+        <tfoot>
+            <td colspan="12">
+                Pos: Position, Pld: Played, Pts:Points, NRR: Net Run Rate
+            </td>
+        </tfoot>
+    </table>
+   </div>
+    
+    <!-- Script for functionality-->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+Note: We can customize the bootstrap classes by using "Embeded technique".
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <style type="text/css">
+        .container-fluid{
+            background-color: aquamarine;
+            border: 10px solid black;
+            padding:50px;
+            height: 100vh;
+        }
+
+        .h3{
+            font-family:Brush Script MT;
+        }
+    </style> 
+</head> 
+<body class="container-fluid">
+    
+    <div class="h3">
+        Welcome User
+    </div>
+  
+   
+    <!-- Script for functionality-->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

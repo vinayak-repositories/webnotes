@@ -1,0 +1,208 @@
+
+Function callback
+----------------
+- Callback is a technique of configuring functions which execute according to state and situation.
+- Callback uses synchronous mechanism which blocks the other actions while performing the specific task.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function fetchData(url,success,failure){
+            if (url ==="https://fakestoreapi.com/products") {
+                success();
+            } else {
+                failure();
+            }    
+        }
+        fetchData(prompt("enter the url : "),function(){
+                document.write("URL is proper...");
+        },function(){
+                document.write("URL is wrong...");
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Input
+ https://fakestoreapi.com/products	
+Output
+ URL is proper
+
+Note: usage of callback 
+	a. Array : map(),forEach(),filter() ....
+	b. callback can return one value or it can return multiple values.
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function fetchData(url,success,failure){
+            if (url ==="https://fakestoreapi.com/products") {
+
+                success({"StatusMSG":"OK", "StatusCode":200,"Data":["ALL","ELECTORNICS","FOOTWEAR"]});
+            } else {
+
+                failure({"StatusMSG": "NOT FOUND","StatusCode": 404});
+            }    
+        }
+        fetchData(prompt("enter the url : "),function(response){
+                console.log(response);
+                
+        },function(response){
+                console.log(response)
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Drawback of callback
+  -> Synchronous, not good in programming
+  -> We use "Promises"
+
+
+Promise in JavaScript
+---------------------
+-Promise is just like a real life promise that you make.
+- It has 3 phases
+	a. Initial  : not yet started,Ready to Start
+	b. Resolve  : Successfully completed
+	c. Reject   : Unable to fullfill the promise
+
+- Promise is implicitly Asynchronous. [async, await]
+	It can execute the other task without blocking in process
+	They are better in performance when compared to "callback"
+
+Promise can be used instead of callback to handle async operations.
+- Promise provides "then","catch" and "finally".
+- "then()"    is executed when promise is fulfilled.
+- "catch()"   is executed when promise is rejected.
+- "finally()" is executed in all situations.
+
+Syntax:
+	const ref = new Promise(function(resolve, reject){
+			if(condition){
+				resolve(response);
+			}else{
+				reject(error);
+			}
+	});
+	ref.then(function(response){
+			//promise fulfilled
+		}).catch(function(error){
+			//promise failed
+		}).finally(function(always){
+			//executes always
+		});
+	
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style: none;
+        }
+    </style>
+    <script type="text/javascript">
+        var fetchData = new Promise(function(resolve,reject){
+            var url = prompt("Enter URL");
+            if (url==="https://fakestoreapi.com/products") {
+                resolve({"StatusText" : "OK","StatusCode" : 200, "Data":["ALL","PRODUCTS","ELECTRONICS"]});
+            } else {
+                reject({"StatusText" : "NOT FOUND","StatusCode" : 404});
+            }
+        });
+
+        fetchData.then(function(response){
+            document.write(`<h2>${response.StatusText}</h2>`);
+            var ul = document.createElement("ul");
+            response.Data.map(function(categories){
+                var li = document.createElement("li");
+                li.innerText= categories;
+                ul.appendChild(li);
+            });
+            document.body.appendChild(ul);
+        }).catch(function(error){
+            document.write(`<h2 style='color:Red'>${error.StatusText} : ${error.StatusCode}</h2>`)
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+Arrow function
+==============
+- Arrow function is a short hand technique use for writing function expression.
+- You can used for expression or callbacks.
+
+Syntax: Default Expression
+	var hello = function(){
+				return "Welcome to javascript";
+			}
+	 
+Syntax: Arrow function
+	var hello = () => "Welcome to javascript";
+
+
+Rules
+=====
+1. Single Parameter Without Parentheses: If there's only one parameter, you can omit the parentheses:
+	const greet = name => {
+    		console.log(`Hello, ${name}!`);
+	};
+	greet("sachin"); 
+
+
+2. Multiple Parameters: If there are multiple parameters, you must use parentheses:
+	const greet = (name,age) => {
+    		console.log(`Hello, ${name}!<br> Your Age is ${age}`);
+	};
+	greet("sachin",49);
+
+3. Single Expression Without return: If the function has a single expression, the return keyword and braces {} can be omitted:
+	const square = x => x * x;
+	console.log(square(4)); 
+
+4. No Parameters: For functions with no parameters, use empty parentheses:
+	const sayHello = () => console.log("Hello, World!");
+	sayHello(); 
+
+eg#1. Working with Arrow functions
+
+<script type="text/javascript">
+        
+                           
+      const URL = "https://fakestoreapi.com/products";
+      fetch(URL)
+            .then(response => response.json())
+            .then(categories =>{
+                categories.map(category=>document.write(`<li>${category.title}</li>`));
+            }).catch(error=>document.write(`<h2 style='color:red'>${error}</h2>`));
+
+</script>
+
+
+
+
+

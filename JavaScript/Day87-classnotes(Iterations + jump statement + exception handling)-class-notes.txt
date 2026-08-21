@@ -1,0 +1,349 @@
+Loops
+   for
+   while
+   do-while
+
+Iteration
+	for..in
+	for..of
+
+Iteration is a software design pattern which is used to read elements from a collection in sequential order.
+
+Syntax: 
+    for(var property/key in collection)
+    {
+						====> It reads all properties from collection
+    }
+
+    for(const value of collection)
+    {	
+						===> It reads all values from collection
+    }
+
+Iteration doesn't require initialization,condition and counter
+
+
+Note: 
+Key Differences:
+a. for..in: Iterates over keys/properties.
+b. for..of: Iterates over values.
+c. Use for..in for objects and when you need keys.
+d. Use for..of for arrays, strings, or iterable objects when you want to access values directly.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        var categories = ["All","Electronics","Fashion"];
+
+        //loop
+        for (let index = 0; index < categories.length; index++) {
+            const element = categories[index];
+            document.write(element +"<br>");      
+        }
+
+        document.write("<br>");
+
+        //Iterations
+        for (const value of categories) {
+            document.write(value + "<br>");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Implicit iterators are : forEach,map,filter....
+
+FAQ: How an iterators works?
+Ans. It uses function generator.
+     A function generator have implicit methods to read and return values from a collection.
+
+
+Jump statement
+ a. break
+ b. continue
+ c. return 
+
+Difference b/w break return and continue
+a. break will terminate the current block but stays in function.
+b. return will terminate the execution of script. It stops compiling.
+c. continue skips the counter that matches the given condition.
+
+Note: 
+return is not a conditional jump.
+break is a conditional jump.
+
+eg#2.
+<script>
+	for(var i = 1; i<=10; i++) {
+		if(i==4 || i==9) {
+			continue;
+		}
+		document.write(i + "<br>");
+	}
+</script>
+
+Output
+1
+2
+3
+5
+6
+7
+8
+10
+
+eg#3.
+<script>
+	for(var i = 1; i<=10; i++) {
+		if(i==4 || i==9) {
+			break;
+		}
+		document.write(i + "<br>");
+	}
+</script>
+
+Output
+1
+2
+3
+
+
+eg#4.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        const URL = "https://fakestoreapi.com/products";
+        fetch(URL).then(function(response){
+            return response.json();
+        }).then(function(products){
+            for (const product of products) {
+                if(product.category==='jewelery' || product.category ==='electronics'){
+                    continue;
+                }
+                console.log(product)
+                document.write(`${product.title} ----- <b><font color='red'>${product.category}</font></b> <br>`)
+            }
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+eg#5.
+
+users.json
+=========
+[
+    {
+        "username" : "sachin",
+        "password" : "tendulkar@123"
+    },
+    {
+        "username" : "rahul",
+        "password" : "dravid@123"
+    }
+]
+
+
+index.html
+==========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+        document.addEventListener("DOMContentLoaded",function(){
+            document.getElementById("username").addEventListener("keyup",function(){
+
+                let username = this.value.trim();
+                let errorMsg = document.getElementById("lblError");
+
+                fetch("../data/users.json").then(function(response){
+                    return response.json();
+                }).then(function(users){
+                    let isFlag = false;
+                    for (const user of users) {
+                        if (user.username===username) {
+                            isFlag = true;
+                            break;   
+                        }
+                    }
+                    if (isFlag) {
+                        errorMsg.innerHTML = `UserName Already Taken-- Try Again`.fontcolor("red");   
+                    } else {
+                        errorMsg.innerHTML = `UserName Available`.fontcolor('green');
+                    }
+                })
+            })
+        })
+       
+       
+    </script>
+
+</head>
+<body>
+    <dl>
+        <h3>Register Users</h3>
+        <dt>
+            Username
+        </dt>
+        <dd>
+            <input type="text" name="txtUsername" 
+                id="username">
+        </dd>
+        <dd id="lblError">
+
+        </dd>
+    </dl>
+</body>
+</html>
+
+FAQ: When an unreachable code is configured and how it is configured?
+Ans.  function f1(){
+		console.log("statement-1" + "<br>");
+		console.log("statement-2" + "<br>");
+		console.log("statement-3" + "<br>");
+		console.log("statement-4" + "<br>");
+		return;
+		console.log("statement-5" + "<br>");
+		console.log("statement-6" + "<br>");
+      }
+     f1();
+
+code can be made unreachable using return statement.
+if we don't want the compiler to reach to our code as it is not implemented then we write return keyword above the 
+unimplemented code.
+
+
+Exception handling statements in javascript
+-------------------------------------------
+In computer programming 2 types of errors are present.
+a) Compile Time Errors
+b) Run Time Errors
+
+- Compile time errors are syntactical errors[unable to understand our keywords,blocks and syntax in our code], due to 
+  which program fails to compile and start the application.
+
+eg#1.
+  <script>
+	far(var i = 0; i<=5 ; i++)
+		console.log("Hello user");
+  </script>
+compile time errors
+=============================================================== 
+- Run time errors are the issues that occur at the time of using application.
+		eg: used software for 3 days, 4th day it is not working that is runtime error
+
+- code is correct, but the instructions what we gave is not correct so the application won't work automatically the
+  application would stop this type of errors are referred as "Runtime Errors".
+
+eg#1.
+<script type="text/javascript">
+        
+	var a = parseInt(prompt("Enter the first  input :: "));
+        var b = parseInt(prompt("Enter the second input :: "))
+
+        var c= a/b;
+        document.write(`Division = ${c}`);
+        
+
+</script>
+
+In the above cases the code would run for every input,but for a input of b=0 it would fail, such type of errors are
+termed as "Runtime Errors".
+
+- If any application is unable to process the instructions given by user at runtime, then it leads to
+  "abnormal termination". [application closes]
+
+- To avoid abnormal termination we have to implement Exception Handling.
+
+But if we use javascript + html, there is no need of "Exception handling" because for the input b= 0 the output would be
+	Division = Infinity
+
+With Exception handling|Without Exception handling  also the output would be 
+	Division = Infinity
+
+Note: If application is unable to understand instructions then exception will trigger, which leads to abnormal termination.
+
+- Exception handling statements are
+
+try 	 => monitioring block contains statement to execute.
+catch    => handler block can catch the exception.
+throw    => It would throw an exception explicitly[Normally custom exception]
+finally  => It is a block that executes statement always.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        var a = parseInt(prompt("Enter the first  input :: "));
+        var b = parseInt(prompt("Enter the second input :: "))
+
+        try {
+            if (b==0) {
+                throw "Can't divide by Zero...";
+            }
+            if(b>a){
+                throw "Can't divide by large number";
+            }
+            var c= a/b;
+            document.write(`Division = ${c} <br>`);   
+        } catch (error) {
+            document.write(error +"<br>");
+        }finally{
+            document.write("finally block executed...");
+        }
+
+
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
+
+In the above code, even if we don't write try catch the output would be "Division = infinity" because javascript with html
+don't have library to tell the specific reason of runtime error. 
+Here we need to manually tell the reason and throw to "error" object, so javascript + html no meaning for "Exception handling",but javascript + react and javascript + Angular Exception handling is a must to avoid abnormal termination
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,319 @@
+FAQ:: Events, Browser Objects, Ajax, State Management
+ 
+1. What is the pattern used by event?
+2. What is eventhandler?
+3. What is eventListener?
+4. What are default event arguments?
+5. Can we pass custom arguments?
+6. What is the type for custom arguments?
+7. Can we define rest and spread parameter for events?
+8. How to prevent default event?
+9. How to stop propogation/event propogation?
+10. How to submit form using the events of other elements in a page?
+11. What is state?
+12. Why we need State?
+13. Why Http is stateless protocol?
+14. What are various state management technique used in client side?
+15. Difference b/w local and session storage?
+16. What are cookies?
+17. How to make cookie permanent?
+18. How to check the status of the cookie?
+19. How to delete a cookie permanently?
+20. How to navigate to any page dynamically?
+21. How to check the status of javascript enabled or not in browser?
+22. How to check the status of any plugin?
+23. How to reload a page upon button click?
+24. How to reload a page upon regular intervals?
+25. How to get current location of the client?
+26. What is ajax?
+27. Why we need ajax?
+28. What is readyState?
+29. What are the response types?
+30. How to convert response to json?
+
+
+
+
+1. What is the pattern used by event?
+Ans. Observer pattern
+
+2. What is eventhandler?
+ans. 
+
+3. What is eventListener?
+ans. 
+
+4. What are default event arguments?
+Ans. this,event
+
+5. Can we pass custom arguments?
+Ans. we can pass custom arugments.
+
+6. What is the type for custom arguments?
+Ans. primitive, non-primitive.
+
+7. Can we define rest and spread parameter for events?
+Ans. yes
+
+8. How to prevent default event?
+ans. Generic elements have default events, that would fireup automatically, we can prevent the default elements using
+	event method called "preventDefault".
+	
+       function submitClick(e){
+		e.preventDefault();
+       }
+      <form onsubmit="submitClick(event)">
+	<button>submit</button>
+      </form>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="get" onsubmit="blockSubmit(event)">
+
+        Username <input type="text" name="userName" id="">
+        <button>submit</button>
+
+    </form>
+    <script type="text/javascript">
+        function blockSubmit(e) {
+            e.preventDefault();
+            alert('form will be submitted to server');
+            console.dir(e);    
+        }
+
+        console.dir(document.querySelector("button"));
+    </script>
+</body>
+</html>
+
+9. How to stop propogation/event propogation?
+Ans. If we click on parent element only parent element event will fireup.
+     If we click on child element ,then child element event will fireup also on parent element parent event would fireup.
+     To stop this propogation : e.stopPropagation()
+
+Problem
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function containerClick() {
+            alert(`clicked on container`);
+        }
+        function submitClick(){
+            alert(`clicked on submit btn`);
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="width:200px; border: 2px solid black; padding: 20px;" onclick="containerClick()" >
+        Container <button onclick="submitClick()">submit</button>
+    </div>
+</body>
+</html>
+Output
+   If we click inside div container : clicked on container will fireup
+   If we click on button 	    : clicked on submit btn & clicked on container will fireup.
+
+Solution
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function containerClick() {
+            alert(`clicked on container`);
+        }
+        function submitClick(e){
+            alert(`clicked on submit btn`);
+	    e.stopPropagation()
+        }
+    </script>
+</head>
+<body>
+    <div class="container" style="width:200px; border: 2px solid black; padding: 20px;" onclick="containerClick()" >
+        Container <button onclick="submitClick(event)">submit</button>
+    </div>
+</body>
+</html>
+
+Output
+   If we click inside div container : clicked on container will fireup.
+   If we click on button 	    : clicked on submit btn.
+
+10. How to submit form using the events of other elements in a page?
+Ans. By calling form element submit() on any browser event.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function submitForm() {
+            document.querySelector("form").submit();
+        }
+    </script>
+</head>
+<body>
+    <form action="../javascript-ajax/load-product.html" >
+        Select City : 
+        <select name="city" id="" onchange="submitForm()">
+            <option value="Select City">Select City</option>
+            <option value="DELHI">Delhi</option>
+            <option value="HYD">Hyderabad</option>
+            <option value="BGLR">Bengaluru</option>
+        </select>
+    </form>
+</body>
+</html>
+
+Browser Objects
+===============
+21. How to check the status of javascript enabled or not in browser?
+Ans. By using HTML element <noscript>
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function submitForm() {
+            document.querySelector("form").submit();
+        }
+    </script>
+</head>
+<body>
+    <noscript>Please enable javascript on your browser</noscript>
+    
+    <form action="../javascript-ajax/load-product.html" >
+        Select City : 
+        <select name="city" id="" onchange="submitForm()">
+            <option value="Select City">Select City</option>
+            <option value="DELHI">Delhi</option>
+            <option value="HYD">Hyderabad</option>
+            <option value="BGLR">Bengaluru</option>
+        </select>
+    </form>
+</body>
+</html>
+
+Note: To disable javascript on browser : edge://settings ---> Javascript --> Allpermission --> disable javascript and run the program
+	output: javascript code won't work.
+
+22. How to check the status of any plugin?
+Ans. 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        for (const plugin of navigator.plugins) {
+            document.write(plugin.name +"<br>");
+        }
+        if(navigator.plugins['Microsoft Edge PDF Viewer']){
+            document.write(`You can watch pdf doucments`);
+            alert(`you can install pdf plugins from website`);
+            location.href='http://www.adobe.com';
+        }else{
+            document.write("plz install the plugin");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+eg#2. 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    
+    <script type="text/javascript">
+
+        function doTransaction() {
+            setTimeout(status,2000);
+            setTimeout(redirect,10000);
+        }
+        
+        function status() {
+            document.getElementById("text").innerHTML = "<div class='spinner-border mt-3'></div> Transaction completed <br> 
+								Please  wait we are redirecting";
+        }
+
+        function redirect() {   
+            location.href='http://www.flipkart.com';
+        }
+
+    </script>
+</head>
+<body class="container-fluid">
+    <button class="btn btn-primary mt-3" onclick="doTransaction()">Pay</button>
+    <p id="text">
+
+    </p>
+</body>
+</html>
+
+23. How to reload a page upon button click?
+Ans. location.reload()
+
+24. How to reload a page upon regular intervals?
+ans. <meta http-equiv="refresh" content="5">
+
+25. How to get current location of the client?
+ans. using latitude and longitude of navigation.geoLocation().
+
+
+Ajax
+===
+30. How to convert response to json?
+   Ans. JSON.parse(string) : string to JSON
+	JSON.stringify()   : converts JSON to string.
+
+
+jQuery
+======
+  John Resig introduced a library for javascript in 2006  by name  "jQuery".
+  Library contains predefined functions. 
+  jQuery functions are designed to implement the mechanism called "write less do more".
+  jQuery reduces browser compatibility issues.
+ [Majority of the internet websites are build using jQuery---> react, jQuery ---> Angular].
+
+	
+  
+
+    
+
+
+
+
+
+
+
+
+

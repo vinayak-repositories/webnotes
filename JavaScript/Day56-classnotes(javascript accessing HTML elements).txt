@@ -1,0 +1,227 @@
+How JavaScript will take the control of HTML elements?
+Ans. 
+1. JavaScript can access HTML elements in page by using DOM hierarchy.
+	window => document => images[], forms[]
+
+   -> Referring using index is faster in accessing elements.
+   -> It is the native method for JS.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+    <script type="text/javascript">
+        function bodyLoad(){
+            window.document.images[0].src="../public/images/a1.jpg";
+            window.document.forms[0].elements[1].value="Register";
+            window.document.forms[1].elements[1].value="Login";
+        }
+    </script>
+    
+</head>
+
+<body onload="bodyLoad()">
+    <div>
+        <img width="100" height="100" border="1">
+    </div>
+    <div>
+        <form>
+            <h3>Register</h3>
+            Username <input type="text"> <input type="button">
+        </form>
+    </div>
+
+    <div>
+        <form>
+            <h3>Login</h3>
+            Email <input type="text"> <input type="button">
+        </form>
+    </div>
+</body>
+</html>
+
+Issue with DOM Hierarchy 
+   -> If any element changes its position in page, then you have to update the index every time in code.
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+    <script type="text/javascript">
+        function bodyLoad(){
+            window.document.images[0].src="../public/images/a1.jpg";
+            window.document.forms[0].elements[1].value="Register";
+            window.document.forms[1].elements[1].value="Login";
+        }
+    </script>
+    
+</head>
+
+<body onload="bodyLoad()">
+    <div>
+        <img width="100" height="100" border="1">
+    </div>
+    <div>
+        <form>
+            <h3>Register</h3>
+            Username <input type="text"> <br><br>
+            Password <input type='password'><br><br>
+            <input type="button">
+        </form>
+    </div>
+
+    <div>
+        <form>
+            <h3>Login</h3>
+            Email <input type="text"> <input type="button">
+        </form>
+    </div>
+</body>
+</html>
+------------------------
+Solution: 
+JavaScript can refer elements by using "name".
+
+- Every element can be defined with a name.
+- JavaScript can access element by using name.
+- You can't access any child element directly.
+- Everytime to access a child you have to refer its parent.
+- HTML can have same name for multiple elements[radio button | checkbox button].
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+    <script type="text/javascript">
+        function bodyLoad(){
+           poster.src='../public/images/a2.jpg';
+           frmRegister.btnRegister.value='Register';
+           frmLogin.btnLogin.value='Login';
+        }
+    </script>
+    
+</head>
+
+<body onload="bodyLoad()">
+    <div class="imgDiv">
+        <img width="100" height="100" border="1" name="poster">
+    </div>
+    <div>
+        <form name="frmRegister">
+            <h3>Register</h3>
+            Username <input type="text" name="userName"> <br><br>
+            Password <input type='password' name="password"><br><br>
+            <input type="button" name="btnRegister">
+        </form>
+    </div>
+
+    <div>
+        <form name="frmLogin">
+            <h3>Login</h3>
+            Email <input type="text" name="login"> <br><br>
+            <input type="button" name="btnLogin">
+        </form>
+    </div>
+</body>
+</html>
+
+----------------------------------------------
+JavaScript can refer HTML elements by using ID
+- JS provides a method "document.getElementById()"
+- You can access any element from any level of hierarchy.
+- ID reference have a confilct with CSS ID.
+- In CSS same ID can be defined for multiple elements.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+    <script type="text/javascript">
+        function bodyLoad(){
+            document.getElementById("poster").src='../public/images/a2.jpg';
+            document.getElementById('btnRegister').value='Register';
+            document.getElementById('btnLogin').value='Login';
+        }
+    </script>
+    
+</head>
+
+<body onload="bodyLoad()">
+    
+    <div class="imgDiv">
+        <img width="100" height="100" border="1" name="poster" id="poster">
+    </div>
+
+    <div>
+        <form name="frmRegister">
+            <h3>Register</h3>
+            Username <input type="text" name="userName"> <br><br>
+            Password <input type='password' name="password"><br><br>
+            <input type="button" name="btnRegister" id="btnRegister">
+        </form>
+    </div>
+
+    <div>
+        <form name="frmLogin">
+            <h3>Login</h3>
+            Email <input type="text" name="login"> <br><br>
+            <input type="button" name="btnLogin" id="btnLogin">
+        </form>
+    </div>
+
+</body>
+</html>
+
+JavaScript can access HTML elements by using CSS selectors.
+a. Primary Selectors: type, id, class
+c. Rational Selectors : child, adjacent, siblings
+e. Attriubte Selectors : attribute, attribute[name], attribute[name='value']
+f. Dynamic Pseudo classes
+g. Structural Pseudo classes
+h. Element state pseudo classes
+i. Validation state pseudo classes
+
+ JavaScript uses the method "document.querySelector()"
+
+document.querySelector("img").src = "public/images/shoe.jpg";
+document.querySelector("#btnRegister").value = "Register";
+document.querySelector(".btn-login").value = "Login";
+document.querySelector("nav div img").src = "public/images/shoe.jpg";
+
+
+
+
+
+
+
+
+
+

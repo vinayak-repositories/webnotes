@@ -1,0 +1,321 @@
+Rest Parameter
+Spread Parameter
+Function Return
+
+Function with Return
+   A function with Return allows to configure the functionality and store the data.
+   A function can return any type of data
+		a. Primitive
+		b. Nonprimitive
+		c. Function
+
+
+eg#1. Function returning primitive type (Number)
+
+<script type="text/javascript">
+
+       function addTwoNumber(a,b){
+            return a+b;
+       }
+
+       function printResult(){
+            document.write(`Result is : ${addTwoNumber(10,30)}`);
+       }
+
+       printResult();
+
+</script>
+
+Output
+Result is : 40
+
+
+eg#2. Function that return an Array
+
+<script type="text/javascript">
+
+       function getCategories(){
+          return ["ALL","MEN","WOMEN","ELECTRONICS"];
+       }
+
+       getCategories().map(function(category){
+          document.write(category + "<br>");
+       })
+       
+
+</script>
+
+Output
+ALL
+MEN
+WOMEN
+ELECTRONICS
+
+Function Closures
+-----------------
+ => It is a technique used in function configuration where the members of outer function are accesible to inner function.
+ => Every function by default uses closure mechanism.
+
+Syntax: 
+   function Outer(){
+	
+	var a = 10;
+	function Inner(){
+		//a  is accessible in inner
+		var c = 30;
+		return c;
+	}
+	//To make c accessible in Outer we need to return c from inner otherwise it is not possible
+  }
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function Outer(){
+            var a = 10;
+            function Inner(){
+                var b = 30;
+                var c = a+b;
+                return c;
+            }
+            document.write(`Result is :: ${Inner()}`)
+        }
+        Outer();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+Result is :: 40
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function getComponent(){
+            return (function(){
+                return "<h2>Welcome to the closures</h2>"
+            });
+        }
+        document.write(getComponent()());
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Note: 
+ function name(){
+	return {} | [] | // ;
+ }
+
+FAQ: Can a function have multiple return ? 
+Ans. Yes
+
+FAQ: Why we need multiple returns? 
+Ans. To achieve conditional rendering.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        
+    </style>
+    <script type="text/javascript">
+        function renderComponet(markup){
+
+            if (markup === "login") {
+                console.log(markup);
+                return ` 
+                    <h2> User login </h2>
+                        <dl>
+                                <dt>Username</dt>
+                                <dd>
+                                    <input type='text' name='username'>
+                                </dd>
+                                <dt>Password</dt>
+                                <dd>
+                                    <input type='password' name='password'>
+                                </dd>
+                        </dl>
+                   <button>Login</button>
+                `;
+            } else if(markup==="register") {
+                return `
+                    <h2> Register </h2>
+                    <dl>
+                        <dt>Username</dt>
+                        <dd>
+                            <input type='text' name='username'>
+                        </dd>
+                        <dt>Password</dt>
+                        <dd>
+                            <input type='password' name='password'>
+                        </dd>
+                        <dt>Mobile</dt>
+                        <dd>
+                            <input type='text' name='userMobile'>
+                        </dd>
+                   </dl>
+                   <button>Register</button>
+                `;
+            }else{
+                return "Plz enter login | register ";
+            }
+        }
+
+        const result=renderComponet(prompt("Enter the markup","login|register"));
+        document.write(result);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+Function Recursion
+------------------
+Recursion is a technique where function is called within the context of same function.
+It is mainly used to configure batch files.
+
+Syntax
+------
+function name(){
+   name();   ---> Calling the function within the same function
+}
+
+
+Note:  batch file  is the concept of function recursion
+cmd> date
+cmd> time
+cmd> dir/w
+
+cmd> copy con job.bat
+data
+time
+dir/w (ctrl + z)
+
+now run the job in command prompt as the administrator using the command
+ cmd> job
+
+if you want to stop the task in b/w while running (press ctrl + c) it would prompt
+	Terminate batch job (Y/N)? y
+
+2. npm install bootstrap --save
+	(batch job)
+
+3. ping -t 127.0.0.1
+
+
+Mathematical equation
+---------------------
+factorial(n)  =   if n==1   return 1;
+	          otherwise  return n * factorial(n-1);
+
+
+Function Generator
+=================
+  Note: yeild  : return and continue to next statement
+	return : return the value and stop the execution
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        
+        var arr=["sachin","saurav","dhoni","kohli"];
+
+        for (const value of arr) {
+            console.log(value);
+        }
+
+
+	// Usage of generators
+        function* generatorFunction(){
+            yield "sachin";
+            yield "saurav";
+            yield "dhoni";
+            yield "kohli";
+        }
+
+       const iterator =  generatorFunction();
+       console.log(iterator); //{next() : function}
+
+       let result = iterator.next();
+       console.log(result);  //{value : "sachin" , done: false} : indicating still more values can be yielded.
+
+       while(!result.done){
+            console.log(result.value);
+            result=iterator.next();
+       }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

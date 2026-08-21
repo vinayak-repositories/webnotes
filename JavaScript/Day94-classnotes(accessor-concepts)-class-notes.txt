@@ -1,0 +1,387 @@
+Modules
+Class
+Class Members
+      - Property
+      - Accessor
+      - Methods
+      - Constructors
+
+Accessor is used to set an alias name for property in class to access from a multi level hierarchy.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<body>
+    
+    <script type="text/javascript">
+        class Product{
+            Name="Samsung TV";
+            Price = 4.5;
+            Rating = {
+                vendor : {
+                    Bajaj : {Rate : 5.3, Count: 56},
+                    Reliance : {Rate: 5.6, Count:5.3}
+                },
+                customer :{
+                    Rate: 4.2, Count:  4000
+                }
+            }
+
+            get RelianceRating(){
+                return this.vendor.Reliance.Rate;
+            }
+
+            set RelianceRating(newRating){
+                 this.vendor.Rating.Reliance.Rate = newRating;
+            }
+        }
+
+        let tv = new Product();
+        tv.RelianceRating = prompt("Enter the new Rating");
+        document.write(`Name : ${tv.Name} <br> Reliance Vendor Rating is : ${tv.RelianceRating}`);
+    </script>
+</body>
+</html>
+
+Output
+   Enter the new Rating : 4.7
+   Name : Samsung TV 
+   Reliance Vendor Rating is : 4.7
+
+Note: If accessor is defined with only "get", then it is considered as "Read only".
+
+
+Methods
+  They are used to define the functionality.
+  functionality is defined by using "Methods".
+  Methods configures the actions to Perform.
+  It is mutable.
+  Javascript method can be void or it can return a value.
+  
+syntax:  
+   class Name{
+	methodName(){
+
+        }
+   }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        class Database{
+            _databaseName = "";
+
+            insert(){
+                return `Connected to ${this._databaseName} - Record inserted`;
+            }
+            update(){
+                return `Connected to ${this._databaseName} - Record updated`;
+            }
+            delete(){
+                return `Connected to ${this._databaseName} - Record Deleted`;
+            }
+        }
+
+        function dbActions(action) {
+            const obj = new Database();
+            obj. _databaseName = document.querySelector("select").value;
+            let msg = "";
+            if (action==='insert') {
+                msg = obj.insert();
+            } else if(action==='update') {
+                msg = obj.update();
+            }else{
+                msg = obj.delete();
+            }
+
+            document.querySelector("p").innerHTML = msg;
+        }
+    </script>
+
+
+</head>
+<body>
+    <fieldset>
+        <legend>Connect with database</legend>
+        <dl>
+            <dt>Select database</dt>
+            <dd>
+                <select>
+                    <option>Select Database</option>
+                    <option>Oracle</option>
+                    <option>MySQL</option>
+                    <option>MongoDB</option>
+                </select>
+            </dd>
+
+            <dt>Select Action</dt>
+            <dd>
+                <button onclick="dbActions('insert')">Insert</button>
+                <button onclick="dbActions('update')">Update</button>
+                <button onclick="dbActions('delete')">Delete</button>
+            </dd>
+        </dl>
+    </fieldset>
+    <p style="text-align: center; color:red;"></p>
+</body>
+</html>
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        class Product{
+             Name = "";
+             Price = 0;
+             qty = 0;
+
+             total(){
+                return this.Price * this.qty; //accessing instance members
+             }
+
+             printDetails(){
+                document.write(`Name = ${this.Name} <br> Price = ${this.Price} <br> Qty = ${this.qty} <br> Total = ${this.total()}`);
+             }
+        }
+
+        let obj = new Product();
+        obj.Name = "TV";
+        obj.Price = 35000; //dynamically using prompt() : parseFloat()
+        obj.qty = 3; //dynamically using prompt() : parseInt()
+        obj.printDetails();
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+constructor
+===========
+ - constructor is a s/w design pattern used for instantiation.
+ - Instantiation is the process of creating an object for class, allocating memory and loading class members into memory.
+ - At the time of creating an object using "new" , internally constructor will be called.
+ - constructor normally will be used to "initialize" the instance property of the class.
+ - Every class has a default constructor
+ - constructor is a special type of method which executes automatically for every object.
+ - javascript constructor is "ananomyous"[no-name]
+
+Syntax: 
+   class Product{
+
+	constructor(){
+
+	}
+   }
+
+- constructor can't be overloaded and it doesn't have any parameterized constructor.
+- constructor can be parameterized and if it is parameterized then while creating an object we need to pass the parameters.
+		let obj = new ClassName(parameters);
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        class Database{
+            constructor(dbName){
+                document.write("Connected to database... "+dbName+ "<br>");
+            }
+            insert() {
+                document.write(`record inserted...`);
+            }
+            delete(){
+                document.write(`record deleted...`);
+            }
+        }
+
+        function insertclick(){
+            let obj = new Database(document.querySelector("select").value);
+            obj.insert();
+        }
+        function deleteclick(){
+            let obj = new Database(document.querySelector("select").value);
+            obj.delete();
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <select name="" id="">
+           <option value="MongoDB">MongoDB</option>
+           <option value="Oracle">Oracle</option>
+           <option value="MySQL">MySQL</option>
+        </select>
+    </div>
+    <br><br>
+    <button onclick="insertclick()">Insert</button>
+    <button onclick="deleteclick()">Insert</button>
+</body>
+</html>
+
+Output
+   select database from dropdown menu
+	Connected to database... MongoDB
+	record inserted...
+
+
+
+eg#2. 
+class Product {
+    constructor(name, price, qty) {  //  Constructor method
+        this.name = name;
+        this.price = price;
+        this.qty = qty;
+    }
+
+    get total(){
+	return this.price * this.qty;
+    }
+
+    printDetails() {
+        console.log(`Name: ${this.name}, Price: ${this.price}, Qty: ${this.qty} , Total = ${this.total}`);
+    }
+}
+
+const obj = new Product("TV", 35000, 3);  //  Constructor is called
+obj.printDetails();
+
+Output
+Name: TV, Price: 35000, Qty: 3 , Total = 105000
+
+
+eg#3.
+
+class Product {
+    constructor(name) {
+        this.name = name;
+    }
+
+    constructor(name, price) {  // ERROR: JavaScript does not support constructor overloading
+        this.name = name;
+        this.price = price;
+    }
+}
+const obj1 = new Product("TV");  // price defaults to 0
+const obj2 = new Product("Laptop", 50000);  // price is set
+
+
+solution
+class Product {
+    constructor(name, price = 0) {  // Default value for price
+        this.name = name;
+        this.price = price;
+    }
+}
+
+const obj1 = new Product("TV");  // price defaults to 0
+const obj2 = new Product("Laptop", 50000);  // price is set
+
+eg#4. constructor role in inheritance
+
+class Product {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+class Electronics extends Product {
+    constructor(name, warranty) {
+        super(name);  // Calls the parent class constructor
+        this.warranty = warranty;
+    }
+}
+
+const obj = new Electronics("TV", 2);
+console.log(obj.name);  // "TV"
+console.log(obj.warranty);  // 2
+
+
+Summary
+  - Property
+  - Accessor
+  - Methods
+  - Constructor
+
+
+
+eg#1. Modular approach
+
+modules : library/modules/database.js
+
+export class Oracle{
+     insert(){
+        return "Record inserted for Oracle database...";
+     }
+}
+export class MySQL{
+    insert(){
+        return "Record inserted for MySQL database...";
+    }
+}
+
+index.html
+==========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Module</title>
+
+    <script type="module">
+            import {Oracle} from "../library/modules/database.js";
+            import {MySQL} from "../library/modules/database.js";
+
+            let obj = new MySQL();
+            let msg = obj.insert();
+            document.querySelector("p").innerHTML = msg;
+    </script>
+</head>
+<body>
+    <p style="text-align: center; color:red;"></p>
+</body>
+</html>
+
+classes which would support " inheritance | polymorphism ".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

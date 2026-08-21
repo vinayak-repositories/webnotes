@@ -1,0 +1,62 @@
+Special operators
+  a. ternary 
+  b. typeof
+  c. instanceof
+  d. in
+  e. delete
+  f. new
+  g. void
+
+yield :: will see in functions
+
+javascript statements
+---------------------
+Statements are used to control the execution flow
+   a. selection : if, ifelse, switch [Decession making]
+   b. looping   : for,while,dowhile
+   c. iteration : for..in,for..of
+   d. jump      : break,continue,return
+   e. Exception : try,catch,finally,throw
+
+
+looping control statements
+==========================
+ - Looping is the process of executing set of statements repeatedly based on given condition. 
+ - Loops can be created while using
+	a. for
+	b. while
+	c. dowhile
+ - Every Loop requries
+	a. initialization    => where to start
+	b. condition   	     => when to stop
+	c. counter	     => how to move(next/previous/stepsize)
+
+
+forloop -> used by developers when they are sure about no of iterations and the iteration counter will not change 
+	   dynamically.
+
+syntax:	for(initialization ;condition ;counter)
+	{
+		//statements
+	}
+
+
+Questions
+ a. print the output like tables by accepting 'n' input from the user
+
+ b. accept n as input and find the factorial of number
+		n = 5
+		5 * 4 * 3 * 2 * 1
+
+ c. Create an array called products
+	let products = ["All","Electronics","Footwear","Fashion"]
+
+ d. learn pattern programming
+
+	
+
+
+
+
+
+

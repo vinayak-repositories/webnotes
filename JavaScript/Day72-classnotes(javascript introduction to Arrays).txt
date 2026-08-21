@@ -1,0 +1,117 @@
+Primitive types
+  => Immutable
+  => They have fixed range of values
+  => Stored in stack[LIFO]
+
+
+Nonprimitive type
+=================
+   => Mutable
+   => value ranges according to memory available
+   => Stored in heap
+   => JavaScript nonprimitive types are 
+		a. Array	b. Object 	c. Map
+
+
+Arrays
+======
+- Arrays are used in computer programming to reduce overhead and complexity.
+- Array reduces overhead by storing values in sequential order.
+- Array can reduce complexity by storing multiple values under one name.
+- JavaScript array can store any type of value, which is not possible for several programming languages.
+- Array can change its size dynamically in JavaScript.
+- Array refers to a formation where items are arranged in order but can be accessed random.
+
+
+Configuring Arrays
+==================
+Array configuration comprises of 2 phases
+
+1. Declaring Array
+2. Initializing memory or assigning memory for array
+3. Store values in an array
+4. Read values from an array
+5. Manipulate values in an array
+
+Syntax: 
+	var arr;	         //declaring variable
+
+	arr = []            ===> Initializing array
+	arr = new Array();   
+
+	var arr = []	
+	var arr = new Array();	--> Declaring and initializing array
+
+What is the difference b/w [] and new ?
+Ans. new is "dynamic memory allocator"
+
+Note: money transaction on paytm :: enter pin :: transaction finished 
+	Assume some money needs to sent again :: will paytm ask to enter pin again :: Yes [means dynamic memory]
+
+      gmail : Login :: enter username and password 
+	      now mails to see it won't ask for username and password :: reason [static memory]
+
+
+- Meta characters refers to static memory which is continous memory, the memory allocated for first request will continue accross requests.
+- Array constructor refers to dynamic memory which means new memory allocated for every request. 
+  It is good for discrete requests[disconnected]. 
+
+Storing values into the arrays
+------------------------------
+ - You can initialize value or assign values
+ - Assignment requires a property reference to store values.
+ - Property is a string type that maps to index which is number type.
+
+Syntax
+   var arr = [10,"sachin",53.5,true]
+
+   var arr = []
+	arr[0] = 10
+	arr["1"] = "sachin"
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=[10,"sachin",true,53.5]
+        for (const property in arr) {
+           document.writeln(`${property} [${typeof property}] : ${arr[property]} [${typeof arr[property]}] <br>`)
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+0 [string] : 10 [number]
+1 [string] : sachin [string]
+2 [string] : true [boolean]
+3 [string] : 53.5 [number]
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

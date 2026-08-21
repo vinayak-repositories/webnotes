@@ -1,0 +1,356 @@
+Array manipulation
+- map()
+
+How to create an element dynamically?
+ Ans. document.createElement("")
+      append() | appendChild()
+
+
+eg#1. Creating a table(dynamically) upon click
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function generateTable() {
+            
+            var table = document.createElement("table");
+            table.border="1"
+            table.width="100%"
+
+            var thead = document.createElement("thead");
+            var tr = document.createElement("tr")
+
+            var th1 = document.createElement("th")
+            var th2 = document.createElement("th")
+            th1.innerHTML="NAME"
+            th2.innerHTML="PRICE"
+
+            tr.appendChild(th1)
+            tr.appendChild(th2)
+
+            thead.appendChild(tr)
+
+            table.appendChild(thead)
+
+            document.getElementById("div").appendChild(table)
+
+
+        }
+    </script>
+
+</head>
+<body>
+    <button type="button" onclick="generateTable()">Generate table</button>
+    <br><br>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+
+
+
+Presenting Array elements in UI
+- Read  elements from an Array using iterator or loops.
+- For every element in an Array create a HTML element dynamically
+- Define properties for an element.
+- Append to its parent.
+
+eg#1.Creating a HTML page dynamically with the help of Array elements
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function bodyLoad() {
+
+            var items =["ALL","ELECTRONICS","MOBILES","KIDSFASHION"]
+
+            items.map(function (item) {
+
+                var li = document.createElement("li")
+                li.innerHTML = item
+    
+                document.querySelector("ol").appendChild(li)
+
+
+                var option = document.createElement("option")
+                option.text = item.toUpperCase()
+                option.value = item
+    
+                document.querySelector("select").appendChild(option)
+
+                var ul_li = document.createElement("li")
+                var input = document.createElement("input")
+                input.type="checkbox"
+                var label = document.createElement("label")
+                label.innerHTML = item
+
+                ul_li.appendChild(input)
+                ul_li.appendChild(label)
+
+                document.querySelector("ul").appendChild(ul_li)
+                
+                
+            })  
+
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+    <ol>
+
+    </ol>
+    <select>
+
+    </select>
+    <ul>
+
+    </ul>
+</body>
+</html>
+
+
+eg#2. Creating a links as child elements for li
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function bodyLoad() {
+
+            var items =["ALL","ELECTRONICS","MOBILES","KIDSFASHION"]
+
+            items.map(function (item) {
+
+                var li = document.createElement("li")
+
+                var anchor = document.createElement("a")
+                var br = document.createElement("br")
+                anchor.innerHTML = item
+                
+                item = item+".html"
+                anchor.href = item
+
+                li.appendChild(anchor)
+
+                document.querySelector("ul").appendChild(li)
+
+            })  
+
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+    
+    <ul>
+
+    </ul>
+</body>
+</html>
+
+			or
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        ul{
+            list-style: none;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function bodyLoad() {
+
+            var items =["ALL","ELECTRONICS","MOBILES","KIDSFASHION"]
+
+            items.map(function (item) {
+
+                var li = document.createElement("li")
+
+                li.innerHTML = `<a href=${item}.html>${item}</a>`
+                
+
+                document.querySelector("ul").appendChild(li)
+
+            })  
+
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+    
+    <ul>
+
+    </ul>
+</body>
+</html>
+
+eg#3. 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       td{
+            text-align: center;    
+       }
+    </style>
+    <script type="text/javascript">
+
+        function bodyLoad() {
+
+            var items =["ALL","ELECTRONICS","MOBILES","KIDSFASHION"]
+            var tr = document.createElement("tr")
+
+            items.map(function (item) {
+
+
+                var td = document.createElement("td")
+                td.innerHTML=item
+                
+
+                tr.appendChild(td)
+
+                document.querySelector("tbody").appendChild(tr)
+
+            })  
+
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+
+    <table border="1" width="300px">
+
+        <thead>
+            <tr>
+                <th colspan="4">Categories</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+</body>
+</html>
+
+--------------------------------------
+
+Adding elements into the Array
+	a. push()    : It adds new elements as last elements.
+	b. unshift() : It adds new elements as first elements.
+	c. splice()  : It adds new elements at specified position.
+
+Syntax : 
+	arrayName.push("element1","element2",...)
+	arrayName.unshift("element1","element2",...)
+	arrayName.splice(arg1,arg2,arg3)
+		It takes three arguments:
+			index (position where the element(s) should be added),
+			howMany (number of elements to remove, set to 0 if you only want to add),
+			element(s) to add.
+
+eg#4.
+Working with Array methods to add elements and change the strucutre of the page
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+       td{
+            text-align: center;    
+       }
+    </style>
+    <script type="text/javascript">
+
+        function bodyLoad() {
+
+            var items =["ALL","ELECTRONICS","MOBILES","KIDSFASHION"]
+            
+            items.splice(2,1,"MensFashion","WomensFashion")
+
+            items.map(function (item) {
+                
+                var tr = document.createElement("tr")
+
+                var td = document.createElement("td")
+                td.innerHTML=item
+                
+
+                tr.appendChild(td)
+
+                document.querySelector("tbody").appendChild(tr)
+
+            })  
+
+        }
+    </script>
+</head>
+<body onload="bodyLoad()">
+
+    <table border="1" width="300px">
+
+        <thead>
+            <tr>
+                <th colspan="4">Categories</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

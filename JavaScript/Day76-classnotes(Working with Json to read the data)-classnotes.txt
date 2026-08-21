@@ -1,0 +1,209 @@
+JavaScript Object type
+----------------------
+Object is set of properties and functions.
+  - Object is to store all related data and logic together. 
+  - "Alan Kay" introduced the concept of Object into computer programming in early 1960's .
+  - John Olay and Nygaard developer object oriented programming in early 1967.
+  - It was formulated with a language "SIMULA".
+
+Syntax:
+let tv = { }
+ 
+- Data and logic is stored in object in the form of "Key - Value" collection.
+Syntax:
+let tv = {
+		Key : value,
+		Key : value
+	}
+
+- All keys are "string" type.
+- Value can any type, Primitive or Non-primitive.
+- If object comprises of only data and no logic then it is reffered as "JSON".
+	[JavaScript Object Notation]
+
+- JSON is format used to represent data. [JSON, XML]
+JSON
+{
+	"Name": "Samsung TV",
+	"Price" : 30000.44,
+	"Stock" : true
+}
+
+XML
+<Product>
+	<Name> Samsung TV </Name>
+	<Price> 30000.44 </Price>
+	<Stock> true </Stock>
+</Product>
+
+- You can access any key with reference of object.
+
+Note: Json is light weight
+      Json is cross platform
+      It is easy to transport over the network
+      It is not blocked in firewall
+      It is not affected by virus
+      It can reach to low bandwidth devices like smart watches,mobile etc
+
+- Every object is a static type, you can access the members of an object within the object using "this".
+	var product = ["Key" : "value" , "Key" : "value"]
+
+Syntax
+	product.key  | product["key"]    ====> "dot is refered as member invoking operator"
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        var tv = {
+            "Name"    : "Samsung Tv",
+            "Price"   : 4500.0,
+            "Cities"  : ["Bengaluru","Hyderabad","Kerala"],
+            "Ratings" : {
+                            "rate"  : 3.5,
+                            "count" : 3000 
+                        }  
+        }
+        console.log(`Name is ${tv.Name}`)
+        console.log(`Price is ${tv["Price"]}`)
+        console.log(`Cities info is :: ${tv.Cities}`)
+        console.log(tv.Ratings)
+    </script>   
+</head>
+<body>
+    
+</body>
+</html>
+
+---------------------------------
+- You can configure a JSON file to store the data offline so it avoids "roundtrip"
+- Json file is saved with an extension of .json
+- JSON is strictly type with objects or array of objects.
+
+Javascript "fetch()" promise which is used to fetch a data from a file or remote URL
+Promise is a function with "asynch" technique.[ Without blocking other request it can process our request : AJAX ]
+
+syntax: 
+ fetch("url | path")
+        .then(function(){
+		on success
+	 }).catch(function(){
+		on failure
+	 }).finally(function(){
+		always..
+	 })
+
+
+Code to demonstrate reading a data from json file
+-------------------------------------------------
+a. Add a new folder called "data" in our project
+
+b. Create a new file called "product.json"
+{
+    "Title" : "Apple iPhone 15 (Blue, 128 GB)",
+    "Price" : "57,999",
+    "Features": [
+        "128 GB ROM",
+        "15.49 cm(1.6 inch) Super Letina XR Display",
+        "12MP + 12MP | 12MP Front Camera",
+        "A15 Bionic Chip, 6 core processor",
+        "1 Year warranty for Phone and 6 months warranty for In Box Accessories"
+    ],
+    "Ratings": {
+                "Rate" : 4.6, 
+                "Count": "24,017 Ratings",
+                "Review" : "8,701 Reviews"
+                },
+    "Photo" : "../public/images/iphone.png"
+}
+
+c. Write a code to read the data from "product.json" and present in UI
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script type="text/javascript">
+        function bodyLoad() {
+            fetch("../data/product.json")
+            .then(function(response){
+                return response.json()
+            }).then(function(product){
+                document.getElementById("productImg").src = product.Photo;
+                document.getElementById("lblTitle").innerHTML = product.Title;
+                document.getElementById("rate").innerHTML = product.Ratings.Rate;
+                document.getElementById("ratings").innerHTML = product.Ratings.Count
+                document.getElementById("reviews").innerHTML = product.Ratings.Review;
+                document.getElementById("currency").innerHTML = product.Price;
+
+                product.Features.map(function(feature){
+                    var li = document.createElement("li");
+                    li.innerHTML = feature
+                    document.getElementById("features").appendChild(li)
+                });
+            })    
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyLoad()">
+
+    <div class="row m-3">
+
+        <!-- First Row-->
+        <div class="col-2">
+            <img id="productImg" width="200" height="200">
+        </div>
+
+        <!-- Second Row-->
+        <div class="col ms-3">
+
+            <h2 id="lblTitle" class="text-dark">
+
+            </h2>
+            <div>
+                <span id="rate" class="bg-success text-white"></span>
+                <span class="bi bi-star-fill bg-success text-white"></span> 
+                <span id="ratings" class="text-secondary fw-light fs-5"></span>               
+                <span id="reviews" class="text-secondary fw-light fs-5"></span>               
+            </div>
+
+            <ul id="features">
+
+            </ul>
+
+        </div>
+
+        <!-- Third Row -->
+        <div class="col-3">
+            <div>
+                <span>&#8377;</span>
+                <span id="currency" class="fw-bold"> </span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

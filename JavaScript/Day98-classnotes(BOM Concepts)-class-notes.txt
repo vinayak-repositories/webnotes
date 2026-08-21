@@ -1,0 +1,196 @@
+BOM: (Browser Object Model)
+===========================
+a. window
+b. location
+c. history
+d. navigation
+e. document 
+
+window 
+  It provides properties and methods that are used to control the browser window.
+
+Members:
+	prompt() : It popup an input box.
+	alert()  : It popup an message box
+	open()   : It can popup any file with specified features
+	close()  : It can close the window
+	print()  : It can invoke the printer properties.
+
+location object
+  - It provides the properties and methods that are used to known the client location details.
+
+Members:
+	host 	 : It returns the server name or IP address.
+	protocol : It returns the protocol: http, https, file
+	port 	 : It returns the port number
+	pathname : It returns the current file path
+	href 	 : It gets and sets URL
+	search   : It returns the query string
+	hash     : It returns the current hash location.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+       
+       if (location.protocol ==="http:") {
+           document.write(`
+                   YOUR IP : ${location.host} <br>
+                   YOUR PORTNO : ${location.port} <br>
+                   URL : ${location.href}
+           `); 
+        
+       } else {
+            document.write('Please run the app using live server - You are not using Live Server');
+       }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+FAQ: How to navigate dynamically in javascript?
+Ans. By using "location.href"
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function loginCheck() {
+            console.log("hey did u clicked");
+            var username = document.getElementById("userName").value;
+            console.log(username);
+
+            var password = document.getElementById("userPwd").value;
+            console.log(password);
+            
+            if (username === "nitin" && password==="nitin") {
+                location.href='../netflix-code.html';
+            } else {
+                location.href='error-code.html';
+            }
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="" id="userName">
+        </dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" name="" id="userPwd">
+        </dd>
+    </dl>
+    <button onclick="loginCheck()">login</button>
+</body>
+</html>
+
+
+Navigator
+--------
+ It provides properties and methods that are used to get client browser details.
+ 
+Members:
+	appName 	: It returns the browser family name.
+	appVersion 	: It returns the browser version
+	userAgent	: browser supported platforms.
+	platform 	: It returns the current platform
+	language 	: It returns browser current language
+	cookieEnabled 	: It returns the cookie status.
+	plugins[] 	: It returns the collection of all plugins installed
+	mimeTypes[] 	: It returns all MIME types supported.
+	geoLocation() 	: It returns the current geo location client.
+
+
+eg#1.
+ <script type="text/javascript">
+        document.cookie = "test=cookieEnabled";
+        let cookieEnabled = document.cookie.indexOf("test=cookieEnable") !== -1;
+        document.write(`
+                Your Browser Version : ${navigator.appVersion} <br>
+                  Cookies : ${cookieEnabled ? "You can login " : "Enable cookies"} <br>
+                  Platform : ${navigator.platform}<br>
+                  Language : ${navigator.language}
+                `)
+ </script>
+
+Output
+Your Browser Version : 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+Cookies : You can login
+Platform : Win32
+Language : en-US
+
+eg#2.
+  plugins
+
+ for (const plugin of navigator.plugins) {
+        document.write(plugin.name +"<br>");
+ }
+
+eg#3. 
+  mimeTypes
+
+for (const mime of navigator.mimeTypes) {
+        document.write(mime.type +"<br>")
+ }
+
+eg#4.  
+   geoLocation
+
+navigator.geolocation.getCurrentPosition(function(position){
+            document.write(`
+                Latitude : ${position.coords.latitude} <br>
+                Longitude : ${position.coords.longitude}
+            `);
+})
+
+
+history
+  - It is used to access current browsing history details
+  	length : get total count of pages in current browsing history.
+        forward() : moves to next page in browsing history.
+	back()	  : moves to previous page in current history.
+	go()	  : moves to specific page in history. 
+
+
+eg#1. 
+ <script type="text/javascript">
+            var now =new Date();
+            document.write(`
+                You opened page at : ${now.toLocaleDateString()} <br>
+                No of pages visited is : ${history.length}
+            `)
+    </script>
+
+Output
+ You opened page at : 21/3/2025
+ No of pages visited is : 5
+
+
+document
+  It provides all the properties and methods to handle elements in document(inside body)
+	a. getElementById()
+	b. querySelector() |querySelectorAll() | ....
+	c. write() | writeln()
+	d. body |documentElement |  head | title | forms | links | images | scripts | cookie   -> properties
+
+
+	
+
+
+	
+
+
+

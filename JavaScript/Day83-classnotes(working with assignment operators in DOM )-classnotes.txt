@@ -1,0 +1,332 @@
+Based on type of value an operator returns , they are further classified into following types
+   a. Arithmetic operators
+		+ , - , * , / , 
+		%  -> modulus operator
+		** -> Math.pow()
+		++ -> increment
+		-- -> decrement
+   b. comparison operator
+		==  -> equality operator
+		=== -> Identical equal
+		!=  -> Not equal
+		!== -> Identical Not equal
+		>   -> Greater than
+		>=  -> Greater than equal to
+		<   -> Less than
+		<=  -> Less than equal to 
+		
+  
+What is the difference b/w == and === in javascript?
+
+== (Loose Equality)
+  Checks only the values for equality.
+  Performs type coercion (i.e., converts one or both values to a common type before comparing).
+
+=== (Strict Equality)
+     Checks both the value and type for equality.
+     No type coercion is done.
+
+eg#1.
+<script type="text/javascript">
+        console.log(5 == "5")
+        console.log(5 ==="5")
+
+        console.log(1==true);
+        console.log(1===true);
+
+        console.log(0==false);
+        console.log(0===false);
+
+        console.log(null==undefined);
+        console.log(null===undefined);
+</script>
+Output
+   true false
+   true false
+   true false
+   true false
+
+3. Assignment operators
+	+=   Add and Assign
+	-=   
+	*=
+	/=
+	%=
+
+Syntax 
+------
+	var cost  = 100;
+	var addOn = 50;
+	cost += addOn;
+	console.log(cost); //150
+
+eg#1.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        img{
+            margin-left:10px; 
+        }
+        </style>
+</head>
+<body>
+    <button id="btnRight">Move Right</button>
+    <button id="btnLeft"> Move Left </button><br><br>
+    <img src="../public/images/iphone.png" alt="" width="200" height="200">
+</body>
+</html>
+<script type="text/javascript">
+    var postion = 0;
+    
+    document.getElementById("btnRight").addEventListener("click",function(){
+            postion+=100;
+            document.querySelector("img").style.marginLeft = postion +"px";
+    })
+
+    document.getElementById("btnLeft").addEventListener("click",function(){
+            postion-=100;
+            document.querySelector("img").style.marginLeft = postion +"px";
+    })
+</script>
+
+eg#2.
+kfc-script.js
+=============
+document.getElementById("generateBill")
+        .addEventListener("click",
+    function(){
+
+     document.getElementById("lblName").textContent = document.getElementById("txtCstmerName").value;
+     document.getElementById("lblMobile").textContent=document.getElementById("txtMobileNumber").value;
+     
+     var optBurger = document.getElementById("optBurger");
+     var optRoller = document.getElementById("optRoller");
+     
+     var mealName = "";
+     var mealCost = 0;
+
+
+     if (optBurger.checked) {
+        mealName = optBurger.value;
+        mealCost = 120;
+    }
+
+    if(optRoller.checked){
+        mealName = optRoller.value;
+        mealCost = 150;
+    }
+    
+    var addOns = " ";
+    var addOnCost = 0;
+    
+    var optWings = document.getElementById("optWings")
+    var krusher = document.getElementById("krusher")
+    
+    if (optWings.checked) {
+        addOns += optWings.value +"<br>";
+        addOnCost = 80;
+        mealCost+=addOnCost;
+        console.log(addOns);
+    }
+    
+    if (krusher.checked) {
+        addOns += krusher.value +"<br>";
+        addOnCost = 50;
+        mealCost+=addOnCost;
+        console.log(addOns);
+    }
+    
+    document.getElementById("generateBill")
+    document.getElementById("lblMeal").textContent = mealName;
+    document.getElementById("lblAddons").innerHTML = addOns;
+    document.getElementById("lblTotal").textContent = mealCost
+                .toLocaleString('en-in',{style:'currency',currency :'INR'});
+    });
+
+
+kfc-code.html
+=============
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body class="container-fluid bg-danger text-white">
+
+    <header>
+        <img src="../public/images/kfctop.png" alt="" srcset="" width="100%" height="200">
+    </header>
+
+    <section>
+
+        <!--Accordion-->
+        <div class="accordion" id="kfc">
+         
+            <!--First item in accordion-->
+          <div class="accordion-item m-2">
+
+                <!--Accordion header-->
+                <div class="accordion-header">
+                    <button class="btn btn-danger w-100 text-center" data-bs-toggle="collapse" 
+                            data-bs-target="#customer">
+                                    Customer Details
+                    </button>
+                </div>
+
+                <!--Accordion body-->
+                <div id="customer" class="accordion-collapse collapse" data-bs-parent="#kfc">
+                    <div class="accordion-body">
+                            <dl>
+                                <dt>Customername</dt>
+                                <dd>
+                                    <input type="text" name="" id="txtCstmerName" class="form-control">
+                                </dd>
+                                <dt>MobileNumber</dt>
+                                <dd>
+                                    <input type="text" name="" id="txtMobileNumber" class="form-control">
+                                </dd>
+                            </dl>
+                    </div>
+                </div>
+        </div>
+
+        <!--Second item in accordion-->
+        <div class="accordion-item m-2">
+
+            <div class="accordion-header">
+                <button class="btn btn-danger w-100" data-bs-target="#meal" 
+                        data-bs-toggle="collapse">
+                        Select your Meal
+                </button>
+            </div>
+
+            <div class="accordion-collapse collapse" id="meal" data-bs-parent="#kfc">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img src="../public/images/omgb1.png" alt="" srcset="" width="50%">
+                            <div class="m2 h3">
+                                <input type="radio" name="meal" value="omgBurger" id="optBurger" class="form-check-input"> 
+                                <span class="fw-bold"> OMG BURGER</span> <span class="bi bi-currency-rupee">120/-</span> 
+                            </div>
+                        </div>
+                        <div class="col">
+                            <img src="../public/images/omgb2.png" alt="" srcset="" width="50%">
+                            <div class="m2 h3">
+                                <input type="radio" name="meal" value="omgRoller" id="optRoller" class="form-check-input"> 
+                                <span class="fw-bold"> OMG Roller</span> <span class="bi bi-currency-rupee">150/-</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End of 2nd accordion item-->
+
+        <!--Third accordion item-->
+        <div class="accordion-item m-2">
+            <div class="accordion-header">
+                <button class="btn btn-danger w-100" data-bs-target="#AddOns" data-bs-toggle="collapse">
+                    Select ADD on's
+                </button>
+            </div>
+            <div id="AddOns" class="accordion-collapse collapse" data-bs-parent="#kfc">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img src="../public/images/hotwings.png" alt="" srcset="" width="50%">
+                            <div class="mt-2 h-3">
+                                <input type="checkbox" id="optWings" value="optWings"  class="form-check-input">
+                                <span class="fw-bold"> Hot Wings</span> <span class="bi bi-currency-rupee"> 80/- </span> 
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <img src="../public/images/krusher.png" alt="" srcset="" width="50%">
+                            <div class="mt-2 h-3">
+                                <input type="checkbox" id="krusher" value="krusher"  class="form-check-input">
+                                <span class="fw-bold"> Krusher Brownie </span> <span class="bi bi-currency-rupee">50/-</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!--End of Accordion-->
+    <button class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#bill" id="generateBill" disabled>Place Order</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bill" data-bs-backdrop="static">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title text-danger fw-bold">Your Bill Summary</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body text-dark">
+                <dl>
+                    <dt>Customer Name</dt>
+                    <dd id="lblName">
+
+                    </dd>
+                    <dt>
+                        Mobile
+                    </dt>
+                    <dd id="lblMobile">
+
+                    </dd>
+                    <dt>
+                        Meal
+                    </dt>
+                    <dd id="lblMeal">
+
+                    </dd>
+                    <dt>
+                        Add on's
+                    </dt>
+                    <dd id="lblAddons">
+
+                    </dd>
+                    <dt>
+                        Total
+                    </dt>
+                    <dd id="lblTotal">
+
+                    </dd>
+                </dl>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+<script src="../src/scripts/kfc-script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

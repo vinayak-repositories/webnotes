@@ -1,0 +1,308 @@
+What is the difference b/w Object and Map? 
+
+Object 
+   -> Key are String type
+   -> It is structured
+   -> It is slow because it needs explicit manipulations.
+   -> It doesn't have size properties to count the keys.
+
+Map
+   -> Key can be any type
+   -> It is schema less
+   -> It is fast because it has many implicit methods.
+   -> It has size properties to count the keys.
+
+
+Date type
+---------
+- Date type is defined by using JavaScript "Date()" constructor.
+- It allocates memory for storing date type value.
+- Date type is stored in "Year-Month-Day" format.
+- It can handle both date and time values.
+
+Syntax:
+var departure = new Date(); 		=> loads the current system date and time
+
+var departue  = new Date("YYYY-MM-DD Hrs:Min:Sec.MilliSeconds");
+var mfd       = new Date("YYYY-MM-DD");
+
+JavaScript date object provides various date and time methods
+=============================================================
+getHours() 			It returns hour number    0 to 23
+getMinutes() 			It returns minutes number 0 to 59
+getSeconds() 			It returns seconds number 0 to 59
+getMilliSeconds() 		It returns milli seconds number 0 to 99
+getDay() 			It returns weekday number 0=Sunday, 1,....6
+getDate() 			It returns date number 1 to 28,29,30,31
+getMonth() 			It returns month number 0=January , 1=February , .....
+getFullYear() 			It returns full year [4 chars]
+getYear() [obsolete] 		It returns year number as per Y2K
+
+
+Conversion of output as per the user requriements
+=================================================
+toLocaleDateString()
+toLocaleTimeString()
+toString()
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script type="text/javascript">
+        function bodyLoad() {
+            var now = new Date();
+            var clock = document.getElementById("clock")
+            var cal = document.getElementById("cal");
+            clock.innerHTML = now.toLocaleTimeString();
+            cal.innerHTML  = now.toLocaleDateString();
+        }
+    </script>
+
+</head>
+<body class="container-fluid" onload="bodyLoad()">
+    <header class="bg-dark text-white d-flex justify-content-between p-1 mt-3">
+        <div>
+            <span class="fw-bold">Shopper.</span>
+        </div>
+        <nav>   
+            <span class="ms-3">Home</span>
+            <span class="ms-3">About</span>
+            <span class="ms-3">Contact</span>
+        </nav>
+        <div>
+            <span class="bi bi-calendar me-3" id="cal"></span>
+            <span class="bi bi-clock me-3" id="clock"></span>
+        </div>
+    </header>
+</body>
+</html>
+
+eg#2.  SAME UI only format of presenting Date and Time would change
+
+<script type="text/javascript">
+
+        var now = new Date();
+
+        function bodyLoad() {
+            loadDateTime();
+        }
+        
+        function loadDateTime() {
+            var weekDays = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+            var months = ["JAN","FEB","MAR","APR","MAY","JUN","JULY","AUG","SEPT","OCT","NOV","DEC"]
+            document.getElementById("clock").innerHTML = ` ${now.toLocaleTimeString()}`;
+            document.getElementById("cal").innerHTML   = 
+			` ${now.getDate()}, ${weekDays[now.getDay()]}, ${months[now.getMonth()]}, ${now.getFullYear()}`;         
+        }
+
+</script>
+
+eg#3. Displaying salutation for the user based on the time part
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script type="text/javascript">
+        var now = new Date();
+
+        function bodyLoad() {
+            loadDateTime();
+            loadMsg();
+        }
+        
+        function loadDateTime() {
+            var weekDays = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+            var months = ["JAN","FEB","MAR","APR","MAY","JUN","JULY","AUG","SEPT","OCT","NOV","DEC"]
+            document.getElementById("clock").innerHTML = ` ${now.toLocaleTimeString()}`;
+            document.getElementById("cal").innerHTML   = 
+			` ${now.getDate()}, ${weekDays[now.getDay()]}, ${months[now.getMonth()]}, ${now.getFullYear()}`;         
+        }
+
+        function loadMsg(){
+            var hrs = now.getHours();
+            var msg = document.getElementById("msg");
+            var img = document.getElementById("img");
+            
+
+            if (hrs>=0 && hrs<=12) {
+                img.src="../public/images/goodmorning.gif";
+                msg.innerHTML = ` Good Morning Users !! `
+                console.log(msg);
+                
+            } else if(hrs>12 && hrs<=16){
+                msg.innerHTML = ` Good Afternoon Users !!`
+            }else{
+                msg.innerHTML = ` Good Evening Users !!`
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid" onload="bodyLoad()">
+    <header class="bg-dark text-white d-flex justify-content-between p-1 mt-3">
+        <div>
+            <span class="fw-bold">Shopper.</span>
+        </div>
+        <nav>   
+            <span class="ms-3">Home</span>
+            <span class="ms-3">About</span>
+            <span class="ms-3">Contact</span>
+        </nav>
+        <div>
+            <span class="bi bi-calendar me-3" id="cal">
+            </span>
+            <span class="bi bi-clock me-3" id="clock">
+            </span>
+        </div>
+    </header>
+    <article class="text-center mt-2">
+        
+        <img src="" alt="" width="25" height="25" border="0" id="img">
+        <span id="msg">
+
+        </span>
+    </article>
+</body>
+</html>
+------------------------------------------------------------
+ Javascript provides various method which would change date and time dynamically
+  a. setHours()
+  b. setMinutes()
+  c. setSeconds()
+  d. setMilliSeconds()
+  e. setDate()
+  f. setMonth()
+  g. setYear()
+
+eg#1. 
+   var now = new Date();
+    now.setHours(15);
+    now.setDate(22)
+  console.log(now);
+
+Javascript timer events
+=======================
+  a. setTimeOut()
+  b. clearTimeOut()
+  c. setInterval()
+  d. clearInterval()
+
+
+eg#1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function printMsg1(){
+            document.querySelector("h1").innerHTML = "Hello User"
+        }
+        function printMsg2(){
+            document.querySelector("h1").innerHTML = "How r u ?"
+        }
+        function printMsg3(){
+            document.querySelector("h1").innerHTML = "Byee User"
+        }
+
+        function bodyLoad(){
+            setTimeout(printMsg1,3000);
+            setTimeout(printMsg2,5000);
+            setTimeout(printMsg3,8000);
+        }
+        
+    </script>
+</head>
+<body onload="bodyLoad()">
+    <h1 align="center"></h1>
+</body>
+</html>
+
+Output
+Hello User
+How r u ?
+Byee User
+
+
+FAQ
+---
+a. What is Debouncing?
+    Bouncing is technique in electornic device where function is released immediately into memory without locking.
+    Debouncing is a technique where function would be locked in a memory for a specific time|duration so that we 
+    can allow other task to perform in process.
+ 
+b. How to control bouncing?
+Ans. using 
+	a. setTimeOut(function(){},timeOutMs); 
+	b. clearTimeOut(refName);
+
+Syntax: 
+ let timeoutID = setTimeout(function, milliseconds, arg1, arg2, ...);
+   function	: The function to be executed after the delay.
+milliseconds	: The delay before executing the function (in milliseconds).
+arg1, arg2, ... : Optional arguments that can be passed to the function.
+
+
+eg#2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function printMsg1(userName){
+            document.querySelector("h1").innerHTML = `Hello User ${userName}`;
+        }
+
+        function printMsg2(){
+            document.querySelector("h1").innerHTML = "How r u ?"
+        }
+
+        function printMsg3(){
+            document.querySelector("h1").innerHTML = "Byee User"
+        }
+
+        var m1,m2,m3;
+        function bodyLoad(){
+             m1 = setTimeout(printMsg1,3000,"NITIN");
+             m2 = setTimeout(printMsg2,5000);
+             m3 = setTimeout(printMsg3,8000);
+        }
+
+        
+        </script>
+</head>
+<body onload="bodyLoad()">
+    <button>Cancel Event</button>
+    <h1 align="center"></h1>
+    <script>
+        document.querySelector("button").addEventListener("click",function(){
+                clearTimeout(m2);
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+    
+

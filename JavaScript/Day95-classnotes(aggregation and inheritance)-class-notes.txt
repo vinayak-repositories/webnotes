@@ -1,0 +1,282 @@
+JavaScript classes
+=================
+   Configuration
+   Members : Property, Accessor, Method, Constructor
+
+
+Code Reusability and Extensibility
+==================================
+  Code Reusability   : It is the process of accessing code from one module and use it another module.
+  Code Extensibility : It is the process of extending the module without disturbing the existing features.
+
+You can achieve Code Reusability and Extensibility using two techniques
+	a. Aggregation [HAS-A]
+	b. Inheritance [IS-A]
+
+Aggregation 
+ => It is the process of accessing the members of one class in another class without configuring any relation b/w the classes.
+ => It uses Object to Object communication, it is often termed as "HAS-A" relation.
+ => We can access members of existing class in another class by using the instance of the class which is know as "Aggregation".
+
+
+Syntax: 
+ 	class A{ 
+		print(){}
+	}
+
+	class B{
+		print(){
+			 let obj =new A(); //Aggregation : HAS-A relationship
+			  obj.print();
+		}
+	}
+
+Note: Extensiblity is required to achieve
+	a. BackwardCompatibility
+	b. Multi Versioning Environment
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        class HDFC_BANK_VERSION1{
+            personal = "Personal Banking <br>";
+            creditcard = "Credit Card Payments <br>";
+
+            print(){
+                document.write(`${this.personal} ${this.creditcard}`);
+            }
+        }
+
+        class HDFC_BANK_VERSION2{
+
+            loans = "Car , Bike, Personal Loan <br>";
+            print(){
+                let obj = new HDFC_BANK_VERSION1();
+                obj.print();
+                document.write(`${this.loans}`);
+            }
+
+        }
+        class HDFC_BANK_VERSION3{
+            nriService = "NRI Banking Service <br>";
+            print(){
+                 let obj  =new HDFC_BANK_VERSION2();
+                 obj.print();
+                 document.write(`${this.nriService}`);
+            }
+        }
+
+        function installApp() {
+            let version= document.getElementById("lstVersions").value;
+        
+            switch (version) {
+                case "ver-1":
+                    let obj1=new HDFC_BANK_VERSION1();
+                    document.write("<h1>HDFC VERSION-1 Installed</h1>")
+                    obj1.print();
+                    break;
+
+                case "ver-2":
+                    let obj2=new HDFC_BANK_VERSION2();
+                    document.write("<h1>HDFC VERSION-2 Installed</h1>")
+                    obj2.print();
+                    break;
+
+                case "ver-3":
+                    let obj3=new HDFC_BANK_VERSION3();
+                    document.write("<h1>HDFC VERSION-3 Installed</h1>")
+                    obj3.print();
+                    break;
+            
+                default:
+                    document.write(`<h1> Plz select a version to Install </h1>`);
+                    break;
+            }  
+        }
+
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>INSTALL HDFC BANK APP</legend>
+        <select name="" id="lstVersions">
+            <option value="-1">Select Version</option>
+            <option value="ver-1">Version-1-2023</option>
+            <option value="ver-2">Version-2-2024 [Loans]</option>
+            <option value="ver-3">Version-3-2025 [NRI Banking]</option>
+        </select>
+        <button type="button" onclick="installApp()">Install</button>
+    </fieldset>
+</body>
+</html>
+
+
+
+Inheritance
+   => Configuring the relationship b/w classes to access members of one class in another class.
+   => Mechanism is termed as "IS-A" relationship.
+   => Newly created class extends existing class.
+   => Existing class (super|parent) , Newly created class (sub|child).
+   => To access the members of parent class in child class we use "super" keyword.
+   => Instance of parent class is not needed to access the members of parent class.
+
+
+Syntax: 
+  class A{
+	print(){
+
+	}
+  }
+
+  class B extends A{
+	print(){
+		super.print(); // Base class print() is accessed here	
+	}
+  }
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        class HDFC_BANK_VERSION1{
+            personal = "Personal Banking <br>";
+            creditcard = "Credit Card Payments <br>";
+
+            print(){
+                document.write(`${this.personal} ${this.creditcard}`);
+            }
+        }
+
+        class HDFC_BANK_VERSION2 extends HDFC_BANK_VERSION1{
+
+            loans = "Car , Bike, Personal Loan <br>";
+            print(){
+                super.print();
+                document.write(`${this.loans}`);
+            }
+
+        }
+        class HDFC_BANK_VERSION3 extends HDFC_BANK_VERSION2{
+            nriService = "NRI Banking Service <br>";
+            print(){
+                 super.print();
+                 document.write(`${this.nriService}`);
+            }
+        }
+
+        function installApp() {
+            let version= document.getElementById("lstVersions").value;
+        
+            switch (version) {
+                case "ver-1":
+                    let obj1=new HDFC_BANK_VERSION1();
+                    document.write("<h1>HDFC VERSION-1 Installed</h1>")
+                    obj1.print();
+                    break;
+
+                case "ver-2":
+                    let obj2=new HDFC_BANK_VERSION2();
+                    document.write("<h1>HDFC VERSION-2 Installed</h1>")
+                    obj2.print();
+                    break;
+
+                case "ver-3":
+                    let obj3=new HDFC_BANK_VERSION3();
+                    document.write("<h1>HDFC VERSION-3 Installed</h1>")
+                    obj3.print();
+                    break;
+            
+                default:
+                    document.write(`<h1> Plz select a version to Install </h1>`);
+                    break;
+            }  
+        }
+
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>INSTALL HDFC BANK APP</legend>
+        <select name="" id="lstVersions">
+            <option value="-1">Select Version</option>
+            <option value="ver-1">Version-1-2023</option>
+            <option value="ver-2">Version-2-2024 [Loans]</option>
+            <option value="ver-3">Version-3-2025 [NRI Banking]</option>
+        </select>
+        <button type="button" onclick="installApp()">Install</button>
+    </fieldset>
+</body>
+</html>
+
+
+
+
+Inheritance
+ A dervied-class constructor must call base-class constructor called.
+ In many OOP language calling parent class constructor from child class is implicit, but in javascript it is explicit.
+ Baseclass constructor will be called first followed by childclass constructor.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+
+        class BaseClass{
+
+            constructor(){
+                document.write(`BaseClass constructor is called <br>`);
+            }
+
+        }
+
+        class DerivedClass extends BaseClass{
+            constructor(){
+                super();
+                document.write(`DerivedClass constructor is caleld`);
+            }
+        }
+
+        let obj = new DerivedClass();
+    
+
+    </script>
+
+
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+BaseClass constructor is called
+DerivedClass constructor is called 
+
+
+
+
+
+
+
+
+
+
+
+
+

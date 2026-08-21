@@ -1,0 +1,441 @@
+ Statements
+	a. selection statements
+		if,if-else,switch,case,default
+	b. Looping statements
+		for,while,do-while
+	c. Iteration statements
+		for..of,for..in
+	d. jump statements
+		break,continue,return
+	e. exception handling statements
+		try,catch,finally,throw
+
+
+Javascript functions
+--------------------
+- Functions are used to refactor the code.
+- ReFactoring is the process of extracting a codesnippet|block and storing under the reference of a function.
+- It is required to reuse the code.
+
+Ex:
+1. Add a new JS file "demo.js"
+
+2. Write a set of code
+
+for(var i =1; i<=10; i++)
+{
+	document.write(i + "<br>");
+}
+
+3. Select all lines => right click on selection => Refactor
+
+4. Name the function
+	"PrintNumbers()"
+
+
+Function configuration
+======================
+a. function expression
+
+=> A function expression stores specified functionality under the reference of a name which is a variable that invokes function using 
+   IIFE pattern.
+
+=> It allows to change the functionality dynamically according to state and situation.
+
+Expression Syntax:
+var Name = function(params) {
+
+}
+
+
+
+Code1: IIFE (Immediate Invoking Function Expression)
+  <script type="text/javascript">
+        (function(){
+            document.write(`Hello Users`);
+        })();
+  </script>
+
+Code2: 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function welcomeUser(){
+            console.log("Hello Users")
+        }
+
+        var msg = function(){
+            console.log("Javascript is soo coool...")
+        }
+        msg();
+        welcomeUser();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+eg#3.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        let password = prompt("Enter the password :: ")
+        let msg = null;
+        if (password==="sachin") {
+            msg = function(){
+                document.write(`Login succesfull...`)
+            }
+        } else {
+            msg = function(){
+                document.write(`Invalid password <br> <a href='index.html'>Try Again</a>`)
+            }
+        }
+        msg();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+- JavaScript function can be configured by using 2 techniques
+	a) function declaration : memory allocated for function will be same across multiple request.
+	b) function expression  : memory allocated will change as per the situtation and state.
+
+2. function Declaration
+
+Declaration Syntax:
+function Name(params){
+
+}
+
+
+Note: 
+function Print(msg)
+{
+
+}
+function Print(msg) 	=> declaration
+Print(msg) 		=> signature
+{ } 			=> definition
+
+A function signature is used to access the function from any location.
+
+Ex:
+<script>
+	function PrintNumbers(){
+		for(var i=1; i<=10; i++){
+			document.write(i + "<br>");
+		}
+	}
+	PrintNumbers();
+	PrintNumbers();
+</script>
+	
+- A function can be anonymous that is without name.
+- It is enclosed using (function(){}).
+- It is called using IIFE (function(){})().
+
+Syntax
+  (
+	function(){
+		document.write("Hello User");
+	}
+  )();
+
+
+FAQ: When to use Anonymous function?
+Ans.  It is normally used in "callback" function.
+      It is a technique where function is configured ,but it executes according to state and situation implicitly.
+      syntax: 
+	fetch(URL). then (function(){})
+	Array.map(function(){})
+
+
+Function parameters
+-------------------
+Function Parameters:
+- In a function, Parameter is required to modify the function.
+- A function can change its functionality according to state and situation.
+- Parameter is used for changing the functionality
+
+
+Syntax:
+function Print(msg) => msg is formal parameter, It is just a memory allocated to store value
+{ 
+
+}
+Print("welcome"); => actual parameter
+
+
+eg#1.
+<script>
+	function PrintNumbers(howMany)
+	{
+		for(var i=1; i<=howMany; i++){
+			document.write(i + "<br>");
+		}
+	}
+	PrintNumbers(9);
+	PrintNumbers(5);
+</script>
+
+
+- Every function have parameters configure as
+	a) Formal Parameter
+	b) Actual Parameter
+
+- Formal Parameter is a reference and Actual Parameter is a value.
+- The parameters defined in function declaration are known as "Formal Parameters".
+- The parameters defined in function calling are known as     "Actual Parameters".
+		Formal_Parameter = Actual_Parameter;
+
+- Actual parameter can be any type
+	a) Primitive
+	b) Non Primitive Type
+	c) Function type
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function demo(val){
+            console.log(`Your value is ${val} and its type :: ${typeof val}`);
+        }
+
+        demo(10);
+        demo("sachin");
+        demo(true);
+        demo([10,20,30])
+        demo(function(){});
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+Your value is 10 and its type 	        :: number
+Your value is sachin and its type       :: string
+Your value is true and its type         :: boolean
+Your value is 10,20,30 and its type     :: object
+Your value is function(){} and its type :: function
+
+- Parameter in a function is always "required" meaning it is mandatory.
+- If value is not assigned then it returns "undefined".
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function demo(val){
+            console.log(`Your value is ${val} and its type :: ${typeof val}`);
+        }
+
+      	demo();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+ Your value is undefined and its type :: undefined  
+
+
+eg#3. Based on the input the functionality would change
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function printTable(number){
+            for(var i =1;i<=10;i++){
+                document.write(`${number} X ${i} = ${number*i} <br>`);
+            }
+        }
+        printTable(parseInt(prompt("Enter the number : ")));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Note: Compiler identifies  the Parameters(actual parameters) as "Arguments".
+	Parameters : Definition phase(formal parameters)
+        Arguments  : Execution phase | call phase
+
+========================================================
+
+A function can have multiple parameters to define multiple break points.
+
+eg#4. 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function printNumber(start,end){
+            if (start>end) {
+                alert(`start can't be greater than end`);
+            } else {
+                for(var i = start; i<=end;i++){
+                    document.write(i +"<br>");
+                }
+            }
+        }
+        printNumber(5,10);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+5
+6
+7
+8
+9
+10
+
+Note: The maximum number of parameters allowed as per ECMA are 1024.
+
+- Every parameter is mandatory(required) and have order dependency.
+eg#5. 
+<script type="text/javascript">
+
+        function Product(id, name, price) {
+            document.write(`
+						Id : ${id} <br>
+						Name : ${name} <br>
+						Price : ${price}<br>
+				     `);
+        }
+
+        Product(prompt("Enter the id ::"),prompt("Enter the name "),prompt("Enter the price: "));
+        Product(prompt("Enter the id ::"),prompt("Enter the price: "));
+
+         
+
+</script>
+
+Output: 
+Id : 10
+Name : tv
+Price : 5000.53
+
+Id : 12
+Name : undefined
+Price : 35000.05
+
+eg#6.
+- If any parameter need to be ignored then u can configure with "undefined"
+
+Ex:
+<script>
+	function Product(id, name, price){
+			if(id==undefined){
+				document.write(`
+						Name : ${name} <br>
+						Price : ${price}
+					      `);
+			} else {
+				document.write(`
+						Id : ${id} <br>
+						Name : ${name} <br>
+						Price : ${price}
+						`);
+		      }
+	}
+
+	Product(undefined, "TV",5000.53);
+	Product(1,"TV", 34000.33);
+
+</script>
+
+Output
+Name : TV
+Price : 5000.53
+ 
+Id : 1
+Name : TV
+Price : 3400.33
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

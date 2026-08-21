@@ -1,0 +1,291 @@
+Boolean type
+------------
+ It is used for decision making in computer programming
+ value for Boolean type are "true false"
+ Boolean type can also be verified by using
+		true  = 1
+		false = 0
+
+Syntax: 
+	var isMarried = true
+	var isAlive   = false
+
+	if(isMarried == 1) {}   ====> not recomended
+	if(isAlive   == false)  ====> recomended
+
+HTML boolean attributes
+	a. readonly		<input type='text' readonly> : by default it is true.
+	b. checked
+	c. required
+	d. disabled
+	e. border		<img border="0"> <table border="0|1">
+
+eg#1. 
+boolean-code.html
+-----------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function checkInfo() {
+            var checkBox = document.getElementById("checkEnable");
+            var txtBox = document.getElementById("txtUsername")
+
+            if (checkBox.checked == true) {
+                txtBox.disabled = true
+            } else{ 
+                txtBox.disabled = false
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <input type="checkbox" id="checkEnable" onchange="checkInfo()"> Enable | Disable
+    <dl>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="" id="txtUsername">
+        </dd>
+    </dl>
+</body>
+</html>
+
+
+FAQ:
+1. What is the result if true + true
+ans. 2
+
+2. What is the result of true + "A"
+ans. trueA
+
+3. What is the result of true + 11
+ans. 12
+
+4. How to convert String "true" to boolean true?
+ans. var input ="true"
+     var output = (input=="true") ? true : false
+     console.log(typeof output) //boolean
+
+
+Ternary operator (condition ? true : false )
+--------------------------------------------
+It is similar to if else.
+It is termed as shortcut for ternary operator
+
+index.html
+----------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        function codeCheck() {
+            console.log(true + true)
+            console.log("true" + "true")
+            console.log(true + "A")
+            console.log(true + 11)
+
+            var input = "true"
+            console.log(typeof input)
+            var output = input=="true" ? true : false
+            console.log( output + typeof output)
+        }
+        codeCheck()
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+
+Output
+2
+truetrue
+12 trueA
+12
+string
+trueboolean
+
+eg#2.
+index.html
+----------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
+    <script type="text/javascript">
+
+        function sortToggle() {
+            var btnClick= document.getElementById("btnSort");
+             btnClick.className= (btnClick.className=="bi bi-sort-alpha-down") ? "bi bi-sort-alpha-up" : "bi bi-sort-alpha-down";
+        }
+
+        function stockToggle() {
+            var stkCheckBox = document.getElementById("chkBoxStock")
+            var lblStock = document.getElementById("lblStock")
+            document.getElementById("")
+            lblStock.innerHTML = stkCheckBox.checked ? "In Stock" : "Out of Stock"
+        }
+
+        function showToggle(){
+            var btnShow = document.getElementById("btnShow")
+            btnShow.innerHTML = btnShow.innerHTML=="SHOW" ? "HIDE" : "SHOW"
+
+            posterImg= document.getElementById("poster")
+            poster.style.display = poster.style.display=="none" ? "block" : "none"; 
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <button class="bi bi-sort-alpha-down" id="btnSort" onclick="sortToggle()"></button>
+    <br><br>
+
+    <input type="checkbox" name="" id="chkBoxStock" onchange="stockToggle()">
+        <label for="" id="lblStock">Out of Stock</label>
+    <br><br>
+
+    <div>
+        <button onclick="showToggle()" id="btnShow">SHOW</button><br><br>
+        <img src="../public/images/menfashion.jpeg" alt="" id="poster"
+                width="50" height="50" style="display: none;">
+    </div>
+</body>
+</html>
+
+---------------------
+Decision making operators and statements
+	
+	== 		Equal
+	===		Identical Equal
+	!=		Not Equal
+	!==		Identical Not Equal
+	>		Greater than
+	<		Lesser than
+	>=		Greater than or equal
+	<=		Less than or equal
+	&&		Logical and
+	||		Logical or
+	!		Not
+
+FAQ: What is the difference b/w == and === ? 
+Ans.  "==" compares value of different types
+      "===" compares values of same types
+
+
+
+FAQ: How to compare a value with regular expression?
+Ans.   By using a string method called "match()"
+		var mobile = "+91987654210";
+		var regExp = /\+91\d{10}/;
+
+		mobile ==  regExp     ===> invalid
+		mobile === regExp     ===> invalid
+		mobile.match(regEx)   ===> valid
+
+
+index.html
+----------
+<script type="text/javascript">
+
+     function dispError() {
+            
+            var mobile="+919876543210";
+            var output=/\+91\d{10}/
+
+            if (mobile.match(output)) {
+                console.log("Matched...")
+            } else {
+                console.log("Didn't matched")
+            }
+    }
+        
+    dispError();
+
+</script>
+
+Output
+ Matched...
+
+
+
+
+index.html
+----------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        
+    </style>
+
+    <script type="text/javascript">
+
+        function verifyPassword() {
+
+            // retrive all the elements using id
+            var pwd = document.getElementById("pwd").value
+            console.log(pwd)
+            var cnfPwd = document.getElementById("cnfPwd").value
+            console.log(cnfPwd)
+            var pwdError = document.getElementById("pwdError")
+
+            if (pwd==cnfPwd) {
+                pwdError.innerHTML = "";
+            } else {
+                pwdError.innerHTML="Password Mismatch".fontcolor("red");
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" name="txtPassword" id="pwd">
+        </dd>
+
+        <dt>Confirm Password</dt>
+        <dd>
+            <input type="password" name="txtCnfrmPassword" id="cnfPwd" 
+                onblur="verifyPassword()">
+        </dd>
+
+        <dd id="pwdError"></dd>
+    </dl>
+</body>
+</html>
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

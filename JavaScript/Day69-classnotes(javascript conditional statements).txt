@@ -1,0 +1,173 @@
+Multiple Decision
+==================
+- We can provide multiple alternatives to perform specified task.
+
+eg:Amazon signin [Email | mobile]
+
+Syntax: 
+	if(condition-1){
+		statements for condition-1 is true
+	}	
+	else if (condition-2){
+		statements for condition-2 is true
+	}else{
+		statements when all condition all evaluates to false
+	}
+
+eg#1. 
+index.html
+----------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript">
+        
+        var flag = "";
+        function continueClick() {
+        
+           console.log("control entering into method")
+
+           var userId = document.getElementById("userId").value;
+           var userContainer = document.getElementById("userIdContainer")
+           var pwdContainer  = document.getElementById("passwordContainer")
+
+           if (userId==="sachin@gmail.com") {
+                flag = `Login success  Verification mail sent to ${userId}`;
+                userContainer.style.display = "none"
+                pwdContainer.style.display  = "block"
+            }else if(userId==="987654321"){
+                flag =`Login sucess  OTP sent to ur mobile number ${userId} `
+                userContainer.style.display ="none"
+                pwdContainer.style.display="block"
+           }else{
+                document.getElementById("userError").innerHTML = `${userId} doesn't exists`
+           }
+        }
+        function loginClick() {
+            var pwd = document.getElementById("userpwd").value
+            var pwdError = document.getElementById("pwdError")
+
+            if (pwd==="sachin@123") {
+                document.write(`<h1>${flag}</h1>`)
+            }else{
+                pwdError.innerHTML="Invalid Password";
+            }
+        }
+    </script>
+</head>
+<body class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="w-25 border border-1 p-4 rounded">
+        <h2>Sign In</h2>
+
+        <div id="userIdContainer">
+            <label class="form-label fw-bold">Enter email or mobile number</label>
+            <div>
+                <input type="text" name="" id="userId" class="form-control">
+                <div id="userError" class="text-danger"></div>
+            </div>
+            <div class="mt-4">
+               <button class="btn btn-warning w-100" onclick="continueClick()">Continue</button> 
+            </div>
+        </div>
+
+        <div id="passwordContainer" style="display: none;">
+            <label class="form-label fw-bold">Password</label>
+            <div>
+                <input type="password" name="" id="userpwd" class="form-control">
+                <div id="pwdError" class="text-danger"></div>
+            </div>
+            <div class="mt-4">
+               <button class="btn btn-warning w-100" onclick="loginClick()">Login</button> 
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+ShortCircuit Operator
+--------------------
+Logical AND(&&)
+- It defines multiple expression in one statement
+- It returns true when all expression evaluates to true
+- It returns false when one expression evalutes to false
+
+Syntax
+	expression-1 && expression-2 && expression-3
+
+Logical OR(||)
+- It defines multiple expression in one statement
+- It returns true if one expression evaluates to true
+- It returns false if all expression evalutes to false
+
+Syntax
+	expression-1 || expression-2 || expression-3
+
+Programs
+ a. Find the largest of 2 numbers
+	eg: a>b       : a is greater
+	    otherwise : b is greater
+
+ b. Find the largest of 3 numbers
+	eg: a>b && a>c : a is greater
+		b>c    : b is greater
+	    otherwise  : c is greater
+
+ c. Find whether the value is in range or out of range
+	eg: input to a functions : value,min,max
+
+<script type="text/javascript">
+
+        function findRange(value,min,max) {
+            if (value>=min && value<=max) {
+                document.write(`Your value ${value} is in range of min=${min} and max=${max}`)
+            } else {
+                document.write(`Your value ${value} is out of range min=${min} and max=${max}`)        
+            }
+        }
+        
+        findRange(prompt("Enter value"),prompt("Enter min value"), prompt("Enter max value"))
+</script>
+
+   d. Check if the triange is equilateral,issoceles or scalene
+		if all 3 sides are equal    : equilateral
+		if any 2 sides are matching : issoceles 
+		if no sides are matching    : scalene
+
+<script type="text/javascript">
+
+       function findTriangleType(side1,side2,side3) {
+            if ((side1==side2) && (side1==side3)) {
+                console.log("Equivilateral triange")
+            }else if((side1==side2) || (side2==side3) || (side1==side3)){
+                console.log("Issoceles triange")
+            }else{
+                console.log("scalene triangle")
+            }
+       }
+
+        findTriangleType(prompt("Enter side1"),prompt("Enter side2"), prompt("Enter side3"))
+</script>
+
+
+
+
+
+
+ 
+
+	
+
+
+
+
+
+
+
+

@@ -1,0 +1,303 @@
+Keyboard events
+===============
+  a. onkeyup
+  b. onkeydown
+  c. onkeypress (deprecated)
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script type="text/javascript">
+        function validateUserId() {
+        
+          let userId =  document.getElementById("userId").value;
+          let errorData = document.getElementById("errorInfo")
+
+           fetch("../data/users.json")
+           .then(response=>response.json())
+           .then(users=>{
+                for (const user of users) {
+                    if (user.username === userId) {
+                        errorData.innerHTML ="UserID taken Try for Another One".fontcolor("red");
+                        break;
+                    } else {
+                        errorData.innerHTML="UserID Available".fontcolor('green');
+                    }
+                }
+           })
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Register User</legend>
+        <dl>
+            <dt>Username</dt>
+            <dd>
+                <input type="text" name="" id="userId" onkeyup="validateUserId()">
+            </dd>
+            <dd id="errorInfo">
+
+            </dd>
+        </dl>
+    </fieldset>
+</body>
+</html>
+
+Note: If we are using for a character then we go for "onkeyup & onkeydown"
+      If we are using for a charactercode then we go for "onkeypress"
+	Key event args are
+		a. keyCode 	b. charCode 	c. which	d. shiftKey	e. ctrlKey	f. altKey
+
+eg#2. 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <script type="text/javascript">
+        function validateUserId() {
+        
+          let userId =  document.getElementById("userId").value;
+          let errorData = document.getElementById("errorInfo")
+
+           fetch("../data/users.json")
+           .then(response=>response.json())
+           .then(users=>{
+                for (const user of users) {
+                    if (user.username === userId) {
+                        errorData.innerHTML ="UserID taken Try for Another One".fontcolor("red");
+                        break;
+                    } else {
+                        errorData.innerHTML="UserID Available".fontcolor('green');
+                    }
+                }
+           })
+        }
+
+        function validateCaps(event) {
+            let pwdError = document.getElementById("pwdError");
+            if(event.keyCode>=65 && event.keyCode<=90){
+                pwdError.style.display = "block";
+            }else{
+                pwdError.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>Register User</legend>
+        <dl>
+            <dt>Username</dt>
+            <dd>
+                <input type="text" name="" id="userId" onkeyup="validateUserId()">
+            </dd>
+            <dd id="errorInfo">
+
+            </dd>
+
+            <dt>Password</dt>
+            <dd>
+                <input type="password" name="" id="userPwd" onkeypress="validateCaps(event)">
+            </dd>
+            <dd id="pwdError" style="color:red; display: none;">
+                <span class="bi bi-exclamation-triangle" ></span> WARNING : CAPS ON
+            </dd>
+        </dl>
+    </fieldset>
+</body>
+</html>
+
+
+Mouse Events
+  a. ondbclick		:: double click
+  b. oncontextmenu	:: right click[To do selection]
+  c. onclick 		:: single click
+
+Note: If we want to disable any event, then configure a function that returns false.
+
+Syntax: 
+ 	document.oncontextmenu = function(){
+		return false;
+        }
+
+eg#1.
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+          function viewLarge() {
+                window.open("../public/images/women.jpg","_blank","width=400 height=400");
+          }
+          document.oncontextmenu  = function(){
+             alert(`Right click not allowed`);
+             return false;
+          }
+
+          document.onselectstart = function(){
+            return false;
+          }
+    </script>
+</head>
+<body>
+    <img src="../public/images/women.jpg" alt="" width="200" height="200" ondblclick="viewLarge()">
+    <p>Double click to view Large</p>
+    <p>Selection Disabled on this page</p>
+</body>
+</html>
+
+
+Element state Events
+====================
+  a. onblur
+  b. onchange
+  c. onfocus
+  d. onselectstart	:: started to select some content
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function validateUsername(obj){
+            
+            let info = document.getElementById("userInfo");
+             if (obj.value === "") {
+                info.innerHTML = 'Username is required'.fontcolor('red');
+             } else {
+                info.innerHTML = '';
+                document.getElementById("txtUsername").value =obj.value.toUpperCase();
+             }
+        }
+
+        function showTip() {
+            document.getElementById("userInfo").innerHTML = 'Name in block letters only'.fontcolor('goldenrod');
+        }
+
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend> Registration Page </legend>
+        <dl>
+            <dt>Username</dt>
+            <dd>
+                <input type="text" name="" 
+                        id="txtUsername" onblur="validateUsername(this)" onfocus="showTip()">
+            </dd>
+            <dd id="userInfo">
+
+            </dd>
+        </dl>
+
+    </fieldset>
+</body>
+</html>
+
+
+ClipBoard Events
+================
+oncut
+oncopy
+onpaste
+
+- Clipboard is the temporary memory for windows.
+- The content that you cut or copy is kept on clipboard.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function copy() {
+            document.getElementById("lblStatus").innerHTML = 'Copied to ClipBoard'.fontcolor('green');
+        }
+        function cut() {
+            document.getElementById("lblStatus").innerHTML = "Removed and Copied to clipboard".fontcolor('red');
+        }
+    </script>
+</head>
+<body>
+    <dl>
+        <dt>OTP</dt>
+        <dd>
+            <input type="text" name="" id="txtOtp" value="5587" oncopy="copy()" oncut="cut()">
+        </dd>
+        <dd id="lblStatus">
+
+        </dd>
+        <dt>Password</dt>
+        <dd>
+            <input type="password" name="" id="txtPwd" onpaste="return false">
+        </dd>
+    </dl>
+</body>
+</html>
+
+Timer events
+============
+ a. setTimeOut()
+ b. clearTimeOut()
+ c. setInterval()
+ d. clearInterval()
+
+
+Touch events [touch screen devices]
+ a. ontouchstart
+ b. ontouchend
+ c. ontouchmove
+
+FormEvents
+  a. onsubmit
+  b. onreset
+
+- These are the events configure for <form> element
+- They define actions to perform when user submits or reset form.
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="alert('form will be submitted to API')" onreset="alert('form will be reseted')">
+        Username <input type="text" name="" id="">
+        <button>submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

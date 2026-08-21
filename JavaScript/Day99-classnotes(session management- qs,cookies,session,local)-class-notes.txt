@@ -1,0 +1,334 @@
+State Management (important concept)
+====================================
+  a. webapplication uses a protocol called "http".
+  		eg: <img src="public/images/....">  [virtual path forward slash only this works]
+		    <img src="D:\images\..."> [physical path :doesn't work in realtime]
+
+  b. protocol defines rules which are followed by computers in a network to communicate with each other.
+  		eg: SMTP  : Simple Mail Transfer Protocol
+		    HTTP  : Hyper Text Transfer Protocol
+		    HTTPS : secured one
+		    MSMQ  : Message queue
+		    FTP   : File Transfer Protocol 
+
+  c. HTTP is a "stateless protocol".
+
+Note: 
+      1. Server allocates memory for request made by client, it will process the request and sends the response to the client.
+         After sending the response it cleans up the client related information from the memory [ stateless ].
+
+      2. Stateless nature of server is good to manage the memory,but it is not good for continous operations from  client.
+
+      3. Every webapplication requires state management techniques, so that clien related information can be saved and accessed across 
+	 requests.
+
+      4. statemanagement can be at 2 side [ clientside | serverside ].
+
+      5. login to an application in my laptop   [ browser remebers ur credentials ]
+         login to application in friends laptop [ now u should enter again ] 
+
+	 In ecommerce website---> payment we are doing  ---> card details u have entered [server remembers this details] :: In my Laptop
+	 In ecommerce website---> payment we are doing  ---> card details u have entered [server remembers this details] :: In friend  Laptop
+
+
+ d.statemanagement techniques are classified into 2 types
+	a. client side
+	b. server side
+
+
+Clientside state management
+===========================
+  It allows to store client details on client device.
+  	a. Query String
+	b. Cookies
+	c. Session Storage
+	d. Local Storage
+
+Query String
+------------
+  It is a value appeneded into URL and stored in browser address bar.
+  It comprises of key and value appended using "?".
+  		?key=value & key=value
+  A query string can carry data from one page to another 
+  It is not safe, can't submit complex data and have limit for data[20248 chars]
+  To access the query string we use "BOM" : location.search
+
+eg#1.
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="get" action="process.html">
+        <dl>
+           <h3>Login page</h3>
+           <dt>Username</dt>
+           <dd>
+               <input type="text" name="Username" id="txtName">
+           </dd>
+        </dl>
+        <button>login</button>
+    </form>
+</body>
+</html>
+
+	process.html
+	============
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function processLogic() {
+              let username = location.search;
+              let result = username.substring(username.indexOf("=") + 1);
+              document.querySelector("p").innerHTML = "Hello " + result.bold().fontsize(20);
+        }
+    </script>
+</head>
+<body onload="processLogic()">
+        <h3> User Details </h3>
+        <p></p>
+</body>
+</html>
+
+2. Local Storage
+	It is memory location in browser
+	It is permanent storage
+	It is accessible from other tabs in browser.
+	It is available even after you close browser or shutdown the device
+	It should be deleted manually.
+	We can store large amount of data.
+	It is a key-value collection (same like map).
+		syntax: 
+			localstorage.setItem("k","V") : void;
+			localstorage.getItem("K") : string
+			localstorage.removeItem("k"):void;
+
+eg#1. index.html
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function sendData() {
+             let data=document.getElementById("txtName").value;
+             if (data==='') {
+                location.href='index.html';
+             } else {
+                 localStorage.setItem("username",data);
+                 location.href="home.html";
+                
+             }
+        }
+    </script>
+</head>
+<body>
+    
+    <dl>
+        <h3>Login page</h3>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="Username" id="txtName">
+        </dd>
+    </dl>
+    
+    <button onclick="sendData()">login</button>
+    
+</body>
+</html>
+
+home.html
+---------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function processLogic() {
+              let username = localStorage.getItem("username");
+              if (username === null) {
+                    location.href='index.html';
+              } else {
+                  document.querySelector("p").innerHTML = `Hello! ${username}`;
+              }
+        }
+        function signOut() {
+             localStorage.removeItem("username");
+             location.href='index.html';
+        }
+    </script>
+</head>
+<body onload="processLogic()">
+        <h3> User Details </h3>
+        <button onclick="signOut()">Signout</button>
+        <p></p>
+</body>
+</html>
+
+
+Session storage
+===============
+ It is the memory of the browser allocated for client.
+ It is temporary memory.
+ It is accessible only to current tab.
+ It is removed when browser is closed.
+
+Syntax: 
+	sessionstorage.setItem("k","v") : void
+	sessionstorage.getItem("k")     : string
+	sessionstroage.removeItem("K")  : void
+
+index.html
+==========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function sendData() {
+             let data=document.getElementById("txtName").value;
+             if (data==='') {
+                location.href='index.html';
+             } else {
+                 sessionStorage.setItem("username",data);
+                 location.href="home.html";
+                
+             }
+        }
+    </script>
+</head>
+<body>
+    
+    <dl>
+        <h3>Login page</h3>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="Username" id="txtName">
+        </dd>
+    </dl>
+    
+    <button onclick="sendData()">login</button>
+    
+</body>
+</html>
+
+home.html
+=========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function processLogic() {
+              let username = sessionStorage.getItem("username");
+              if (username === null) {
+                    location.href='index.html';
+              } else {
+                  document.querySelector("p").innerHTML = `Hello! ${username}`;
+              }
+        }
+    </script>
+</head>
+<body onload="processLogic()">
+        <h3> User Details </h3>
+        <p></p>
+</body>
+</html> 
+
+
+Cookies
+=======
+  Cookies are classified into 2 types
+	a. non-persistence cookie : cookie created,but once the browser is closed cookie will expiry automatically.
+	b. persistence cookie     : cookie should be created with expiry, so browser would be available even if we close the browser.
+
+
+eg#1. 
+index.html
+==========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function sendData() {
+             let data=document.getElementById("txtName").value;
+             if (data==='') {
+                location.href='index.html';
+             } else {
+                 document.cookie = `username=${data}`;
+                 location.href="home.html";    
+             }
+        }
+    </script>
+</head>
+<body>
+    
+    <dl>
+        <h3>Login page</h3>
+        <dt>Username</dt>
+        <dd>
+            <input type="text" name="Username" id="txtName">
+        </dd>
+    </dl>
+    
+    <button onclick="sendData()">login</button>
+    
+</body>
+</html>
+
+
+home.html
+=========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function processLogic() {
+            console.log(document.cookie);
+              let username = document.cookie.substring(document.cookie.indexOf("=") + 1);
+              if (username === null) {
+                    location.href='index.html';
+              } else {
+                  document.querySelector("p").innerHTML = `Hello! ${username}`;
+              }
+        }
+        function signout(){
+            document.cookie ='username=;max-age=0;';
+            location.href='index.html';
+        }
+    </script>
+</head>
+<body onload="processLogic()">
+        <h3> User Details </h3>
+        <p></p>
+        <button onclick="signout()">signout</button>
+</body>
+</html>
+   
+   
+Note: Just by closing the browser window the cookie would be deleted [non-persistence]
+      To delete after some interval we set 'expires=Thu, 01 Jan 1970 00:00:00 UTC;'|'max-age=0;' 
+
+        
+        	 

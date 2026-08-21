@@ -1,0 +1,209 @@
+Cookie
+   It is a simple text document which is created and saved on client device.
+   It Comprises of client related data, which is made available across pages used.
+   To use cookies, they must be enabled on browser.
+   You can verify the cookie status using "navigator.cookieEnabled" property.
+   Cookies are classified into 2 types
+	a. inmemory cookie	: It gets deleted once u close the browser[or session is closed]. 
+	b. persistent cookie	: It would stored for specific period of time based on "expires | max-age" attribute.
+
+ Syntax: inmemory cookie
+	document.cookie = "k1=v1";
+
+ Syntax: persistent cookie
+        document.cookie = "k=v; expires= , path=/";
+  
+
+Note: The value to expires will be in the following format : Mon, 24 Mar 2025 00:00:00 GMT
+	var now = new Date("2025-03-24");
+	let expires = now.toUTCString();
+	console.log(expires);
+		output: Mon, 24 Mar 2025 00:00:00 GMT
+
+
+How to delete a cookie?
+ Ans. document.cookie = 'username=,max-age=0,path=/';
+	Normally in project to work with cookie we use "redux" in statemanagement.
+	In React|angular we learn more about statemanagement.
+
+Note: 
+JavaScript State Management
+	- Query String    : 2048B
+	- Local Storage   : 10MB
+	- Session Storage : 10MB
+	- Cookie Storage  : 4MB
+
+Javascript AJAX
+===============
+  Asynchronous Javascript and XML.
+	callback : synchronous [It blocks others while executing]
+	promises : asynchronous[without blocking others it would execute]
+
+  Note: Through Ajax : Portion of the page is updated, entired page would not be refreshed(it would avoid the loading time).
+
+- Ajax is used to achieve "Partial PostBack".
+- It allows to add new content into the page without reloading the page.
+- It can submit the specific portion of the page without reloading the page.
+- It improves the performance of the application.
+- To handle Ajax calls javascript uses "XMLHttpRequest"[browser understands only this object].
+- Directly using this object is lengthy in frontend,  so different technologies uses shortcut techniques
+	jQuery $.ajax()    => XMLHttpRequest
+	React axios        => XMLHttpRequest
+	Angular HttpClient => XMLHttpRequest
+
+- var http = new XmlHttpRequest()
+	http.open()             -> It configures the request type
+					a. request type : get, post
+					b. URL
+					c. asynch: boolean [true [defualt] | false]
+
+        http.send()              -> It is used to process the request
+	http.onreadystatechange  -> It defines function to execute when the requested path is available.
+	http.readyState          -> It has 4 stages
+					1. initial 2. send 3. process 4. ready with response
+	http.response		 -> It defines the response text,xml and html.
+
+
+
+data/help.txt
+=============
+- Ajax is used to achieve "Partial PostBack".
+- It allows to add new content into the page without reloading the page.
+- It can submit the specific portion of the page without reloading the page.
+- It improves the performance of the application.
+- To handle Ajax calls javascript uses "XMLHttpRequest"[browser understands only this object].
+- Directly using this object is lengthy in frontend,  so different technologies uses shortcut techniques
+	jQuery $.ajax()    => XMLHttpRequest
+	React axios        => XMLHttpRequest
+	Angular HttpClient => XMLHttpRequest
+
+eg#1. 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function bodyload() {
+            document.getElementById("showTime").innerHTML =`Page requested on ${new Date().toLocaleString()} `
+        }
+
+        function loadPage() {
+              var http = new XMLHttpRequest();
+              http.open("get","../data/help.txt",true);
+              
+              
+              http.onreadystatechange = function(){
+                  console.log("Executing the logic of help.txt file");
+                  if (http.readyState ==4 && http.status == 200) {
+                      document.getElementById("data").innerHTML = http.responseText;
+                  }
+              }
+                
+            http.send();
+        }
+
+        function loadshopperTemplate() {
+            
+            var http = new XMLHttpRequest();
+
+            http.open("get","../shopper-template.html",true);
+            
+            http.onreadystatechange = function(){
+               
+                if (http.readyState === 4 && http.status === 200) {
+                    console.log("executing the logic of shopper-template.html");
+                    document.getElementById("shopper").innerHTML = http.responseText;   
+            }
+        }
+
+        http.send();
+    }
+
+    </script>
+</head>
+<body onload="bodyload()">
+    <p id="showTime"></p>
+    <button onclick="loadPage()">Load Page</button>
+    <button onclick="loadshopperTemplate()">LoadTemplate</button>
+    <pre id="data"></pre>
+    <section id="shopper">
+
+    </section>
+</body>
+</html>
+
+Output
+- Ajax is used to achieve "Partial PostBack".
+- It allows to add new content into the page without reloading the page.
+- It can submit the specific portion of the page without reloading the page.
+- It improves the performance of the application.
+- To handle Ajax calls javascript uses "XMLHttpRequest"[browser understands only this object].
+- Directly using this object is lengthy in frontend,  so different technologies uses shortcut techniques
+	jQuery $.ajax()    => XMLHttpRequest
+	React axios        => XMLHttpRequest
+	Angular HttpClient => XMLHttpRequest
+
+
+eg#2. Working with json data using ajax calls
+      =======================================
+URL : https://fakestoreapi.com/products
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        function loadData() {
+            var http = new XMLHttpRequest();
+            http.open('get','https://fakestoreapi.com/products',true);
+
+            http.onreadystatechange = function(){
+                //logic to exeucte upon the response is generated
+                if (http.readyState == 4 && http.status ==200) {
+                     var products = JSON.parse(http.responseText);
+                     products.map(function(product){
+                        var img =document.createElement("img");
+                        img.src = product.image;
+                        img.width="200";
+                        img.height="200";
+
+                        document.getElementById("container").appendChild(img);
+                     });
+                }
+            }
+            http.send();
+        }
+    </script>
+</head>
+<body>
+    <button onclick="loadData()">Load Products</button>
+    <div id="container">
+
+    </div>
+</body>
+</html>
+
+
+	
+								
+
+
+
+
+
+
+		 
+
+
+
+
+    
+
+
+

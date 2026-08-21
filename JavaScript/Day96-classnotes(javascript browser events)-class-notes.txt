@@ -1,0 +1,478 @@
+JavaScript Browser Events
+=========================
+Sender
+Subscriber
+Observer
+Delegate[Function pointer]
+Event Handler
+Event Listener
+
+
+JavaScript Browser Events
+=========================
+- Event is a message sent by sender to its subscriber in order to notify change.
+- Event follows a software design pattern called "Observer".
+- Observer is a communication pattern.
+- Event uses a function pointer mechanism. [Delegate = function pointer]
+
+Syntax:
+function InsertClick()
+{
+
+}
+<button onclick="InsertClick()">
+
+function InsertClick() { } 	=> Subscriber
+onclick="InsertClick()" 	=> Sender
+
+- Subscriber defines the actions to perform.
+- Sender triggers the actions.
+
+What is Event Handler? What is Event?
+onclick 	=> Event
+onclick		=> InsertClick() => EventHandler
+
+What is EventListner ?
+	document.querySelector("button").addEventListener("event",function(){})
+	It allows an element to configure the event dynamically.[For dynamically created element to configure the event we use eventlistener)
+
+eg::
+
+  <script type="text/javascript">
+	function bodyLoad(){
+		document.querySelector("button").addEventListener("click",function(){
+			 alert("Button clicked");
+		});
+	}
+  </script>
+
+  <body onload="bodyLoad()">
+	<button>Insert Record</button>
+  </body>
+
+Event Arguments:
+- It comprises of default and custom arguments.
+- Every event handler have 2 default arguments
+	a) this
+	b) event
+
+<button onclick="InsertClick(this, event)" id="" class="" name="">
+
+this  => sends information about current element. [button] id, name, class, width, height, value etc..
+event => sends information about current event.   [onclick] clientX, clientY, shiftKey, ctrlKey, altKey etc..
+
+syntax: 
+   <button onclick = "insert(this,event)"> 
+	function insert(obj,e){
+
+        }
+
+Note: 
+1. You can use any argument without order dependency.
+	<button onclick = "insert(event,this)"> 
+	<button onclick = "insert(this)"> 
+	<button onclick = "insert(event)">
+
+2. It is also possible to send specific details 
+	<button onclick = "insert(event.id)">
+
+
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+            function findPostion(obj,e) {
+                document.write(`
+                    Button Id   : ${obj.id} <br>
+                    ButtonName  : ${obj.name} <br>
+                    ButtonClass : ${obj.className} <br>
+                    X Position  : ${e.clientX} <br>
+                    Ctrl Key    : ${e.ctrlKey}                 
+                `)
+            }
+    </script>
+</head>
+<body>
+    <button onclick="findPostion(this,event)" id="btnInsert" class="btn btn-insert" name="insert">Click Me</button>
+</body>
+</html>
+
+Output
+ Button Id : btnInsert
+ButtonName : insert
+ButtonClass : btn btn-insert
+X Position : 37
+Ctrl Key : false
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+            function changeColor(color) {
+                 document.querySelector("h1").style.color=color;
+            }
+    </script>
+</head>
+<body>
+
+    <button type="button" onclick="changeColor(this.name)" name="RED">RED</button>
+    <button type="button" onclick="changeColor(this.name)" name="GREEN">GREEN</button>
+    <button type="button" onclick="changeColor(this.name)" name="BLUE">BLUE</button>
+    <h1>Welcome to Javascript</h1>
+
+</body>
+</html> 
+
+eg#3. 
+    x = 48 to 70
+    y = 298 to 318
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+            function sayPrice(e) {
+                condition1 = e.clientX>= 48 && e.clientX <=70;
+                condition2 = e.clientY>= 298 && e.clientY <=318;
+                
+                let p = document.querySelector("p");
+
+                if (condition1 && condition2) {
+                    p.innerHTML = "<p style='font-family: Algerian;'>PRICE IS &#8377;35,000/-</p>"
+                } else {
+                   p.innerHTML = " "; 
+                }
+            
+            }
+    </script>
+</head>
+<body>
+    <button onclick="findPostion(this,event)" id="btnInsert" class="btn btn-insert" name="insert">Click Me</button>
+    <br><br>
+
+    <button type="button" onclick="changeColor(this.name)" name="RED">RED</button>
+    <button type="button" onclick="changeColor(this.name)" name="GREEN">GREEN</button>
+    <button type="button" onclick="changeColor(this.name)" name="BLUE">BLUE</button>
+    <h1>Welcome to Javascript</h1>
+
+    <img src="../public/images/women.jpg" alt="" srcset="" width="200" height="250" onclick="sayPrice(event)">
+    <p>
+
+    </p>
+
+</body>
+</html> 
+
+
+Note: 
+ a. It is also possible to send custom arguments which can be primitive or non-primitive.
+ b. We can pass custom arguments along with default arguments
+	syntax : <button onclick='insert({},[],true,'sachin')'>
+
+
+eg#4. 
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+          function presentData(...args) {
+                 var[product,cities,feedback,classInfo]=args;
+
+                 document.write(`
+                    <h2>${product}</h2>
+                    ${cities.toString()}<br>
+                    Ratings : ${feedback.Ratings} [${feedback.count}] <br>
+                    Button info : ${classInfo.className}
+                 `);
+            }
+    </script>
+</head>
+<body>
+    <button onclick="findPostion(this,event)" id="btnInsert" class="btn btn-insert" name="insert">Click Me</button>
+    <br><br>
+
+    <button type="button" onclick="changeColor(this.name)" name="RED">RED</button>
+    <button type="button" onclick="changeColor(this.name)" name="GREEN">GREEN</button>
+    <button type="button" onclick="changeColor(this.name)" name="BLUE">BLUE</button>
+    <h1>Welcome to Javascript</h1>
+
+    <img src="../public/images/women.jpg" alt="" srcset="" width="200" height="250" onclick="sayPrice(event)">
+    <p>
+
+    </p>
+    <button class="btn btn-primary" onclick="presentData('IPHONE',['BGLR','HYD'],{Ratings: 4.5, count: 45000},this)">DISPLAYINFO</button>
+</body>
+</html>
+
+  
+Browser Events
+==============
+ All javascript events are related to browser.
+ Browser events can configured to any element in a page.
+ Browser events are classified into various categories
+	a. Mouse Events
+	b. keyboard Events
+	c. Button Events
+	d. Timer Events
+	e. Touch Events
+	f. Form Events
+	g. Clipboard Events
+
+Mouse Events
+	a. onmouseover
+	b. onmouseout
+	c. onmousedown
+	d. onmouseup
+	e. onmousemove
+	
+
+Mouse Event
+===========
+eg#1.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        section{
+            display: grid;
+            grid-template-columns: 2fr 10fr;
+        }
+        nav{
+            margin-top: 25px;
+        }
+        main img{
+             margin-top: 25px;
+             border: 2px solid black;
+        }
+        nav img{
+             border: 2px solid transparent;
+             cursor: pointer;
+        }
+        nav img.active{
+            border-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <nav>
+            <div>
+                <img onmouseover="showPreview(this)" src="../public/images/m1.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)"  src="../public/images/m2.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)"  src="../public/images/m3.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)" src="../public/images/m4.png" alt="" srcset="" width="80" height="80">
+            </div>
+        </nav>
+        <main>
+            <img  alt="" width="300" height="300">
+        </main>
+    </section>
+
+    <script type="text/javascript">
+          function showPreview(imageElement) {
+                document.querySelector("main img").src = imageElement.src;
+               
+                document.querySelectorAll("nav img").forEach(img => img.classList.remove("active"));
+
+                imageElement.classList.add("active"); 
+            }
+    </script>
+</body>
+</html>
+
+
+eg#2.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        section{
+            display: grid;
+            grid-template-columns: 2fr 10fr;
+        }
+        nav{
+            margin-top: 25px;
+        }
+        nav img{
+             border: 2px solid transparent;
+             cursor: pointer;
+        }
+        nav img.active{
+            border-color: blue;
+        }
+        .zoomIn{
+            width:600px;
+            height: 500px;
+            transition: 3s;
+        }
+
+        .zoomOut{
+            width:300px;
+            height: 300px;
+            transition: 3s;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <nav>
+            <div>
+                <img onmouseover="showPreview(this)" src="../public/images/m1.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)"  src="../public/images/m2.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)"  src="../public/images/m3.png" alt="" srcset="" width="80" height="80">
+            </div>
+            <div>
+                <img onmouseover="showPreview(this)" src="../public/images/m4.png" alt="" srcset="" width="80" height="80">
+            </div>
+        </nav>
+        <main>
+            <div style="width:300px; height: 300px; overflow: hidden; border: 1px solid gray; margin-top: 50px;">
+                <img  alt="" width="300" height="300" onmouseup="zoomOut()" onmousedown="zoomIn()" id="imgPreview">
+            </div>
+        </main>
+    </section>
+
+    <script type="text/javascript">
+          function showPreview(imageElement) {
+                document.querySelector("main img").src = imageElement.src;
+               
+                document.querySelectorAll("nav img").forEach(img => img.classList.remove("active"));
+
+                imageElement.classList.add("active"); 
+         }
+
+         function zoomIn() {
+             document.getElementById("imgPreview").className ="zoomIn";
+         }
+
+         function zoomOut() {
+            document.getElementById("imgPreview").className = "zoomOut";
+         }
+
+    </script>
+</body>
+</html>
+
+
+eg#2. "onmousemove event" : This event would occur upon moving the mouse cursor.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function changePostion(e) {
+             img = document.querySelector("img");
+             img.style.position = "absolute";
+             img.style.top = e.clientY +"px";
+             img.style.left = e.clientX +"px";
+        }
+    </script>
+</head>
+<body onmousemove="changePostion(event)">
+    <div style="height:1000px;">
+        Move Mouse Pointer to test the code
+    </div>
+    <img src="../public/images/flag.gif" alt="" width="50" height="50">
+</body>
+</html>
+
+
+eg#3. "onmouse event" along with animations
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <script type="text/javascript">
+        function changePostion(e) {
+             let img = document.getElementById("star");
+             img.style.position = "absolute";
+             img.style.top = e.clientY +"px";
+             img.style.left = e.clientX +"px";
+             img.style.animation ="blink";
+             img.style.animationDuration="700ms";
+             img.style.animationIterationCount="infinite";
+        }
+    </script>
+    <style type="text/css">
+         .bi-star-fill{
+              font-size: 40px;
+              color:green;
+         }
+
+         @keyframes blink {
+            from{
+                opacity: 0;
+                font-size:10px;
+            }
+            to{
+                opacity: 1;
+                font-size: 40px;
+            }
+         }
+    </style>
+</head>
+<body onmousemove="changePostion(event)">
+    <div style="height:1000px;">
+        Move Mouse Pointer to test the code
+    </div>
+    <div class="bi bi-star-fill" id="star">
+
+    </div>
+</body>
+</html>
+
+
+KeyBoard Events
+===============
+ a. onkeyup
+ b. onkeydown
+ c. onkeypress
+
+
+
+
+
+
